@@ -72,7 +72,7 @@ const AppContent = () => {
               <Sonner />
               <CustomCursor />
               <SoundProvider>
-                <BrowserRouter basename="/kiddoarabia-main.main">
+                <BrowserRouter>
                   <Analytics />
                   <AnimatedRoutes />
                 </BrowserRouter>
