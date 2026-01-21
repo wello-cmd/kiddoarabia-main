@@ -15,6 +15,7 @@ import { lazy, Suspense } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
+import ScrollToTop from "@/components/ScrollToTop";
 import { AnimatePresence } from "framer-motion";
 
 // Lazy load pages for better performance
@@ -73,6 +74,7 @@ const AppContent = () => {
               <CustomCursor />
               <SoundProvider>
                 <BrowserRouter>
+                  <ScrollToTop />
                   <Analytics />
                   <AnimatedRoutes />
                 </BrowserRouter>
