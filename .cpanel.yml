@@ -1,6 +1,6 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/kiddokid/kiddoarabia.kiddo-kid.com/
+    - export DEPLOYPATH=/home/kiddokid/public_html/
     - /bin/cp -R dist/* $DEPLOYPATH
     - /bin/cp dist/.htaccess $DEPLOYPATH
