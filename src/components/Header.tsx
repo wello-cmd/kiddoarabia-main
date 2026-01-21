@@ -42,7 +42,7 @@ const Header = () => {
       <div className="bg-gradient-hero text-white text-center py-2 px-4">
         <p className="text-sm font-medium">
           {t('header.notice')}
-          <span 
+          <span
             className="underline ml-1 cursor-pointer hover:no-underline"
             onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
           >
@@ -55,10 +55,10 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center cursor-pointer" onClick={() => navigate('/')}>
-            <img 
-              src="/lovable-uploads/8aa5e4ba-a495-4253-a878-6d7cd762bdf4.png" 
-              alt="Kiddo logo" 
-              className="h-12 md:h-14 w-auto"
+            <img
+              src="/logo.png"
+              alt="Kiddo logo"
+              className="h-16 md:h-20 w-auto"
               decoding="async"
             />
           </div>
@@ -80,11 +80,11 @@ const Header = () => {
           <div className="flex items-center space-x-4">
             {/* Language Selector */}
             <LanguageSelector />
-            
+
             {/* Search - scrolls to contact for questions */}
-            <Button 
-              variant="ghost" 
-              size="icon" 
+            <Button
+              variant="ghost"
+              size="icon"
               className="hidden sm:flex"
               onClick={() => {
                 if (location.pathname !== '/') {

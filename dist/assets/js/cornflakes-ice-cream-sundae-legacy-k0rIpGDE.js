@@ -1,0 +1,1 @@
+System.register([],function(s,e){"use strict";return{execute:function(){s("c","/assets/images/classic-cornflakes-bowl-Diidnzj3.jpg"),s("e","/assets/images/cornflakes-energy-bars-Dcvq2ZBd.jpg"),s("s","/assets/images/cornflakes-smoothie-bowl-Bq4JeZxp.jpg"),s("a","/assets/images/cornflakes-cookies-DCNyP_nO.jpg"),s("b","/assets/images/cornflakes-ice-cream-sundae-D9bzkOKh.jpg")}}});

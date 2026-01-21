@@ -148,9 +148,9 @@ const ProductionReadyHeader: React.FC = () => {
                 aria-label={t('brand.name')}
               >
                 <img
-                  src="/lovable-uploads/8aa5e4ba-a495-4253-a878-6d7cd762bdf4.png"
+                  src="/logo.png"
                   alt="Kiddo logo"
-                  className="h-10 md:h-12 w-auto transition-all duration-300"
+                  className="h-14 md:h-16 w-auto transition-all duration-300"
                   decoding="async"
                 />
                 <span className="sr-only">{t('brand.name')}</span>

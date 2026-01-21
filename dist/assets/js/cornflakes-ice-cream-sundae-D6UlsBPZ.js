@@ -1,0 +1,1 @@
+const s="/assets/images/classic-cornflakes-bowl-Diidnzj3.jpg",e="/assets/images/cornflakes-energy-bars-Dcvq2ZBd.jpg",a="/assets/images/cornflakes-smoothie-bowl-Bq4JeZxp.jpg",o="/assets/images/cornflakes-cookies-DCNyP_nO.jpg",c="/assets/images/cornflakes-ice-cream-sundae-D9bzkOKh.jpg";export{o as a,c as b,s as c,e,a as s};
