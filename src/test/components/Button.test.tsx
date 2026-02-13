@@ -1,8 +1,16 @@
-import { render } from '@testing-library/react';
-import { screen } from '@testing-library/dom';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Button } from '@/components/ui/button';
 import { describe, it, expect, vi } from 'vitest';
+
+// Mock the useSound hook because Button component uses it
+vi.mock('@/contexts/SoundContext', () => ({
+  useSound: vi.fn(() => ({
+    playSound: vi.fn(),
+    isSoundEnabled: true,
+    toggleSound: vi.fn(),
+  })),
+}));
 
 describe('Button Component', () => {
   it('renders correctly with default props', () => {
