@@ -6,7 +6,9 @@ const ServiceWorker = () => {
       window.addEventListener('load', async () => {
         try {
           const registration = await navigator.serviceWorker.register('/sw.js');
-          console.log('SW registered: ', registration);
+          if (process.env.NODE_ENV === 'development') {
+            console.log('SW registered: ', registration);
+          }
           
           // Check for updates
           registration.addEventListener('updatefound', () => {
@@ -23,7 +25,9 @@ const ServiceWorker = () => {
             }
           });
         } catch (error) {
-          console.log('SW registration failed: ', error);
+          if (process.env.NODE_ENV === 'development') {
+            console.log('SW registration failed: ', error);
+          }
         }
       });
     }
