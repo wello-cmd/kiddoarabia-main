@@ -58,7 +58,10 @@ const ParticleSystem: React.FC = () => {
     };
 
     const updateParticles = () => {
-      particlesRef.current.forEach((particle, index) => {
+      const particles = particlesRef.current;
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const particle = particles[i];
+
         // Update position
         particle.x += particle.vx;
         particle.y += particle.vy;
@@ -80,14 +83,14 @@ const ParticleSystem: React.FC = () => {
 
         // Remove dead particles
         if (particle.life >= particle.maxLife || particle.opacity <= 0) {
-          particlesRef.current.splice(index, 1);
+          particles.splice(i, 1);
           createParticle();
+        } else {
+          // Bounce off edges
+          if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+          if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
         }
-
-        // Bounce off edges
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
-      });
+      }
     };
 
     const drawParticles = () => {
