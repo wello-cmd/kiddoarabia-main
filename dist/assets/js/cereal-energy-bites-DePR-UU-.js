@@ -1,0 +1,1 @@
+const s="/assets/images/cornflakes-crusted-chicken-rXknVgDE.jpg",e="/assets/images/cocoa-crunch-milkshake--Bb91nDh.png",a="/assets/images/honey-rings-morning-blast-CdqeT1W9.png",n="/assets/images/fruit-rings-splash-C1m0gPRn.png",g="/assets/images/cereal-energy-bites-BGPROybV.png";export{e as a,g as b,s as c,n as f,a as h};

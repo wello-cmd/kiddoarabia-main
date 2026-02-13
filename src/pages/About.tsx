@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/contexts/TranslationContext";
 import EnhancedLayout from "@/components/EnhancedLayout";
 import { motion } from "framer-motion";
+import heroImage from "@/assets/kiddo-hero-illustration.png";
+import SEOHead from "@/components/SEOHead";
 
 const About = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
 
   const values = [
     {
@@ -42,6 +44,18 @@ const About = () => {
 
   return (
     <EnhancedLayout>
+      <SEOHead
+        title={language === 'ar'
+          ? "كيدو أرابيا - الأفضل فقط لأطفالك | قصتنا"
+          : "About Kiddo Arabia - Our Story & Values | Kids' Nutrition Experts"}
+        description={language === 'ar'
+          ? "تعرف على مهمة كيدو أرابيا لتوفير طعام صحي ومغذي وممتع للأطفال. اكتشف قصتنا وقيمنا."
+          : "Learn about Kiddo Arabia's mission to provide premium, healthy nutrition for children. Discover our story, our commitment to safety, and our passion for natural ingredients."}
+        keywords={language === 'ar'
+          ? "عن كيدو أرابيا, قصتنا, مهمة تغذية الأطفال, شركة طعام صحي, قيمنا"
+          : "about kiddo arabia, kids nutrition company, healthy cereal brand, natural ingredients, children food safety, our story"}
+        lang={language}
+      />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -97,8 +111,8 @@ const About = () => {
                   tables across the Middle East and beyond.
                 </p>
               </div>
-              <div className="bg-gradient-warm rounded-3xl h-64 flex items-center justify-center">
-                <Globe className="h-24 w-24 text-white/60" />
+              <div className="rounded-3xl h-64 flex items-center justify-center overflow-hidden">
+                <img src={heroImage} alt="Our Mission" className="w-full h-full object-cover rounded-3xl" />
               </div>
             </div>
           </div>
@@ -122,7 +136,7 @@ const About = () => {
           </div>
 
           {/* Achievements */}
-          <div className="bg-gradient-warm rounded-3xl p-12 text-white text-center mb-16">
+          <div className="bg-red-600 rounded-3xl p-12 text-white text-center mb-16">
             <h2 className="text-3xl font-bold mb-8">Our Achievements</h2>
             <div className="grid md:grid-cols-4 gap-8">
               {achievements.map((achievement, index) => (
@@ -134,17 +148,7 @@ const About = () => {
             </div>
           </div>
 
-          {/* Team Section */}
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-foreground mb-6">Meet Our Team</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              Behind every great product is a passionate team. Our experts in nutrition, food science,
-              and child development work together to create the perfect breakfast experience.
-            </p>
-            <Button size="lg" variant="outline">
-              Join Our Team
-            </Button>
-          </div>
+
         </div>
       </motion.div>
     </EnhancedLayout>

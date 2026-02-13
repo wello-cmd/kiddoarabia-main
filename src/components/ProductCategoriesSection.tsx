@@ -4,7 +4,7 @@ import { useTranslation } from "@/contexts/TranslationContext";
 import { useNavigate } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Sparkles, Zap, Star } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import TiltCard from "@/components/TiltCard";
 
 const ProductCategoriesSection = () => {
@@ -18,7 +18,7 @@ const ProductCategoriesSection = () => {
       id: "cereals",
       name: "Cereals Collection",
       description: "Explore our complete range of delicious cereals",
-      icon: "🥣",
+      icon: <span className="text-4xl">🥣</span>,
       gradient: "bg-gradient-hero",
       route: "/cereals",
       particles: <Sparkles className="h-4 w-4" />
@@ -27,19 +27,19 @@ const ProductCategoriesSection = () => {
       id: "oat-jars",
       name: "Oat Jars",
       description: "Nutritious oat jars for healthy snacking",
-      icon: "🍯",
+      icon: <span className="text-4xl">🍫</span>,
       gradient: "bg-gradient-warm",
       route: "/oat-jars",
-      particles: <Zap className="h-4 w-4" />
+      particles: <Sparkles className="h-4 w-4" />
     },
     {
       id: "biscuits",
       name: "Oat Biscuits",
       description: "Wholesome biscuits in multiple flavors",
-      icon: "🍪",
+      icon: <span className="text-4xl">🍪</span>,
       gradient: "bg-gradient-playful",
       route: "/biscuits",
-      particles: <Star className="h-4 w-4" />
+      particles: <Sparkles className="h-4 w-4" />
     }
   ];
 
@@ -79,7 +79,7 @@ const ProductCategoriesSection = () => {
                 ],
               }}
               transition={{ duration: 4, repeat: Infinity }}
-              className="bg-clip-text text-transparent"
+              className="text-red-600"
             >
               {t('products.title')}
             </motion.span>

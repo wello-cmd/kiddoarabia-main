@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
+import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -11,35 +12,39 @@ import energyBarsImage from "@/assets/cornflakes-energy-bars.jpg";
 import smoothieBowlImage from "@/assets/cornflakes-smoothie-bowl.jpg";
 import cookiesImage from "@/assets/cornflakes-cookies.jpg";
 import sundaeImage from "@/assets/cornflakes-ice-cream-sundae.jpg";
+import cocoaCrunchMilkshakeImage from "@/assets/cocoa-crunch-milkshake.png";
+import honeyRingsMorningBlastImage from "@/assets/honey-rings-morning-blast.png";
+import fruitRingsSplashImage from "@/assets/fruit-rings-splash.png";
+import cerealEnergyBitesImage from "@/assets/cereal-energy-bites.png";
 
 const RecipeDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
 
   const recipes = [
     {
       id: 1,
-      title: "Classic Cornflakes Bowl",
-      description: "A simple yet nutritious breakfast bowl with fresh fruits and nuts",
+      title: t('recipe.1.title'),
+      description: t('recipe.1.description'),
       image: classicBowlImage,
       time: "5 mins",
       serves: 2,
       difficulty: "Easy",
       rating: 4.8,
       ingredients: [
-        "2 cups Kiddo Cornflakes",
-        "1 cup cold milk",
-        "1 sliced banana",
-        "2 tbsp honey",
-        "1/4 cup mixed berries"
+        t('recipe.1.ing.1'),
+        t('recipe.1.ing.2'),
+        t('recipe.1.ing.3'),
+        t('recipe.1.ing.4'),
+        t('recipe.1.ing.5')
       ],
       instructions: [
-        "Pour cornflakes into a bowl",
-        "Add cold milk until cornflakes are covered",
-        "Top with sliced banana and berries",
-        "Drizzle honey on top",
-        "Serve immediately and enjoy!"
+        t('recipe.1.inst.1'),
+        t('recipe.1.inst.2'),
+        t('recipe.1.inst.3'),
+        t('recipe.1.inst.4'),
+        t('recipe.1.inst.5')
       ],
       tags: ["Quick", "Healthy", "Kids Favorite"],
       nutritionFacts: {
@@ -52,28 +57,28 @@ const RecipeDetail = () => {
     },
     {
       id: 2,
-      title: "Cornflakes Crusted Chicken",
-      description: "Crispy chicken pieces coated with crushed cornflakes for extra crunch",
+      title: t('recipe.2.title'),
+      description: t('recipe.2.description'),
       image: chickenImage,
       time: "45 mins",
       serves: 4,
       difficulty: "Medium",
       rating: 4.9,
       ingredients: [
-        "4 chicken breasts",
-        "3 cups Kiddo Cornflakes, crushed",
-        "2 eggs, beaten",
-        "1/2 cup flour",
-        "1 tsp paprika",
-        "Salt and pepper to taste"
+        t('recipe.2.ing.1'),
+        t('recipe.2.ing.2'),
+        t('recipe.2.ing.3'),
+        t('recipe.2.ing.4'),
+        t('recipe.2.ing.5'),
+        t('recipe.2.ing.6')
       ],
       instructions: [
-        "Preheat oven to 375°F (190°C)",
-        "Crush cornflakes in a bowl",
-        "Set up breading station: flour, beaten eggs, crushed cornflakes",
-        "Season chicken with salt, pepper, and paprika",
-        "Dredge chicken in flour, dip in eggs, coat with cornflakes",
-        "Bake for 25-30 minutes until golden and cooked through"
+        t('recipe.2.inst.1'),
+        t('recipe.2.inst.2'),
+        t('recipe.2.inst.3'),
+        t('recipe.2.inst.4'),
+        t('recipe.2.inst.5'),
+        t('recipe.2.inst.6')
       ],
       tags: ["Dinner", "Family Meal", "Crispy"],
       nutritionFacts: {
@@ -86,29 +91,29 @@ const RecipeDetail = () => {
     },
     {
       id: 3,
-      title: "Cornflakes Energy Bars",
-      description: "Homemade energy bars packed with cornflakes, nuts, and dried fruits",
+      title: t('recipe.3.title'),
+      description: t('recipe.3.description'),
       image: energyBarsImage,
       time: "20 mins",
       serves: 8,
       difficulty: "Easy",
       rating: 4.7,
       ingredients: [
-        "3 cups Kiddo Cornflakes",
-        "1/2 cup honey",
-        "1/2 cup peanut butter",
-        "1/4 cup dried cranberries",
-        "1/4 cup chopped almonds",
-        "1 tsp vanilla extract"
+        t('recipe.3.ing.1'),
+        t('recipe.3.ing.2'),
+        t('recipe.3.ing.3'),
+        t('recipe.3.ing.4'),
+        t('recipe.3.ing.5'),
+        t('recipe.3.ing.6')
       ],
       instructions: [
-        "Line an 8x8 inch pan with parchment paper",
-        "In a large bowl, mix cornflakes, cranberries, and almonds",
-        "In a saucepan, warm honey and peanut butter until smooth",
-        "Add vanilla to the honey mixture",
-        "Pour over cornflakes mixture and stir well",
-        "Press into prepared pan and refrigerate for 2 hours",
-        "Cut into bars and serve"
+        t('recipe.3.inst.1'),
+        t('recipe.3.inst.2'),
+        t('recipe.3.inst.3'),
+        t('recipe.3.inst.4'),
+        t('recipe.3.inst.5'),
+        t('recipe.3.inst.6'),
+        t('recipe.3.inst.7')
       ],
       tags: ["Snack", "No-Bake", "Healthy"],
       nutritionFacts: {
@@ -121,27 +126,27 @@ const RecipeDetail = () => {
     },
     {
       id: 4,
-      title: "Cornflakes Smoothie Bowl",
-      description: "Creamy smoothie bowl topped with crunchy cornflakes and fresh fruits",
+      title: t('recipe.4.title'),
+      description: t('recipe.4.description'),
       image: smoothieBowlImage,
       time: "10 mins",
       serves: 2,
       difficulty: "Easy",
       rating: 4.6,
       ingredients: [
-        "1 frozen banana",
-        "1/2 cup frozen berries",
-        "1/2 cup Greek yogurt",
-        "1/4 cup milk",
-        "1 cup Kiddo Cornflakes",
-        "Fresh fruits for topping"
+        t('recipe.4.ing.1'),
+        t('recipe.4.ing.2'),
+        t('recipe.4.ing.3'),
+        t('recipe.4.ing.4'),
+        t('recipe.4.ing.5'),
+        t('recipe.4.ing.6')
       ],
       instructions: [
-        "Blend frozen banana, berries, yogurt, and milk until smooth",
-        "Pour into bowls",
-        "Top with cornflakes and fresh fruits",
-        "Add a drizzle of honey if desired",
-        "Serve immediately"
+        t('recipe.4.inst.1'),
+        t('recipe.4.inst.2'),
+        t('recipe.4.inst.3'),
+        t('recipe.4.inst.4'),
+        t('recipe.4.inst.5')
       ],
       tags: ["Breakfast", "Healthy", "Smoothie"],
       nutritionFacts: {
@@ -154,30 +159,30 @@ const RecipeDetail = () => {
     },
     {
       id: 5,
-      title: "Cornflakes Cookies",
-      description: "Crispy and sweet cookies made with cornflakes for extra texture",
+      title: t('recipe.5.title'),
+      description: t('recipe.5.description'),
       image: cookiesImage,
       time: "30 mins",
       serves: 24,
       difficulty: "Medium",
       rating: 4.5,
       ingredients: [
-        "2 cups Kiddo Cornflakes",
-        "1 cup butter, softened",
-        "3/4 cup brown sugar",
-        "1/2 cup white sugar",
-        "1 egg",
-        "1 1/2 cups flour",
-        "1 tsp vanilla extract"
+        t('recipe.5.ing.1'),
+        t('recipe.5.ing.2'),
+        t('recipe.5.ing.3'),
+        t('recipe.5.ing.4'),
+        t('recipe.5.ing.5'),
+        t('recipe.5.ing.6'),
+        t('recipe.5.ing.7')
       ],
       instructions: [
-        "Preheat oven to 350°F (175°C)",
-        "Cream butter and sugars until light and fluffy",
-        "Beat in egg and vanilla",
-        "Gradually mix in flour",
-        "Fold in cornflakes",
-        "Drop spoonfuls onto baking sheet",
-        "Bake 10-12 minutes until golden"
+        t('recipe.5.inst.1'),
+        t('recipe.5.inst.2'),
+        t('recipe.5.inst.3'),
+        t('recipe.5.inst.4'),
+        t('recipe.5.inst.5'),
+        t('recipe.5.inst.6'),
+        t('recipe.5.inst.7')
       ],
       tags: ["Dessert", "Baking", "Sweet"],
       nutritionFacts: {
@@ -190,28 +195,28 @@ const RecipeDetail = () => {
     },
     {
       id: 6,
-      title: "Cornflakes Ice Cream Sundae",
-      description: "Delicious ice cream sundae with cornflakes for added crunch",
+      title: t('recipe.6.title'),
+      description: t('recipe.6.description'),
       image: sundaeImage,
       time: "5 mins",
       serves: 2,
       difficulty: "Easy",
       rating: 4.9,
       ingredients: [
-        "4 scoops vanilla ice cream",
-        "1 cup Kiddo Cornflakes",
-        "2 tbsp chocolate syrup",
-        "2 tbsp caramel sauce",
-        "Whipped cream",
-        "Maraschino cherries"
+        t('recipe.6.ing.1'),
+        t('recipe.6.ing.2'),
+        t('recipe.6.ing.3'),
+        t('recipe.6.ing.4'),
+        t('recipe.6.ing.5'),
+        t('recipe.6.ing.6')
       ],
       instructions: [
-        "Place ice cream scoops in bowls",
-        "Sprinkle cornflakes generously over ice cream",
-        "Drizzle with chocolate syrup and caramel sauce",
-        "Top with whipped cream",
-        "Garnish with a cherry",
-        "Serve immediately"
+        t('recipe.6.inst.1'),
+        t('recipe.6.inst.2'),
+        t('recipe.6.inst.3'),
+        t('recipe.6.inst.4'),
+        t('recipe.6.inst.5'),
+        t('recipe.6.inst.6')
       ],
       tags: ["Dessert", "Kids Favorite", "Cold Treat"],
       nutritionFacts: {
@@ -219,6 +224,138 @@ const RecipeDetail = () => {
         protein: "6g",
         carbs: "58g",
         fat: "16g",
+        fiber: "2g"
+      }
+    },
+    {
+      id: 7,
+      title: t('recipe.7.title'),
+      description: t('recipe.7.description'),
+      image: cocoaCrunchMilkshakeImage,
+      time: "5 mins",
+      serves: 2,
+      difficulty: "Easy",
+      rating: 4.8,
+      ingredients: [
+        t('recipe.7.ing.1'),
+        t('recipe.7.ing.2'),
+        t('recipe.7.ing.3'),
+        t('recipe.7.ing.4'),
+        t('recipe.7.ing.5')
+      ],
+      instructions: [
+        t('recipe.7.inst.1'),
+        t('recipe.7.inst.2'),
+        t('recipe.7.inst.3'),
+        t('recipe.7.inst.4'),
+        t('recipe.7.inst.5')
+      ],
+      tags: ["Drink", "Chocolate", "Sweet"],
+      nutritionFacts: {
+        calories: 350,
+        protein: "8g",
+        carbs: "45g",
+        fat: "15g",
+        fiber: "2g"
+      }
+    },
+    {
+      id: 8,
+      title: t('recipe.8.title'),
+      description: t('recipe.8.description'),
+      image: honeyRingsMorningBlastImage,
+      time: "5 mins",
+      serves: 1,
+      difficulty: "Easy",
+      rating: 4.7,
+      ingredients: [
+        t('recipe.8.ing.1'),
+        t('recipe.8.ing.2'),
+        t('recipe.8.ing.3'),
+        t('recipe.8.ing.4'),
+        t('recipe.8.ing.5')
+      ],
+      instructions: [
+        t('recipe.8.inst.1'),
+        t('recipe.8.inst.2'),
+        t('recipe.8.inst.3'),
+        t('recipe.8.inst.4'),
+        t('recipe.8.inst.5')
+      ],
+      tags: ["Drink", "Breakfast", "Energy"],
+      nutritionFacts: {
+        calories: 280,
+        protein: "9g",
+        carbs: "42g",
+        fat: "10g",
+        fiber: "5g"
+      }
+    },
+    {
+      id: 9,
+      title: t('recipe.9.title'),
+      description: t('recipe.9.description'),
+      image: fruitRingsSplashImage,
+      time: "5 mins",
+      serves: 2,
+      difficulty: "Easy",
+      rating: 4.6,
+      ingredients: [
+        t('recipe.9.ing.1'),
+        t('recipe.9.ing.2'),
+        t('recipe.9.ing.3'),
+        t('recipe.9.ing.4'),
+        t('recipe.9.inst.1'),
+        t('recipe.9.inst.2'),
+        t('recipe.9.inst.3'),
+        t('recipe.9.inst.4'),
+        t('recipe.9.inst.5')
+      ],
+      instructions: [
+        t('recipe.9.inst.1'),
+        t('recipe.9.inst.2'),
+        t('recipe.9.inst.3'),
+        t('recipe.9.inst.4'),
+        t('recipe.9.inst.5')
+      ],
+      tags: ["Drink", "Fruity", "Fun"],
+      nutritionFacts: {
+        calories: 210,
+        protein: "8g",
+        carbs: "30g",
+        fat: "5g",
+        fiber: "1g"
+      }
+    },
+    {
+      id: 10,
+      title: t('recipe.10.title'),
+      description: t('recipe.10.description'),
+      image: cerealEnergyBitesImage,
+      time: "40 mins",
+      serves: 12,
+      difficulty: "Easy",
+      rating: 4.9,
+      ingredients: [
+        t('recipe.10.ing.1'),
+        t('recipe.10.ing.2'),
+        t('recipe.10.ing.3'),
+        t('recipe.10.ing.4'),
+        t('recipe.10.ing.5')
+      ],
+      instructions: [
+        t('recipe.10.inst.1'),
+        t('recipe.10.inst.2'),
+        t('recipe.10.inst.3'),
+        t('recipe.10.inst.4'),
+        t('recipe.10.inst.5')
+      ],
+      tags: ["Snack", "Healthy", "No-Bake"],
+      nutritionFacts: {
+        calories: 140,
+        protein: "4g",
+        carbs: "18g",
+        fat: "6g",
         fiber: "2g"
       }
     }
@@ -241,6 +378,14 @@ const RecipeDetail = () => {
 
   return (
     <EnhancedLayout>
+      <SEOHead
+        title={`${recipe.title} - ${language === 'ar' ? 'وصفات كيدو أرابيا' : 'Kiddo Arabia Recipes'}`}
+        description={recipe.description}
+        image={recipe.image}
+        keywords={`recipe, ${recipe.tags.join(', ')}, kiddo arabia`}
+        type="article"
+        lang={language}
+      />
       <div className="bg-background">
         {/* Header */}
         <div className="bg-gradient-hero text-white py-16">

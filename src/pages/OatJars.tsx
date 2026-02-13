@@ -4,10 +4,11 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/contexts/TranslationContext";
 import EnhancedLayout from "@/components/EnhancedLayout";
+import SEOHead from "@/components/SEOHead";
 
 const OatJars = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
 
   const oatJars = [
     {
@@ -30,6 +31,18 @@ const OatJars = () => {
 
   return (
     <EnhancedLayout>
+      <SEOHead
+        title={language === 'ar'
+          ? "برطمانات شوفان كيدو أرابيا - إفطار مغذي أثناء التنقل"
+          : "Kiddo Arabia Oat Jars - Nutritious Breakfast on the Go"}
+        description={language === 'ar'
+          ? "جرب برطمانات الشوفان اللذيذة - الإفطار الصحي والمريح المثالي للأطفال والكبار على حد سواء. مليئة بالألياف والخيرات الطبيعية."
+          : "Try our delicious Oat Jars - the perfect convenient and healthy breakfast or snack for kids and adults alike. Packed with fiber and natural goodness."}
+        keywords={language === 'ar'
+          ? "برطمانات شوفان, إفطار صحي, شوفان منقوع, تغذية أطفال, وجبات سريعة, شوفان كيدو أرابيا"
+          : "oat jars, healthy breakfast, overnight oats, kids nutrition, convenient snacks, kiddo arabia oats"}
+        lang={language}
+      />
       <div className="bg-background min-h-screen">
         {/* Header */}
         <div className="bg-gradient-hero text-white py-16">

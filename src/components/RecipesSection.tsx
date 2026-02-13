@@ -12,7 +12,7 @@ import chickenImage from "@/assets/cornflakes-crusted-chicken.jpg";
 
 const RecipesSection = () => {
   const navigate = useNavigate();
-  
+
   // Breakfast recipes
   const breakfastRecipes = [
     {
@@ -173,10 +173,10 @@ const RecipesSection = () => {
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-3xl font-bold text-foreground mb-4">
-                      Superhero Breakfast Bowl
+                      SuperHero Breakfast.
                     </h3>
                     <p className="text-lg text-muted-foreground leading-relaxed">
-                      Start the day right with this power-packed breakfast bowl featuring our Kiddo cereals, 
+                      Start the day right with this power-packed breakfast bowl featuring our Kiddo cereals,
                       fresh fruits, and a touch of honey. Perfect for giving your little superheroes the energy they need!
                     </p>
                   </div>
@@ -196,9 +196,9 @@ const RecipesSection = () => {
                     </div>
                   </div>
 
-                  <Button 
-                    variant="kiddo" 
-                    size="lg" 
+                  <Button
+                    variant="kiddo"
+                    size="lg"
                     className="group"
                     onClick={() => navigate('/recipe/1')}
                   >
@@ -216,7 +216,7 @@ const RecipesSection = () => {
           <h3 className="text-2xl font-bold text-foreground mb-6 text-center">Browse by Category</h3>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {categories.map((category, index) => (
-              <Card 
+              <Card
                 key={index}
                 className="cursor-pointer group hover:shadow-glow transition-all duration-300 hover:-translate-y-1"
                 onClick={() => navigate(`/recipes#${category.name.toLowerCase()}`)}
@@ -240,15 +240,15 @@ const RecipesSection = () => {
         {/* Recipe Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {featuredRecipes.map((recipe, index) => (
-            <Card 
+            <Card
               key={recipe.id}
               className="group hover:shadow-glow transition-all duration-500 hover:-translate-y-2 cursor-pointer"
               style={{ animationDelay: `${index * 150}ms` }}
               onClick={() => navigate(`/recipe/${recipe.id}`)}
             >
               <div className="h-48 relative overflow-hidden rounded-t-lg">
-                <img 
-                  src={recipe.image} 
+                <img
+                  src={recipe.image}
                   alt={recipe.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -272,7 +272,7 @@ const RecipesSection = () => {
                   </div>
                 </div>
               </div>
-              
+
               <CardContent className="p-6">
                 <h3 className="font-bold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
                   {recipe.title}
@@ -280,7 +280,7 @@ const RecipesSection = () => {
                 <p className="text-muted-foreground text-sm mb-4">
                   {recipe.description}
                 </p>
-                
+
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
                   <div className="flex items-center gap-1">
                     <Clock className="h-4 w-4" />
@@ -302,16 +302,16 @@ const RecipesSection = () => {
 
         {/* CTA */}
         <div className="text-center">
-          <div className="bg-gradient-playful rounded-3xl p-8 text-white">
+          <div className="bg-red-500 rounded-3xl p-8 text-white">
             <h3 className="text-2xl font-bold mb-4">
-              Want More Recipes?
+              Want more recipes.
             </h3>
             <p className="text-lg opacity-90 mb-6 max-w-2xl mx-auto">
               Join our community and get access to hundreds of kid-friendly recipes, meal plans, and nutrition tips
             </p>
-            <Button 
-              variant="outline" 
-              size="lg" 
+            <Button
+              variant="outline"
+              size="lg"
               className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary"
               onClick={() => navigate('/recipes')}
             >

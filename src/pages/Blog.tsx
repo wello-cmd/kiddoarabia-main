@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import SEOHead from "@/components/SEOHead";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, Eye, ArrowLeft, Play, Image } from "lucide-react";
@@ -215,290 +216,316 @@ const Blog = () => {
     }
   };
 
+
+
   return (
     <EnhancedLayout>
+      <SEOHead
+        title={language === 'ar'
+          ? "مدونة كيدو أرابيا - تربية، تغذية ومرح | عادات صحية"
+          : "Kiddo Arabia Blog - Parenting, Nutrition, & Fun | Healthy Habits"}
+        description={language === 'ar'
+          ? "اقرأ مدونة كيدو أرابيا للحصول على نصائح تربوية من الخبراء، وأفكار وجبات مغذية، وأنشطة عائلية ممتعة. انضم إلى مجتمع العائلات السعيدة والصحية."
+          : "Read the Kiddo Arabia blog for expert parenting tips, nutritious meal ideas, and fun family activities. Join our community of happy, healthy families."}
+        keywords={language === 'ar'
+          ? "مدونة كيدو أرابيا, نصائح تربية, مدونة تغذية أطفال, عادات عائلية صحية, أفكار وجبات أطفال, مجتمع كيدو"
+          : "kiddo arabia blog, parenting tips, kids nutrition blog, healthy family habits, children meal ideas, kiddo community"}
+        lang={language}
+      />
       <div className="bg-background">
-      {/* Header */}
-      <div className="bg-gradient-hero text-white py-16">
-        <div className="container mx-auto px-4">
-          <Button
-            variant="ghost"
-            onClick={() => navigate('/')}
-            className="mb-8 text-white hover:bg-white/20"
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            {language === 'ar' ? 'العودة للرئيسية' : 'Back to Home'}
-          </Button>
-          
-          <div className="text-center">
-            <h1 className="text-4xl lg:text-6xl font-bold mb-4">
-              {t('pages.blog.title')}
-            </h1>
-            <p className="text-xl opacity-90 max-w-2xl mx-auto">
-              {t('pages.blog.subtitle')}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 py-16">
-        {/* Categories */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold text-foreground mb-6">
-            {language === 'ar' ? 'تصفح المحتوى' : 'Browse Content'}
-          </h2>
-          <div className="flex flex-wrap gap-4">
-            {categories.map((category, index) => (
-              <Badge
-                key={index}
-                variant={category.active ? "default" : "secondary"}
-                className="px-4 py-2 cursor-pointer hover:shadow-md transition-all"
-              >
-                {category.name} ({category.count})
-              </Badge>
-            ))}
-          </div>
-        </div>
-
-        {/* Featured Post */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-foreground mb-6">
-            {language === 'ar' ? 'المحتوى المميز' : 'Featured Content'}
-          </h2>
-          <Card className="overflow-hidden hover:shadow-glow transition-all duration-300">
-            <div className="grid md:grid-cols-2">
-              <div className="h-64 md:h-80 overflow-hidden">
-                <img 
-                  src={blogPosts[0].image} 
-                  alt={language === 'ar' ? blogPosts[0].titleAr : blogPosts[0].title}
-                  className="w-full h-full object-contain object-center bg-muted"
-                  loading="lazy"
-                />
-              </div>
-              <CardContent className="p-8">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <Badge className={getTypeColor(blogPosts[0].type)}>
-                      {getTypeIcon(blogPosts[0].type)}
-                      <span className="ml-1 capitalize">{blogPosts[0].type}</span>
-                    </Badge>
-                    <Badge variant="outline">
-                      {language === 'ar' ? blogPosts[0].categoryAr : blogPosts[0].category}
-                    </Badge>
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-foreground">
-                    {language === 'ar' ? blogPosts[0].titleAr : blogPosts[0].title}
-                  </h3>
-                  
-                  <p className="text-muted-foreground">
-                    {language === 'ar' ? blogPosts[0].excerptAr : blogPosts[0].excerpt}
-                  </p>
-                  
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      {new Date(blogPosts[0].date).toLocaleDateString(language === 'ar' ? 'ar-SA' : 'en-US')}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      {getTypeIcon(blogPosts[0].type)}
-                      {language === 'ar' ? blogPosts[0].readTimeAr : blogPosts[0].readTime}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Eye className="h-4 w-4" />
-                      {blogPosts[0].views}
-                    </div>
-                  </div>
-                  
-                  <Button className="mt-4" onClick={() => navigate(`/blog/${blogPosts[0].id}`)}>
-                    {language === 'ar' ? 'اقرأ المزيد' : 'Read More'}
-                  </Button>
-                </div>
-              </CardContent>
-            </div>
-          </Card>
-        </div>
-
-        {/* Social Media Section */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-foreground mb-6">Follow Us on Social Media</h2>
-          <p className="text-muted-foreground mb-8">Stay connected with the Kiddo family and see our latest content, behind-the-scenes moments, and community highlights!</p>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {/* Instagram */}
-            <Card className="overflow-hidden hover:shadow-glow transition-all duration-500 cursor-pointer group" onClick={() => window.open('https://www.instagram.com/kiddoarabia/', '_blank')}>
-              <div className="h-48 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 flex items-center justify-center">
-                <div className="text-white text-center">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span className="text-2xl">📸</span>
-                  </div>
-                  <h3 className="font-bold text-lg">Instagram</h3>
-                  <p className="text-sm opacity-90">@kiddoarabia</p>
-                </div>
-              </div>
-              <CardContent className="p-4">
-                <p className="text-sm text-muted-foreground">Daily breakfast inspiration, kid-friendly recipes, and family moments!</p>
-              </CardContent>
-            </Card>
-
-            {/* Facebook */}
-            <Card className="overflow-hidden hover:shadow-glow transition-all duration-500 cursor-pointer group" onClick={() => window.open('https://www.facebook.com/people/Kiddo-Arabia/100090897127132/?_rdr', '_blank')}>
-              <div className="h-48 bg-blue-600 flex items-center justify-center">
-                <div className="text-white text-center">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span className="text-2xl">👨‍👩‍👧‍👦</span>
-                  </div>
-                  <h3 className="font-bold text-lg">Facebook</h3>
-                  <p className="text-sm opacity-90">Kiddo Arabia</p>
-                </div>
-              </div>
-              <CardContent className="p-4">
-                <p className="text-sm text-muted-foreground">Community stories, parenting tips, and nutritional advice for families.</p>
-              </CardContent>
-            </Card>
-
-            {/* TikTok */}
-            <Card className="overflow-hidden hover:shadow-glow transition-all duration-500 cursor-pointer group" onClick={() => window.open('https://www.tiktok.com/@kiddoarabia_', '_blank')}>
-              <div className="h-48 bg-black flex items-center justify-center">
-                <div className="text-white text-center">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span className="text-2xl">🎵</span>
-                  </div>
-                  <h3 className="font-bold text-lg">TikTok</h3>
-                  <p className="text-sm opacity-90">@kiddoarabia_</p>
-                </div>
-              </div>
-              <CardContent className="p-4">
-                <p className="text-sm text-muted-foreground">Fun breakfast videos, quick recipes, and trending content with kids!</p>
-              </CardContent>
-            </Card>
-
-            {/* YouTube */}
-            <Card className="overflow-hidden hover:shadow-glow transition-all duration-500 cursor-pointer group" onClick={() => window.open('https://www.youtube.com/@KiddoArabia', '_blank')}>
-              <div className="h-48 bg-red-600 flex items-center justify-center">
-                <div className="text-white text-center">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span className="text-2xl">▶️</span>
-                  </div>
-                  <h3 className="font-bold text-lg">YouTube</h3>
-                  <p className="text-sm opacity-90">Kiddo Arabia</p>
-                </div>
-              </div>
-              <CardContent className="p-4">
-                <p className="text-sm text-muted-foreground">Extended cooking tutorials, family vlogs, and educational content.</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        {/* Blog Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.filter((_, index) => index !== 0).map((post, index) => (
-            <Card 
-              key={post.id} 
-              className="group hover:shadow-glow transition-all duration-500 hover:-translate-y-2 bg-card border-border/50 overflow-hidden cursor-pointer"
-              style={{ animationDelay: `${index * 100}ms` }}
-              onClick={() => navigate(`/blog/${post.id}`)}
+        {/* Header */}
+        <div className="bg-gradient-hero text-white py-16">
+          <div className="container mx-auto px-4">
+            <Button
+              variant="ghost"
+              onClick={() => navigate('/')}
+              className="mb-8 text-white hover:bg-white/20"
             >
-              {/* Post Image */}
-              <div className="h-48 overflow-hidden">
-                <img 
-                  src={post.image} 
-                  alt={language === 'ar' ? post.titleAr : post.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              {language === 'ar' ? 'العودة للرئيسية' : 'Back to Home'}
+            </Button>
 
-              <CardContent className="p-6">
-                <div className="space-y-4">
-                  {/* Post Meta */}
-                  <div className="flex items-center justify-between">
-                    <Badge className={`${getTypeColor(post.type)} text-xs`}>
-                      {getTypeIcon(post.type)}
-                      <span className="ml-1 capitalize">{post.type}</span>
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      {post.category}
-                    </Badge>
-                  </div>
+            <div className="text-center">
+              <h1 className="text-4xl lg:text-6xl font-bold mb-4">
+                {t('pages.blog.title')}
+              </h1>
+              <p className="text-xl opacity-90 max-w-2xl mx-auto">
+                {t('pages.blog.subtitle')}
+              </p>
+            </div>
+          </div>
+        </div>
 
-                   {/* Post Title */}
-                  <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                    {language === 'ar' ? post.titleAr : post.title}
-                  </h3>
-                  
-                  {/* Post Excerpt */}
-                  <p className="text-sm text-muted-foreground line-clamp-3">
-                    {language === 'ar' ? post.excerptAr : post.excerpt}
-                  </p>
+        <div className="container mx-auto px-4 py-16">
+          {/* Categories */}
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold text-foreground mb-6">
+              {language === 'ar' ? 'تصفح المحتوى' : 'Browse Content'}
+            </h2>
+            <div className="flex flex-wrap gap-4">
+              {categories.filter(c => c.name !== 'All Posts').map((category, index) => (
+                <a
+                  key={index}
+                  href={`#${category.name.toLowerCase()}`}
+                  className="no-underline"
+                >
+                  <Badge
+                    variant="secondary"
+                    className="px-6 py-3 text-base cursor-pointer hover:shadow-md transition-all hover:bg-primary hover:text-white"
+                  >
+                    {category.name} ({category.count})
+                  </Badge>
+                </a>
+              ))}
+            </div>
+          </div>
 
-                  {/* Post Stats */}
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3" />
-                      {new Date(post.date).toLocaleDateString()}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      {getTypeIcon(post.type)}
-                      {post.readTime}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Eye className="h-3 w-3" />
-                      {post.views}
-                    </div>
-                  </div>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {post.tags.slice(0, 2).map((tag, tagIndex) => (
-                      <Badge key={tagIndex} variant="secondary" className="text-xs">
-                        {tag}
+          {/* Featured Post */}
+          <div className="mb-16">
+            <h2 className="text-2xl font-bold text-foreground mb-6">
+              {language === 'ar' ? 'المحتوى المميز' : 'Featured Content'}
+            </h2>
+            <Card className="overflow-hidden hover:shadow-glow transition-all duration-300">
+              <div className="grid md:grid-cols-2">
+                <div className="h-64 md:h-80 overflow-hidden">
+                  <img
+                    src={blogPosts[0].image}
+                    alt={language === 'ar' ? blogPosts[0].titleAr : blogPosts[0].title}
+                    className="w-full h-full object-contain bg-white/5"
+                    loading="lazy"
+                  />
+                </div>
+                <CardContent className="p-8">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4">
+                      <Badge className={getTypeColor(blogPosts[0].type)}>
+                        {getTypeIcon(blogPosts[0].type)}
+                        <span className="ml-1 capitalize">{blogPosts[0].type}</span>
                       </Badge>
+                      <Badge variant="outline">
+                        {language === 'ar' ? blogPosts[0].categoryAr : blogPosts[0].category}
+                      </Badge>
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-foreground">
+                      {language === 'ar' ? blogPosts[0].titleAr : blogPosts[0].title}
+                    </h3>
+
+                    <p className="text-muted-foreground">
+                      {language === 'ar' ? blogPosts[0].excerptAr : blogPosts[0].excerpt}
+                    </p>
+
+                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="h-4 w-4" />
+                        {new Date(blogPosts[0].date).toLocaleDateString(language === 'ar' ? 'ar-SA' : 'en-US')}
+                      </div>
+                      <div className="flex items-center gap-1">
+                        {getTypeIcon(blogPosts[0].type)}
+                        {language === 'ar' ? blogPosts[0].readTimeAr : blogPosts[0].readTime}
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Eye className="h-4 w-4" />
+                        {blogPosts[0].views}
+                      </div>
+                    </div>
+
+                    <Button className="mt-4" onClick={() => navigate(`/blog/${blogPosts[0].id}`)}>
+                      {language === 'ar' ? 'اقرأ المزيد' : 'Read More'}
+                    </Button>
+                  </div>
+                </CardContent>
+              </div>
+            </Card>
+          </div>
+
+          {/* Social Media Section */}
+          <div className="mb-16">
+            <h2 className="text-2xl font-bold text-foreground mb-6">Follow Us on Social Media</h2>
+            <p className="text-muted-foreground mb-8">Stay connected with the Kiddo family and see our latest content, behind-the-scenes moments, and community highlights!</p>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              {/* Instagram */}
+              <Card className="overflow-hidden hover:shadow-glow transition-all duration-500 cursor-pointer group" onClick={() => window.open('https://www.instagram.com/kiddoarabia/', '_blank')}>
+                <div className="h-48 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 flex items-center justify-center">
+                  <div className="text-white text-center">
+                    <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <span className="text-2xl">📸</span>
+                    </div>
+                    <h3 className="font-bold text-lg">Instagram</h3>
+                    <p className="text-sm opacity-90">@kiddoarabia</p>
+                  </div>
+                </div>
+                <CardContent className="p-4">
+                  <p className="text-sm text-muted-foreground">Daily breakfast inspiration, kid-friendly recipes, and family moments!</p>
+                </CardContent>
+              </Card>
+
+              {/* Facebook */}
+              <Card className="overflow-hidden hover:shadow-glow transition-all duration-500 cursor-pointer group" onClick={() => window.open('https://www.facebook.com/people/Kiddo-Arabia/100090897127132/?_rdr', '_blank')}>
+                <div className="h-48 bg-blue-600 flex items-center justify-center">
+                  <div className="text-white text-center">
+                    <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <span className="text-2xl">👨‍👩‍👧‍👦</span>
+                    </div>
+                    <h3 className="font-bold text-lg">Facebook</h3>
+                    <p className="text-sm opacity-90">Kiddo Arabia</p>
+                  </div>
+                </div>
+                <CardContent className="p-4">
+                  <p className="text-sm text-muted-foreground">Community stories, parenting tips, and nutritional advice for families.</p>
+                </CardContent>
+              </Card>
+
+              {/* TikTok */}
+              <Card className="overflow-hidden hover:shadow-glow transition-all duration-500 cursor-pointer group" onClick={() => window.open('https://www.tiktok.com/@kiddoarabia_', '_blank')}>
+                <div className="h-48 bg-black flex items-center justify-center">
+                  <div className="text-white text-center">
+                    <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <span className="text-2xl">🎵</span>
+                    </div>
+                    <h3 className="font-bold text-lg">TikTok</h3>
+                    <p className="text-sm opacity-90">@kiddoarabia_</p>
+                  </div>
+                </div>
+                <CardContent className="p-4">
+                  <p className="text-sm text-muted-foreground">Fun breakfast videos, quick recipes, and trending content with kids!</p>
+                </CardContent>
+              </Card>
+
+              {/* YouTube */}
+              <Card className="overflow-hidden hover:shadow-glow transition-all duration-500 cursor-pointer group" onClick={() => window.open('https://www.youtube.com/@KiddoArabia', '_blank')}>
+                <div className="h-48 bg-red-600 flex items-center justify-center">
+                  <div className="text-white text-center">
+                    <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <span className="text-2xl">▶️</span>
+                    </div>
+                    <h3 className="font-bold text-lg">YouTube</h3>
+                    <p className="text-sm opacity-90">Kiddo Arabia</p>
+                  </div>
+                </div>
+                <CardContent className="p-4">
+                  <p className="text-sm text-muted-foreground">Extended cooking tutorials, family vlogs, and educational content.</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          {/* Blog Grid */}
+          {/* Blog Sections by Category */}
+          <div className="space-y-20">
+            {categories.filter(c => c.name !== 'All Posts').map((category) => {
+              const categoryPosts = blogPosts.filter(post => post.category === category.name);
+              if (categoryPosts.length === 0) return null;
+
+              return (
+                <section key={category.name} id={category.name.toLowerCase()} className="scroll-mt-32">
+                  <div className="flex items-center gap-4 mb-8">
+                    <h2 className="text-3xl font-bold text-foreground">
+                      {language === 'ar' ? category.name : category.name}
+                    </h2>
+                    <div className="h-1 flex-1 bg-border rounded-full"></div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {categoryPosts.map((post, index) => (
+                      <Card
+                        key={post.id}
+                        className="group hover:shadow-glow transition-all duration-500 hover:-translate-y-2 bg-card border-border/50 overflow-hidden cursor-pointer h-full flex flex-col"
+                        onClick={() => navigate(`/blog/${post.id}`)}
+                      >
+                        {/* Post Image */}
+                        <div className="h-56 overflow-hidden bg-white/5 flex items-center justify-center">
+                          <img
+                            src={post.image}
+                            alt={language === 'ar' ? post.titleAr : post.title}
+                            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+
+                        <CardContent className="p-8 flex-1 flex flex-col">
+                          <div className="space-y-4 flex-1">
+                            {/* Post Meta */}
+                            <div className="flex items-center justify-between">
+                              <Badge className={`${getTypeColor(post.type)} px-3 py-1 text-xs`}>
+                                {getTypeIcon(post.type)}
+                                <span className="ml-1 capitalize">{post.type}</span>
+                              </Badge>
+                              <span className="text-sm text-muted-foreground font-medium">
+                                {post.category}
+                              </span>
+                            </div>
+
+                            {/* Post Title */}
+                            <h3 className="font-bold text-xl text-foreground group-hover:text-primary transition-colors line-clamp-2 leading-tight">
+                              {language === 'ar' ? post.titleAr : post.title}
+                            </h3>
+
+                            {/* Post Excerpt */}
+                            <p className="text-base text-muted-foreground line-clamp-3 leading-relaxed">
+                              {language === 'ar' ? post.excerptAr : post.excerpt}
+                            </p>
+                          </div>
+
+                          <div className="mt-6 pt-6 border-t border-border/50 space-y-4">
+                            {/* Post Stats */}
+                            <div className="flex items-center justify-between text-sm text-muted-foreground">
+                              <div className="flex items-center gap-2">
+                                <Calendar className="h-4 w-4" />
+                                {new Date(post.date).toLocaleDateString()}
+                              </div>
+                              <div className="flex items-center gap-2">
+                                {getTypeIcon(post.type)}
+                                {post.readTime}
+                              </div>
+                            </div>
+
+                            {/* Read More Button */}
+                            <Button className="w-full text-base font-semibold" variant="outline" size="lg">
+                              {language === 'ar'
+                                ? (post.type === 'video' ? 'شاهد' : post.type === 'gallery' ? 'عرض المعرض' : 'اقرأ المزيد')
+                                : (post.type === 'video' ? 'Watch' : post.type === 'gallery' ? 'View Gallery' : 'Read More')
+                              }
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
                     ))}
                   </div>
+                </section>
+              );
+            })}
+          </div>
 
-                  {/* Read More Button */}
-                  <Button className="w-full mt-4" variant="outline" size="sm">
-                    {language === 'ar' 
-                      ? (post.type === 'video' ? 'شاهد' : post.type === 'gallery' ? 'عرض المعرض' : 'اقرأ المزيد')
-                      : (post.type === 'video' ? 'Watch' : post.type === 'gallery' ? 'View Gallery' : 'Read More')
-                    }
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+          {/* Load More */}
+          <div className="text-center mt-12">
+            <Button variant="outline" size="lg">
+              Load More Posts
+            </Button>
+          </div>
 
-        {/* Load More */}
-        <div className="text-center mt-12">
-          <Button variant="outline" size="lg">
-            Load More Posts
-          </Button>
-        </div>
-
-        {/* Newsletter Signup */}
-        <div className="text-center mt-16">
-          <div className="bg-gradient-warm rounded-3xl p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">
-              Stay Updated
-            </h3>
-            <p className="text-lg opacity-90 max-w-2xl mx-auto mb-6">
-              Subscribe to our newsletter and never miss our latest content, recipes, and family tips.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg text-foreground"
-              />
-              <Button variant="secondary">
-                Subscribe
-              </Button>
+          {/* Newsletter Signup */}
+          <div className="text-center mt-16">
+            <div className="bg-gradient-warm rounded-3xl p-8 text-white">
+              <h3 className="text-2xl font-bold mb-4">
+                Stay Updated
+              </h3>
+              <p className="text-lg opacity-90 max-w-2xl mx-auto mb-6">
+                Subscribe to our newsletter and never miss our latest content, recipes, and family tips.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="flex-1 px-4 py-3 rounded-lg text-foreground"
+                />
+                <Button variant="secondary">
+                  Subscribe
+                </Button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
     </EnhancedLayout>
   );

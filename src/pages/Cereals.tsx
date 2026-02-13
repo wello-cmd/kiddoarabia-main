@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
+import SEOHead from "@/components/SEOHead";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ArrowLeft, Eye } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { useTranslation } from "@/contexts/TranslationContext";
 import EnhancedLayout from "@/components/EnhancedLayout";
 import { motion } from "framer-motion";
@@ -20,7 +22,21 @@ import chocoFlakesImage from "@/assets/choco-flakes-official.jpg";
 
 const Cereals = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
+  const [searchParams] = useSearchParams();
+  const [selectedCerealId, setSelectedCerealId] = useState<number | null>(null);
+
+  useEffect(() => {
+    const id = searchParams.get('id');
+    if (id) {
+      const cerealId = parseInt(id);
+      if (!isNaN(cerealId)) {
+        setSelectedCerealId(cerealId);
+        // Clean up URL after opening
+        // navigate('/cereals', { replace: true }); // Optional: keep URL clean or keep state
+      }
+    }
+  }, [searchParams]);
 
   const cereals = [
     {
@@ -106,7 +122,19 @@ const Cereals = () => {
 
   return (
     <EnhancedLayout>
-      <motion.div 
+      <SEOHead
+        title={language === 'ar'
+          ? "حبوب كيدو أرابيا - إفطار صحي للأطفال | كوكو سكوبس، حلقات الفواكه"
+          : "Kiddo Arabia Cereals - Healthy Breakfast for Kids | Cocoa Scoops, Fruit Rings"}
+        description={language === 'ar'
+          ? "اكتشف مجموعتنا من حبوب الإفطار اللذيذة والصحية للأطفال. من كوكو سكوبس إلى حلقات الفواكه، حبوب كيدو أرابيا مليئة بالعناصر الغذائية والخيرات."
+          : "Explore our range of delicious and healthy cereals for kids. From Cocoa Scoops to Fruit Rings, Kiddo Arabia cereals are packed with nutrients and goodness."}
+        keywords={language === 'ar'
+          ? "حبوب أطفال, إفطار صحي, كوكو سكوبس, حلقات فواكه, حبوب كيدو, حبوب مغذية, إفطار للأطفال"
+          : "kids cereal, healthy breakfast, cocoa scoops, fruit rings, kiddo cereals, nutritious cereal, breakfast for children"}
+        lang={language}
+      />
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
@@ -123,7 +151,7 @@ const Cereals = () => {
               <ArrowLeft className="mr-2 h-4 w-4" />
               {t('pages.cereals.backToProducts')}
             </Button>
-            
+
             <div className="text-center">
               <h1 className="text-4xl lg:text-6xl font-bold mb-4">
                 {t('pages.cereals.title')}
@@ -157,8 +185,8 @@ const Cereals = () => {
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {cereals.map((cereal, index) => (
-                <Card 
-                  key={cereal.id} 
+                <Card
+                  key={cereal.id}
                   className="group hover:shadow-glow transition-all duration-500 hover:-translate-y-2 bg-card border-border/50"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
@@ -172,8 +200,8 @@ const Cereals = () => {
 
                     {/* Product Image */}
                     <div className="h-48 rounded-xl mb-4 relative overflow-hidden bg-white flex items-center justify-center">
-                      <img 
-                        src={cereal.image} 
+                      <img
+                        src={cereal.image}
                         alt={cereal.name}
                         className="max-w-full max-h-full object-contain rounded-xl"
                       />
@@ -190,19 +218,26 @@ const Cereals = () => {
 
                       {/* View Button */}
                       <div className="pt-2">
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <Button variant="outline" size="sm" className="group">
-                              <Eye className="mr-2 h-4 w-4" />
-                              {t('pages.cereals.viewDetails')}
-                            </Button>
-                          </DialogTrigger>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="group"
+                          onClick={() => setSelectedCerealId(cereal.id)}
+                        >
+                          <Eye className="mr-2 h-4 w-4" />
+                          {t('pages.cereals.viewDetails')}
+                        </Button>
+
+                        <Dialog
+                          open={selectedCerealId === cereal.id}
+                          onOpenChange={(open) => !open && setSelectedCerealId(null)}
+                        >
                           <DialogContent className="max-w-2xl">
                             <div className="grid md:grid-cols-2 gap-6">
                               <div className="space-y-4">
                                 <div className="bg-white rounded-xl p-4 flex items-center justify-center">
-                                  <img 
-                                    src={cereal.image} 
+                                  <img
+                                    src={cereal.image}
                                     alt={cereal.name}
                                     className="max-w-full max-h-64 object-contain rounded-xl"
                                   />

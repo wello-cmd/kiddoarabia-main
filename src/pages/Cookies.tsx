@@ -1,8 +1,24 @@
 import EnhancedLayout from "@/components/EnhancedLayout";
+import SEOHead from "@/components/SEOHead";
+
+import { useTranslation } from "@/contexts/TranslationContext";
 
 const Cookies = () => {
+    const { language } = useTranslation();
     return (
         <EnhancedLayout>
+            <SEOHead
+                title={language === 'ar'
+                    ? "سياسة ملفات تعريف الارتباط - كيدو أرابيا | كيف نستخدم الكوكيز"
+                    : "Cookie Policy - Kiddo Arabia | How We Use Cookies"}
+                description={language === 'ar'
+                    ? "اقرأ سياسة ملفات تعريف الارتباط الخاصة بكيدو أرابيا لفهم كيفية استخدامنا للكوكيز لتحسين تجربتك في التصفح على موقعنا."
+                    : "Read Kiddo Arabia's Cookie Policy to understand how we use cookies to improve your browsing experience on our website."}
+                keywords={language === 'ar'
+                    ? "سياسة كوكيز, خصوصية, ملفات تعريف ارتباط, تحسين تجربة, كوكيز كيدو أرابيا"
+                    : "cookie policy, privacy, cookies, improve experience, kiddo arabia cookies"}
+                lang={language}
+            />
             <div className="container mx-auto px-4 py-20 min-h-[60vh]">
                 <h1 className="text-4xl font-bold mb-8 text-foreground">Cookie Policy</h1>
                 <div className="prose prose-lg dark:prose-invert max-w-4xl">

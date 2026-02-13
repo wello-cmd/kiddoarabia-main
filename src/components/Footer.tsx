@@ -98,7 +98,14 @@ const Footer = () => {
             <div className="space-y-3 text-sm">
               <div className="flex items-center gap-3">
                 <MapPin className="h-4 w-4 text-primary flex-shrink-0" />
-                <span className="text-background/80">Egypt Maadi</span>
+                <a
+                  href="https://maps.app.goo.gl/CWUQKc4Qyo4E6ona6?g_st=ic"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-background/80 hover:text-primary transition-colors"
+                >
+                  24 El 50 Street / Taksem Shamal Sinai / Zahraa El Maadi, Cairo, Egypt
+                </a>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-primary flex-shrink-0" />

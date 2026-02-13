@@ -11,7 +11,7 @@ const ContactSection = () => {
   const contactInfo = [{
     icon: MapPin,
     title: t('contact.info.address'),
-    content: "Egypt Maadi\nCairo, Egypt",
+    content: "24 El 50 Street / Taksem Shamal Sinai\nZahraa El Maadi, Cairo, Egypt",
     color: "text-primary"
   }, {
     icon: Phone,
@@ -132,34 +132,42 @@ const ContactSection = () => {
             </Card>)}
           </div>
 
-          <Card className="overflow-hidden shadow-card border-none">
-            <div className="relative h-56 bg-[#e5e7eb] overflow-hidden group">
-              <div className="absolute inset-0 bg-[url('https://api.mapbox.com/styles/v1/mapbox/light-v10/static/31.2357,30.0444,12,0/800x400@2x?access_token=placeholder')] bg-cover bg-center grayscale opacity-60 group-hover:grayscale-0 transition-all duration-700" />
-              <div className="absolute inset-0 bg-primary/10 mix-blend-multiply" />
+          <a
+            href="https://maps.app.goo.gl/CWUQKc4Qyo4E6ona6?g_st=ic"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
+          >
+            <Card className="overflow-hidden shadow-card border-none hover:shadow-glow transition-all duration-300">
+              <div className="relative h-56 bg-[#e5e7eb] overflow-hidden group">
+                <div className="absolute inset-0 bg-[url('https://api.mapbox.com/styles/v1/mapbox/light-v10/static/31.2357,30.0444,12,0/800x400@2x?access_token=placeholder')] bg-cover bg-center grayscale opacity-60 group-hover:grayscale-0 transition-all duration-700" />
+                <div className="absolute inset-0 bg-primary/10 mix-blend-multiply" />
 
-              {/* Decorative Map Elements */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                  <div className="relative bg-white p-3 rounded-full shadow-lg">
-                    <MapPin className="h-6 w-6 text-primary" />
-                  </div>
-                  {/* Location Tooltip */}
-                  <div className="absolute top-12 left-1/2 -translate-x-1/2 bg-white px-4 py-2 rounded-lg shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">
-                    <p className="font-bold text-xs text-primary">Kiddo HQ</p>
-                    <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-white rotate-45" />
+                {/* Decorative Map Elements */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="relative">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                    <div className="relative bg-white p-3 rounded-full shadow-lg">
+                      <MapPin className="h-6 w-6 text-primary" />
+                    </div>
+
+                    {/* Location Tooltip */}
+                    <div className="absolute top-12 left-1/2 -translate-x-1/2 bg-white px-4 py-2 rounded-lg shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0 z-10">
+                      <p className="font-bold text-xs text-primary">Kiddo HQ</p>
+                      <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-white rotate-45" />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-                <p className="text-xs font-bold text-foreground flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  Open Now
-                </p>
+                <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
+                  <p className="text-xs font-bold text-foreground flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                    Open Now
+                  </p>
+                </div>
               </div>
-            </div>
-          </Card>
+            </Card>
+          </a>
 
           {/* Quick Contact */}
           <div className="bg-gradient-hero rounded-2xl p-6 text-white">

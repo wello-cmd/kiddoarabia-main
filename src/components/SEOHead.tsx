@@ -21,6 +21,8 @@ interface SEOHeadProps {
     availability?: 'in stock' | 'out of stock';
     brand?: string;
   };
+  noIndex?: boolean;
+  lang?: string;
 }
 
 const SEOHead: React.FC<SEOHeadProps> = ({
@@ -32,7 +34,9 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   type = "website",
   structuredData: customStructuredData,
   article,
-  product
+  product,
+  noIndex = false,
+  lang = 'en'
 }) => {
   const structuredData = {
     "@context": "https://schema.org",
@@ -75,12 +79,17 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   };
 
   return (
-    <Helmet>
+    <Helmet htmlAttributes={{ lang }}>
       {/* Primary Meta Tags */}
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
+      {noIndex ? (
+        <meta name="robots" content="noindex, nofollow" />
+      ) : (
+        <meta name="robots" content="index, follow" />
+      )}
       <link rel="canonical" href={url} />
 
       {/* Open Graph / Facebook */}

@@ -12,19 +12,29 @@ import CriticalCss from "@/components/CriticalCss";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
 import AccessibilityChecker from "@/components/AccessibilityChecker";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useTranslation } from "@/contexts/TranslationContext";
 
 const Index = () => {
+  const { language } = useTranslation();
+
   return (
     <>
       <SEOHead
-        title="Kiddo Arabia - Premium Kids' Nutrition | Made with Love & Care"
-        description="🌟 Nourishing your little ones with the finest, healthiest ingredients. Premium cereals, oat jars & biscuits crafted with love for growing minds and bodies."
-        keywords="kids nutrition, healthy cereals, children food, premium oat jars, kiddo arabia, natural ingredients"
+        title={language === 'ar'
+          ? "كيدو أرابيا - تغذية متميزة للأطفال | صنعت بكل حب وعناية"
+          : "Kiddo Arabia - Premium Kids' Nutrition | Made with Love & Care"}
+        description={language === 'ar'
+          ? "🌟 نغذي صغارك بأجود وأفضل المكونات الصحية. حبوب إفطار متميزة، برطمانات الشوفان والبسكويت المصنوعة بكل حب لنمو العقول والأجساد."
+          : "🌟 Nourishing your little ones with the finest, healthiest ingredients. Premium cereals, oat jars & biscuits crafted with love for growing minds and bodies."}
+        keywords={language === 'ar'
+          ? "تغذية الأطفال, حبوب صحية, طعام أطفال, برطمانات شوفان متميزة, كيدو أرابيا, مكونات طبيعية"
+          : "kids nutrition, healthy cereals, children food, premium oat jars, kiddo arabia, natural ingredients"}
+        lang={language}
         structuredData={{
           "@context": "https://schema.org",
           "@type": "Organization",
           "name": "Kiddo Arabia",
-          "description": "Premium healthy nutrition for children with natural ingredients",
+          "description": language === 'ar' ? "تغذية صحية متميزة للأطفال بمكونات طبيعية" : "Premium healthy nutrition for children with natural ingredients",
           "url": "https://kiddo-arabia.com",
           "logo": "https://kiddo-arabia.com/logo.png",
           "contactPoint": {

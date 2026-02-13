@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
+import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -474,6 +475,20 @@ const BlogDetail = () => {
 
   return (
     <EnhancedLayout>
+      <SEOHead
+        title={currentTitle}
+        description={currentExcerpt}
+        image={post.image}
+        keywords={currentTags.join(', ')}
+        type="article"
+        article={{
+          publishedTime: post.date,
+          author: currentAuthor,
+          section: currentCategory,
+          tags: currentTags
+        }}
+        lang={language}
+      />
       <div className="bg-background">
         {/* Header */}
         <div className="bg-gradient-hero text-white py-16">

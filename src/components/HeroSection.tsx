@@ -84,11 +84,8 @@ const HeroSection = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 {t('hero.title.part1')} <br />
-                <span className="text-primary relative inline-block">
+                <span className="text-foreground relative inline-block">
                   {t('hero.title.part2')}
-                  <svg className="absolute w-full h-4 -bottom-2 left-0 text-accent opacity-30 z-[-1]" viewBox="0 0 100 10" preserveAspectRatio="none">
-                    <path d="M0 5 Q 50 15 100 5" stroke="currentColor" strokeWidth="6" fill="none" />
-                  </svg>
                 </span>
               </motion.h1>
 

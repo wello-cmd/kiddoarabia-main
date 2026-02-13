@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import SEOHead from "@/components/SEOHead";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +9,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const Biscuits = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
 
   const biscuits = [
     {
@@ -51,6 +52,18 @@ const Biscuits = () => {
 
   return (
     <EnhancedLayout>
+      <SEOHead
+        title={language === 'ar'
+          ? "بسكويت كيدو أرابيا - وجبات خفيفة صحية ولذيذة | بسكويت الشوفان"
+          : "Kiddo Arabia Biscuits - Healthy & Delicious Snacks | Oat Biscuits"}
+        description={language === 'ar'
+          ? "اكتشف مجموعة بسكويت كيدو أرابيا الصحي. مصنوع من الشوفان والمكونات الطبيعية، بسكويت كيدو هو الوجبة الخفيفة المثالية للمدرسة أو المنزل."
+          : "Discover Kiddo Arabia's range of healthy biscuits. Made with oats and natural ingredients, our biscuits are the perfect snack for school or home."}
+        keywords={language === 'ar'
+          ? "بسكويت أطفال, وجبات خفيفة صحية, بسكويت شوفان, بسكويت شوكولاتة, بسكويت تفاح وقرفة, وجبات كيدو, وجبات مدرسة"
+          : "kids biscuits, healthy snacks, oat biscuits, chocolate biscuits, apple cinnamon biscuits, kiddo snacks, school snacks"}
+        lang={language}
+      />
       <div className="bg-background">
         {/* Header */}
         <div className="bg-gradient-hero text-white py-16">

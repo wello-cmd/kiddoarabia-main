@@ -1,8 +1,24 @@
 import EnhancedLayout from "@/components/EnhancedLayout";
+import SEOHead from "@/components/SEOHead";
+
+import { useTranslation } from "@/contexts/TranslationContext";
 
 const Nutrition = () => {
+    const { language } = useTranslation();
     return (
         <EnhancedLayout>
+            <SEOHead
+                title={language === 'ar'
+                    ? "دليل تغذية كيدو أرابيا - مكونات صحية للأطفال"
+                    : "Kiddo Arabia Nutrition - Health & Wellness for Kids | Vitamins & Minerals"}
+                description={language === 'ar'
+                    ? "تعرف على الفوائد الغذائية لمنتجات كيدو أرابيا. نستخدم مكونات طبيعية مثل الشوفان، العسل، والفواكه الحقيقية لدعم نمو وتطور طفلك."
+                    : "Learn about the nutritional benefits of Kiddo Arabia products. We prioritize natural ingredients, essential vitamins, and minerals to support your child's growth and health."}
+                keywords={language === 'ar'
+                    ? "تغذية أطفال, مكونات صحية, فوائد شوفان, فيتامينات ومعادن, نمو طفولة, نظام غذائي صحي"
+                    : "kids nutrition, healthy ingredients, vitamins for kids, minerals, child growth, healthy eating for children"}
+                lang={language}
+            />
             <div className="container mx-auto px-4 py-20 min-h-[60vh]">
                 <h1 className="text-4xl font-bold mb-8 text-center text-foreground">Nutrition Guide</h1>
                 <div className="max-w-4xl mx-auto prose prose-lg dark:prose-invert">

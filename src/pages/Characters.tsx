@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import SEOHead from "@/components/SEOHead";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -146,6 +147,18 @@ const Characters = () => {
 
   return (
     <EnhancedLayout>
+      <SEOHead
+        title={language === 'ar'
+          ? "قابل شخصيات كيدو أرابيا - أورا، دريمي والأصدقاء"
+          : "Meet the Kiddo Arabia Characters - Aura, Dreamy & Friends"}
+        description={language === 'ar'
+          ? "ادخل عالم كيدو وقابل شخصياتنا الممتعة! من أورا إلى كابتن فليكس، اكتشف القصص وراء حبوب كيدو أرابيا المفضلة لديك."
+          : "Enter the Kiddoverse and meet our fun characters! From Aura to Captain Flakes, discover the stories behind your favorite Kiddo Arabia cereals."}
+        keywords={language === 'ar'
+          ? "شخصيات كيدو أرابيا, تمائم حبوب إفطار, شخصيات أطفال, أورا, دريمي, كابتن فليكس, تمائم العلامة التجارية, قصص للأطفال"
+          : "kiddo arabia characters, cereal mascots, kids characters, aura, dreamy, captain flakes, brand mascots, storytelling for kids"}
+        lang={language}
+      />
       <div className="bg-background min-h-screen">
         {/* Header */}
         <div className="bg-gradient-hero text-white py-16">
@@ -188,61 +201,85 @@ const Characters = () => {
         <section className="py-20">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {characters.map((character, index) => (
-                <ScrollReveal key={character.id} animation="scale" delay={index * 0.1}>
-                  <Card
-                    className="group hover:shadow-glow transition-all duration-300 hover:-translate-y-2 bg-card border-border/50 overflow-hidden"
-                  >
-                    <CardContent className="p-6">
-                      {/* Character Badge */}
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className={`w-4 h-4 rounded-full ${character.colorClass}`}></div>
-                        <span className="text-2xl">{character.color}</span>
-                        <div className="text-sm text-muted-foreground">
-                          {language === 'ar' ? 'المنتج:' : 'Box:'} {character.boxName}
+              {characters.map((character, index) => {
+                // Map character to cereal ID manually since we don't have it in the object yet
+                const getCerealId = (id: number) => {
+                  switch (id) {
+                    case 1: return 9; // Aura -> Fruit Rings
+                    case 2: return 6; // Dreamy -> Crunchy Pillow
+                    case 3: return 3; // Strawby -> Strawberry Pillow
+                    case 4: return 4; // Krio -> Choco Creamo
+                    case 5: return 2; // Hona -> Honey Rings
+                    case 6: return 1; // Bono -> Banana Pillow
+                    case 7: return 7; // Raizo -> Choco Rice
+                    case 8: return 8; // Mr. Scoop -> Cocoa Scoops
+                    case 9: return 11; // Captain Flakes -> Choco Flakes
+                    case 10: return 5; // Professor Pops -> Choco Pops
+                    default: return 1;
+                  }
+                };
+                const cerealId = getCerealId(character.id);
+
+                return (
+                  <ScrollReveal key={character.id} animation="scale" delay={index * 0.1}>
+                    <Card
+                      className="group hover:shadow-glow transition-all duration-300 hover:-translate-y-2 bg-card border-border/50 overflow-hidden cursor-pointer"
+                      onClick={() => navigate(`/cereals?id=${cerealId}`)}
+                    >
+                      <CardContent className="p-6">
+                        {/* Character Badge */}
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className={`w-4 h-4 rounded-full ${character.colorClass}`}></div>
+                          <span className="text-2xl">{character.color}</span>
+                          <div className="text-sm text-muted-foreground">
+                            {language === 'ar' ? 'المنتج:' : 'Box:'} {character.boxName}
+                          </div>
                         </div>
-                      </div>
 
-                      {/* Character Image */}
-                      <div className="h-48 rounded-xl mb-4 relative overflow-hidden bg-gradient-to-br from-primary/5 to-secondary/5 flex items-center justify-center">
-                        <img
-                          src={character.image}
-                          alt={language === 'ar' ? character.nameAr : character.name}
-                          className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-110"
-                          loading="lazy"
-                        />
-                        <Sparkles className="absolute top-2 right-2 h-5 w-5 text-primary/50" />
-                      </div>
+                        {/* Character Image */}
+                        <div className="h-48 rounded-xl mb-4 relative overflow-hidden bg-gradient-to-br from-primary/5 to-secondary/5 flex items-center justify-center">
+                          <img
+                            src={character.image}
+                            alt={language === 'ar' ? character.nameAr : character.name}
+                            className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                            loading="lazy"
+                          />
+                          <Sparkles className="absolute top-2 right-2 h-5 w-5 text-primary/50" />
+                        </div>
 
-                      {/* Character Info */}
-                      <div className="space-y-3">
-                        <div>
-                          <h3 className="font-bold text-xl text-foreground group-hover:text-primary transition-colors">
-                            {language === 'ar' ? character.nameAr : character.name}
-                          </h3>
-                          <p className="text-primary font-medium text-sm">
-                            {character.title}
+                        {/* Character Info */}
+                        <div className="space-y-3">
+                          <div>
+                            <h3 className="font-bold text-xl text-foreground group-hover:text-primary transition-colors">
+                              {language === 'ar' ? character.nameAr : character.name}
+                            </h3>
+                            <p className="text-primary font-medium text-sm">
+                              {character.title}
+                            </p>
+                          </div>
+
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            {character.description}
                           </p>
+
+                          {/* Link to Product */}
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="w-full mt-3 group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigate(`/cereals?id=${cerealId}`);
+                            }}
+                          >
+                            {language === 'ar' ? `جرب ${character.boxName}` : `Try ${character.boxName}`}
+                          </Button>
                         </div>
-
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          {character.description}
-                        </p>
-
-                        {/* Link to Product */}
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="w-full mt-3 group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
-                          onClick={() => navigate('/cereals')}
-                        >
-                          {language === 'ar' ? `جرب ${character.boxName}` : `Try ${character.boxName}`}
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </ScrollReveal>
-              ))}
+                      </CardContent>
+                    </Card>
+                  </ScrollReveal>
+                );
+              })}
             </div>
 
             {/* Mystery Section */}

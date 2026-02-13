@@ -1,8 +1,24 @@
 import EnhancedLayout from "@/components/EnhancedLayout";
+import SEOHead from "@/components/SEOHead";
+
+import { useTranslation } from "@/contexts/TranslationContext";
 
 const Terms = () => {
+    const { language } = useTranslation();
     return (
         <EnhancedLayout>
+            <SEOHead
+                title={language === 'ar'
+                    ? "شروط الخدمة - كيدو أرابيا | قواعد استخدام الموقع"
+                    : "Terms of Service - Kiddo Arabia | Website Usage Rules"}
+                description={language === 'ar'
+                    ? "اقرأ الشروط والأحكام لاستخدام موقع كيدو أرابيا. من خلال الوصول إلى موقعنا، فإنك توافق على هذه الشروط."
+                    : "Read the Terms and Conditions for using Kiddo Arabia's website. By accessing our site, you agree to these terms."}
+                keywords={language === 'ar'
+                    ? "شروط خدمة, شروط وأحكام, قواعد موقع, اتفاقية مستخدم, شروط كيدو أرابيا"
+                    : "terms of service, terms and conditions, website rules, user agreement, kiddo arabia terms"}
+                lang={language}
+            />
             <div className="container mx-auto px-4 py-20 min-h-[60vh]">
                 <h1 className="text-4xl font-bold mb-8 text-foreground">Terms of Service</h1>
                 <div className="prose prose-lg dark:prose-invert max-w-4xl">
