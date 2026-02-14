@@ -1,12 +1,30 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Send, Loader2 } from "lucide-react";
 import { useTranslation } from "@/contexts/TranslationContext";
 import { safeExternalLink } from "@/utils/security";
+import { toast } from "sonner";
+
 const ContactSection = () => {
   const { t } = useTranslation();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // Simulate network request
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    toast.success(t('contact.form.success'));
+    setIsSubmitting(false);
+
+    // Reset form
+    (e.target as HTMLFormElement).reset();
+  };
 
   const contactInfo = [{
     icon: MapPin,
@@ -50,51 +68,91 @@ const ContactSection = () => {
               {t('contact.form.title')}
             </h3>
 
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                     {t('contact.form.name')} *
                   </label>
-                  <Input placeholder={t('contact.form.name')} className="bg-background/50 border-border/50 focus:border-primary transition-colors" />
+                  <Input
+                    id="name"
+                    name="name"
+                    required
+                    placeholder={t('contact.form.name')}
+                    className="bg-background/50 border-border/50 focus:border-primary transition-colors"
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                     {t('contact.form.email')} *
                   </label>
-                  <Input type="email" placeholder={t('contact.form.email')} className="bg-background/50 border-border/50 focus:border-primary transition-colors" />
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder={t('contact.form.email')}
+                    className="bg-background/50 border-border/50 focus:border-primary transition-colors"
+                  />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
                   {t('contact.form.phone')}
                 </label>
-                <Input placeholder={t('contact.form.phone')} className="bg-background/50 border-border/50 focus:border-primary transition-colors" />
+                <Input
+                  id="phone"
+                  name="phone"
+                  placeholder={t('contact.form.phone')}
+                  className="bg-background/50 border-border/50 focus:border-primary transition-colors"
+                />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
                   {t('contact.form.subject')}
                 </label>
-                <Input placeholder={t('contact.form.subject')} className="bg-background/50 border-border/50 focus:border-primary transition-colors" />
+                <Input
+                  id="subject"
+                  name="subject"
+                  placeholder={t('contact.form.subject')}
+                  className="bg-background/50 border-border/50 focus:border-primary transition-colors"
+                />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                   {t('contact.form.message')} *
                 </label>
-                <Textarea placeholder={t('contact.form.message')} rows={5} className="bg-background/50 border-border/50 focus:border-primary transition-colors resize-none" />
+                <Textarea
+                  id="message"
+                  name="message"
+                  required
+                  placeholder={t('contact.form.message')}
+                  rows={5}
+                  className="bg-background/50 border-border/50 focus:border-primary transition-colors resize-none"
+                />
               </div>
 
               <Button
+                type="submit"
                 variant="kiddo"
                 size="lg"
                 className="w-full group"
-                onClick={() => alert(t('contact.form.send') + '! We\'ll get back to you within 24 hours.')}
+                disabled={isSubmitting}
               >
-                {t('contact.form.send')}
-                <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                {isSubmitting ? (
+                  <>
+                    {t('contact.form.sending')}
+                    <Loader2 className="ml-2 h-5 w-5 animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    {t('contact.form.send')}
+                    <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
               </Button>
             </form>
           </CardContent>
