@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Clock, Users, ChefHat, Heart, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import type { KeyboardEvent } from 'react';
 import breakfastImage from "@/assets/kiddo-breakfast.png";
 import classicBowlImage from "@/assets/classic-cornflakes-bowl.jpg";
 import energyBarsImage from "@/assets/cornflakes-energy-bars.jpg";
@@ -12,6 +13,13 @@ import chickenImage from "@/assets/cornflakes-crusted-chicken.jpg";
 
 const RecipesSection = () => {
   const navigate = useNavigate();
+
+  const handleKeyDown = (e: KeyboardEvent, action: () => void) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      action();
+    }
+  };
 
   // Breakfast recipes
   const breakfastRecipes = [
@@ -218,8 +226,12 @@ const RecipesSection = () => {
             {categories.map((category, index) => (
               <Card
                 key={index}
-                className="cursor-pointer group hover:shadow-glow transition-all duration-300 hover:-translate-y-1"
+                className="cursor-pointer group hover:shadow-glow transition-all duration-300 hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-primary"
                 onClick={() => navigate(`/recipes#${category.name.toLowerCase()}`)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => handleKeyDown(e, () => navigate(`/recipes#${category.name.toLowerCase()}`))}
+                aria-label={`View ${category.name} recipes`}
               >
                 <CardContent className="p-6 text-center">
                   <div className={`${category.color} w-12 h-12 rounded-xl mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform`}>
@@ -242,9 +254,13 @@ const RecipesSection = () => {
           {featuredRecipes.map((recipe, index) => (
             <Card
               key={recipe.id}
-              className="group hover:shadow-glow transition-all duration-500 hover:-translate-y-2 cursor-pointer"
+              className="group hover:shadow-glow transition-all duration-500 hover:-translate-y-2 cursor-pointer focus-visible:ring-2 focus-visible:ring-primary"
               style={{ animationDelay: `${index * 150}ms` }}
               onClick={() => navigate(`/recipe/${recipe.id}`)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => handleKeyDown(e, () => navigate(`/recipe/${recipe.id}`))}
+              aria-label={`View recipe: ${recipe.title}`}
             >
               <div className="h-48 relative overflow-hidden rounded-t-lg">
                 <img
