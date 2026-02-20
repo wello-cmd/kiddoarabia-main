@@ -198,6 +198,7 @@ const AiBot = () => {
         onClick={handleOpen}
         className="fixed bottom-6 right-6 rounded-full w-14 h-14 shadow-lg z-50"
         size="lg"
+        aria-label={language === 'ar' ? 'فتح المساعد الذكي' : 'Open chat assistant'}
       >
         <MessageCircle className="h-6 w-6" />
       </Button>
@@ -209,7 +210,12 @@ const AiBot = () => {
             <CardTitle className="text-lg">
               {language === 'ar' ? 'مساعد كيدو الذكي' : 'Kiddo AI Assistant'}
             </CardTitle>
-            <Button variant="ghost" size="sm" onClick={() => setIsOpen(false)}>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsOpen(false)}
+              aria-label={language === 'ar' ? 'إغلاق المحادثة' : 'Close chat'}
+            >
               <X className="h-4 w-4" />
             </Button>
           </CardHeader>
@@ -227,11 +233,13 @@ const AiBot = () => {
                     onChange={(e) => setApiKey(e.target.value)}
                     placeholder="sk-or-..."
                     className="flex-1 px-2 py-1 text-xs border rounded"
+                    aria-label={language === 'ar' ? 'مفتاح API' : 'API Key'}
                   />
                   <Button 
                     size="sm" 
                     onClick={() => setShowApiKeyInput(false)}
                     disabled={!apiKey.trim()}
+                    aria-label={language === 'ar' ? 'حفظ مفتاح API' : 'Save API key'}
                   >
                     {language === 'ar' ? 'حفظ' : 'Save'}
                   </Button>
@@ -239,7 +247,12 @@ const AiBot = () => {
               </div>
             )}
 
-            <div className="flex-1 overflow-y-auto space-y-3 mb-4">
+            <div
+              className="flex-1 overflow-y-auto space-y-3 mb-4"
+              role="log"
+              aria-live="polite"
+              aria-label={language === 'ar' ? 'سجل المحادثة' : 'Chat history'}
+            >
               {messages.map((msg, idx) => (
                 <div key={idx} className={`flex ${msg.isBot ? 'justify-start' : 'justify-end'}`}>
                   <div className={`max-w-[80%] p-3 rounded-lg text-sm ${
@@ -280,8 +293,14 @@ const AiBot = () => {
                 placeholder={language === 'ar' ? 'اسأل عن منتجات كيدو...' : 'Ask about Kiddo products...'}
                 className="flex-1 px-3 py-2 border rounded-lg text-sm"
                 disabled={isLoading}
+                aria-label={language === 'ar' ? 'أدخل رسالتك' : 'Chat input'}
               />
-              <Button size="sm" onClick={handleSend} disabled={isLoading || !input.trim()}>
+              <Button
+                size="sm"
+                onClick={handleSend}
+                disabled={isLoading || !input.trim()}
+                aria-label={language === 'ar' ? 'إرسال الرسالة' : 'Send message'}
+              >
                 {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
               </Button>
             </div>
