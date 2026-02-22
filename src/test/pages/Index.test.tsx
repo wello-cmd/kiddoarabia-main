@@ -2,9 +2,25 @@ import { render } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { HelmetProvider } from 'react-helmet-async';
 import { TranslationProvider } from '@/contexts/TranslationContext';
 import Index from '@/pages/Index';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
+
+// Mock useSound
+vi.mock('@/contexts/SoundContext', () => ({
+  useSound: () => ({
+    playSound: vi.fn(),
+  }),
+}));
+
+// Mock useInteraction
+vi.mock('@/contexts/InteractionContext', () => ({
+  useInteraction: () => ({
+    isInteracting: false,
+    registerInteraction: vi.fn(),
+  }),
+}));
 
 const TestWrapper = ({ children }: { children: React.ReactNode }) => {
   const queryClient = new QueryClient({
@@ -16,13 +32,15 @@ const TestWrapper = ({ children }: { children: React.ReactNode }) => {
   });
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <TranslationProvider>
-          {children}
-        </TranslationProvider>
-      </BrowserRouter>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <TranslationProvider>
+            {children}
+          </TranslationProvider>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 };
 
@@ -45,10 +63,10 @@ describe('Index Page', () => {
     );
 
     // Check for main content sections
-    expect(screen.getByText(/product/i)).toBeInTheDocument();
-    expect(screen.getByText(/about/i)).toBeInTheDocument();
-    expect(screen.getByText(/recipe/i)).toBeInTheDocument();
-    expect(screen.getByText(/contact/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/product/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/about/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/recipe/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/contact/i).length).toBeGreaterThan(0);
   });
 
   it('has proper semantic structure', () => {

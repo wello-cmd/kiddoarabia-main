@@ -47,8 +47,7 @@ const Index = () => {
       <SecurityHeaders />
       <CriticalCss />
       <EnhancedLayout>
-        <main id="main-content" role="main">
-          <HeroSection />
+        <HeroSection />
           <ScrollReveal animation="slide" delay={0.2}>
             <TrustSignalsSection />
           </ScrollReveal>
@@ -67,7 +66,6 @@ const Index = () => {
           <ScrollReveal animation="fade">
             <ContactSection />
           </ScrollReveal>
-        </main>
 
         {/* Development Tools */}
         <PerformanceMonitor />
