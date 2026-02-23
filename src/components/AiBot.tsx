@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MessageCircle, X, Send, Loader2 } from "lucide-react";
@@ -22,12 +22,12 @@ const AiBot = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Initialize welcome message based on language
-  const getWelcomeMessage = () => {
+  const getWelcomeMessage = useCallback(() => {
     if (language === 'ar') {
       return "مرحباً! أنا مساعد كيدو الذكي. اسألني عن منتجاتنا والتغذية والوصفات!";
     }
     return "Hi! I'm Kiddo AI Assistant. Ask me anything about our products, nutrition, and recipes!";
-  };
+  }, [language]);
 
   // Initialize messages when component mounts or language changes
   React.useEffect(() => {
@@ -38,7 +38,7 @@ const AiBot = () => {
         timestamp: new Date() 
       }]);
     }
-  }, [language]);
+  }, [getWelcomeMessage, messages.length]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -198,6 +198,7 @@ const AiBot = () => {
         onClick={handleOpen}
         className="fixed bottom-6 right-6 rounded-full w-14 h-14 shadow-lg z-50"
         size="lg"
+        aria-label={t('aibot.open')}
       >
         <MessageCircle className="h-6 w-6" />
       </Button>
@@ -209,7 +210,12 @@ const AiBot = () => {
             <CardTitle className="text-lg">
               {language === 'ar' ? 'مساعد كيدو الذكي' : 'Kiddo AI Assistant'}
             </CardTitle>
-            <Button variant="ghost" size="sm" onClick={() => setIsOpen(false)}>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsOpen(false)}
+              aria-label={t('aibot.close')}
+            >
               <X className="h-4 w-4" />
             </Button>
           </CardHeader>
@@ -227,6 +233,7 @@ const AiBot = () => {
                     onChange={(e) => setApiKey(e.target.value)}
                     placeholder="sk-or-..."
                     className="flex-1 px-2 py-1 text-xs border rounded"
+                    aria-label={t('aibot.apiKeyLabel')}
                   />
                   <Button 
                     size="sm" 
@@ -239,7 +246,12 @@ const AiBot = () => {
               </div>
             )}
 
-            <div className="flex-1 overflow-y-auto space-y-3 mb-4">
+            <div
+              className="flex-1 overflow-y-auto space-y-3 mb-4"
+              role="log"
+              aria-live="polite"
+              aria-label={t('aibot.history')}
+            >
               {messages.map((msg, idx) => (
                 <div key={idx} className={`flex ${msg.isBot ? 'justify-start' : 'justify-end'}`}>
                   <div className={`max-w-[80%] p-3 rounded-lg text-sm ${
@@ -269,6 +281,7 @@ const AiBot = () => {
                   size="sm" 
                   onClick={() => setShowApiKeyInput(true)}
                   className="text-xs"
+                  aria-label={t('aibot.apiKeyLabel')}
                 >
                   API
                 </Button>
@@ -280,8 +293,14 @@ const AiBot = () => {
                 placeholder={language === 'ar' ? 'اسأل عن منتجات كيدو...' : 'Ask about Kiddo products...'}
                 className="flex-1 px-3 py-2 border rounded-lg text-sm"
                 disabled={isLoading}
+                aria-label={t('aibot.inputLabel')}
               />
-              <Button size="sm" onClick={handleSend} disabled={isLoading || !input.trim()}>
+              <Button
+                size="sm"
+                onClick={handleSend}
+                disabled={isLoading || !input.trim()}
+                aria-label={t('aibot.send')}
+              >
                 {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
               </Button>
             </div>

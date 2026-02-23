@@ -47,27 +47,25 @@ const Index = () => {
       <SecurityHeaders />
       <CriticalCss />
       <EnhancedLayout>
-        <main id="main-content" role="main">
-          <HeroSection />
-          <ScrollReveal animation="slide" delay={0.2}>
-            <TrustSignalsSection />
-          </ScrollReveal>
-          <ScrollReveal animation="fade" delay={0.1}>
-            <ProductCategoriesSection />
-          </ScrollReveal>
-          <ScrollReveal animation="scale">
-            <TestimonialsSection />
-          </ScrollReveal>
-          <ScrollReveal animation="fade">
-            <AboutSection />
-          </ScrollReveal>
-          <ScrollReveal animation="slide" delay={0.2}>
-            <RecipesSection />
-          </ScrollReveal>
-          <ScrollReveal animation="fade">
-            <ContactSection />
-          </ScrollReveal>
-        </main>
+        <HeroSection />
+        <ScrollReveal animation="slide" delay={0.2}>
+          <TrustSignalsSection />
+        </ScrollReveal>
+        <ScrollReveal animation="fade" delay={0.1}>
+          <ProductCategoriesSection />
+        </ScrollReveal>
+        <ScrollReveal animation="scale">
+          <TestimonialsSection />
+        </ScrollReveal>
+        <ScrollReveal animation="fade">
+          <AboutSection />
+        </ScrollReveal>
+        <ScrollReveal animation="slide" delay={0.2}>
+          <RecipesSection />
+        </ScrollReveal>
+        <ScrollReveal animation="fade">
+          <ContactSection />
+        </ScrollReveal>
 
         {/* Development Tools */}
         <PerformanceMonitor />
