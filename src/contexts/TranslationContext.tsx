@@ -334,7 +334,15 @@ const translations = {
     'pages.blog.featuredContent': 'Featured Content',
     'pages.blog.readMore': 'Read More',
     'pages.blog.followUs': 'Follow Us on Social Media',
-    'pages.blog.allPosts': 'All Posts'
+    'pages.blog.allPosts': 'All Posts',
+
+    // AiBot
+    'aibot.open': 'Open chat assistant',
+    'aibot.close': 'Close chat',
+    'aibot.inputLabel': 'Chat message',
+    'aibot.send': 'Send message',
+    'aibot.history': 'Chat history',
+    'aibot.apiKeyLabel': 'Enter API Key'
   },
   ar: {
     // Header
@@ -572,7 +580,15 @@ const translations = {
     'pages.blog.featuredContent': 'المحتوى المميز',
     'pages.blog.readMore': 'اقرأ المزيد',
     'pages.blog.followUs': 'تابعنا على وسائل التواصل الاجتماعي',
-    'pages.blog.allPosts': 'جميع المنشورات'
+    'pages.blog.allPosts': 'جميع المنشورات',
+
+    // AiBot
+    'aibot.open': 'فتح مساعد المحادثة',
+    'aibot.close': 'إغلاق المحادثة',
+    'aibot.inputLabel': 'رسالة المحادثة',
+    'aibot.send': 'إرسال الرسالة',
+    'aibot.history': 'سجل المحادثة',
+    'aibot.apiKeyLabel': 'أدخل مفتاح API'
   }
 };
 

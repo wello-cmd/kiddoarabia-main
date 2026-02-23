@@ -2,9 +2,31 @@ import { render } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { HelmetProvider } from 'react-helmet-async';
 import { TranslationProvider } from '@/contexts/TranslationContext';
 import Index from '@/pages/Index';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
+
+// Mock SoundContext
+vi.mock('@/contexts/SoundContext', () => ({
+  useSound: () => ({
+    playSound: vi.fn(),
+  }),
+}));
+
+// Mock InteractionContext
+vi.mock('@/contexts/InteractionContext', () => ({
+  useInteraction: () => ({
+    cursorType: 'default',
+    setCursorType: vi.fn(),
+    isHovering: false,
+    setIsHovering: vi.fn(),
+  }),
+  useCursor: () => ({
+    onMouseEnter: vi.fn(),
+    onMouseLeave: vi.fn(),
+  }),
+}));
 
 const TestWrapper = ({ children }: { children: React.ReactNode }) => {
   const queryClient = new QueryClient({
@@ -17,11 +39,13 @@ const TestWrapper = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <TranslationProvider>
-          {children}
-        </TranslationProvider>
-      </BrowserRouter>
+      <HelmetProvider>
+        <BrowserRouter>
+          <TranslationProvider>
+            {children}
+          </TranslationProvider>
+        </BrowserRouter>
+      </HelmetProvider>
     </QueryClientProvider>
   );
 };
@@ -45,10 +69,10 @@ describe('Index Page', () => {
     );
 
     // Check for main content sections
-    expect(screen.getByText(/product/i)).toBeInTheDocument();
-    expect(screen.getByText(/about/i)).toBeInTheDocument();
-    expect(screen.getByText(/recipe/i)).toBeInTheDocument();
-    expect(screen.getByText(/contact/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/product/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/about/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/recipe/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/contact/i)[0]).toBeInTheDocument();
   });
 
   it('has proper semantic structure', () => {
