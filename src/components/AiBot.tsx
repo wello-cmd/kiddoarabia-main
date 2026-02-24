@@ -198,6 +198,7 @@ const AiBot = () => {
         onClick={handleOpen}
         className="fixed bottom-6 right-6 rounded-full w-14 h-14 shadow-lg z-50"
         size="lg"
+        aria-label={language === 'ar' ? 'فتح مساعد المحادثة' : 'Open chat assistant'}
       >
         <MessageCircle className="h-6 w-6" />
       </Button>
@@ -209,7 +210,12 @@ const AiBot = () => {
             <CardTitle className="text-lg">
               {language === 'ar' ? 'مساعد كيدو الذكي' : 'Kiddo AI Assistant'}
             </CardTitle>
-            <Button variant="ghost" size="sm" onClick={() => setIsOpen(false)}>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsOpen(false)}
+              aria-label={language === 'ar' ? 'إغلاق المحادثة' : 'Close chat'}
+            >
               <X className="h-4 w-4" />
             </Button>
           </CardHeader>
@@ -269,6 +275,7 @@ const AiBot = () => {
                   size="sm" 
                   onClick={() => setShowApiKeyInput(true)}
                   className="text-xs"
+                  aria-label={language === 'ar' ? 'إعدادات API' : 'API Settings'}
                 >
                   API
                 </Button>
@@ -280,8 +287,14 @@ const AiBot = () => {
                 placeholder={language === 'ar' ? 'اسأل عن منتجات كيدو...' : 'Ask about Kiddo products...'}
                 className="flex-1 px-3 py-2 border rounded-lg text-sm"
                 disabled={isLoading}
+                aria-label={language === 'ar' ? 'إدخال رسالة المحادثة' : 'Chat message input'}
               />
-              <Button size="sm" onClick={handleSend} disabled={isLoading || !input.trim()}>
+              <Button
+                size="sm"
+                onClick={handleSend}
+                disabled={isLoading || !input.trim()}
+                aria-label={language === 'ar' ? 'إرسال الرسالة' : 'Send message'}
+              >
                 {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
               </Button>
             </div>
