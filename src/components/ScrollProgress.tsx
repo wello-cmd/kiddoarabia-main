@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { ArrowUp } from 'lucide-react';
 
 const ScrollProgress: React.FC = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -34,7 +35,7 @@ const ScrollProgress: React.FC = () => {
       
       {/* Circular Progress Indicator */}
       <motion.div
-        className="fixed bottom-8 right-8 z-40"
+        className="fixed bottom-24 right-8 z-40"
         initial={{ scale: 0, opacity: 0 }}
         animate={{ 
           scale: isVisible ? 1 : 0, 
@@ -85,11 +86,14 @@ const ScrollProgress: React.FC = () => {
         
         {/* Scroll to Top Button */}
         <motion.button
-          className="absolute inset-0 rounded-full bg-card/80 backdrop-blur-sm border border-border hover:bg-card transition-colors"
+          aria-label="Scroll to top"
+          className="absolute inset-0 flex items-center justify-center rounded-full bg-background/90 backdrop-blur-sm border border-border opacity-0 hover:opacity-100 transition-opacity duration-300"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-        />
+        >
+          <ArrowUp className="h-5 w-5 text-primary" />
+        </motion.button>
       </motion.div>
     </>
   );
