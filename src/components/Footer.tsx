@@ -126,6 +126,7 @@ const Footer = () => {
                   size="icon"
                   className={`bg-background/10 hover:bg-background/20 text-background ${social.color} transition-all duration-300 hover:scale-110`}
                   onClick={() => safeExternalLink(social.href)}
+                  aria-label={social.label}
                 >
                   <social.icon className="h-5 w-5" />
                 </Button>
