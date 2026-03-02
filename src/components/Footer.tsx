@@ -124,6 +124,7 @@ const Footer = () => {
                   key={index}
                   variant="ghost"
                   size="icon"
+                  aria-label={social.label}
                   className={`bg-background/10 hover:bg-background/20 text-background ${social.color} transition-all duration-300 hover:scale-110`}
                   onClick={() => safeExternalLink(social.href)}
                 >
