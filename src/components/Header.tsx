@@ -97,6 +97,7 @@ const Header = () => {
                 }
               }}
               title="Contact Us"
+              aria-label={language === 'ar' ? 'تواصل معنا' : 'Contact Us'}
             >
               <Search className="h-5 w-5" />
             </Button>
@@ -107,6 +108,10 @@ const Header = () => {
               size="icon"
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-expanded={isMenuOpen}
+              aria-label={isMenuOpen
+                ? (language === 'ar' ? 'أغلق القائمة' : 'Close menu')
+                : (language === 'ar' ? 'افتح القائمة' : 'Open menu')}
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
