@@ -196,6 +196,8 @@ const AiBot = () => {
       {/* Chat Button */}
       <Button
         onClick={handleOpen}
+        aria-label={language === 'ar' ? 'افتح الدردشة' : 'Open chat'}
+        aria-expanded={isOpen}
         className="fixed bottom-6 right-6 rounded-full w-14 h-14 shadow-lg z-50"
         size="lg"
       >
@@ -209,7 +211,7 @@ const AiBot = () => {
             <CardTitle className="text-lg">
               {language === 'ar' ? 'مساعد كيدو الذكي' : 'Kiddo AI Assistant'}
             </CardTitle>
-            <Button variant="ghost" size="sm" onClick={() => setIsOpen(false)}>
+            <Button variant="ghost" size="sm" aria-label={language === 'ar' ? 'أغلق الدردشة' : 'Close chat'} onClick={() => setIsOpen(false)}>
               <X className="h-4 w-4" />
             </Button>
           </CardHeader>
@@ -230,6 +232,7 @@ const AiBot = () => {
                   />
                   <Button 
                     size="sm" 
+                    aria-label={language === 'ar' ? 'حفظ مفتاح API' : 'Save API Key'}
                     onClick={() => setShowApiKeyInput(false)}
                     disabled={!apiKey.trim()}
                   >
@@ -267,6 +270,7 @@ const AiBot = () => {
                 <Button 
                   variant="outline" 
                   size="sm" 
+                  aria-label={language === 'ar' ? 'إدخال مفتاح API' : 'Enter API Key'}
                   onClick={() => setShowApiKeyInput(true)}
                   className="text-xs"
                 >
@@ -281,7 +285,7 @@ const AiBot = () => {
                 className="flex-1 px-3 py-2 border rounded-lg text-sm"
                 disabled={isLoading}
               />
-              <Button size="sm" onClick={handleSend} disabled={isLoading || !input.trim()}>
+              <Button size="sm" aria-label={language === 'ar' ? 'إرسال الرسالة' : 'Send message'} onClick={handleSend} disabled={isLoading || !input.trim()}>
                 {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
               </Button>
             </div>

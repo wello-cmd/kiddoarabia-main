@@ -85,6 +85,7 @@ const Header = () => {
             <Button
               variant="ghost"
               size="icon"
+              aria-label="Search or Contact"
               className="hidden sm:flex"
               onClick={() => {
                 if (location.pathname !== '/') {
@@ -105,6 +106,8 @@ const Header = () => {
             <Button
               variant="ghost"
               size="icon"
+              aria-label={isMenuOpen ? "Close mobile menu" : "Open mobile menu"}
+              aria-expanded={isMenuOpen}
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
