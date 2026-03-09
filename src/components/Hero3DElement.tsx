@@ -66,7 +66,7 @@ const CinematicParticle = ({ position, rotation, scale, color, type, speed }: an
 
 const CinematicScene = () => {
     const particles = useMemo(() => {
-        return new Array(20).fill(null).map((_, i) => ({
+        return Array.from({ length: 20 }, () => ({
             position: [
                 (Math.random() - 0.5) * 35,
                 (Math.random() - 0.5) * 20,
