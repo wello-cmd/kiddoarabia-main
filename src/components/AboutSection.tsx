@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Shield, Leaf, Award, Users, Globe } from "lucide-react";
 import { useTranslation } from "@/contexts/TranslationContext";
+import { toast } from "sonner";
 const AboutSection = () => {
   const { t } = useTranslation();
 
@@ -137,13 +138,14 @@ const AboutSection = () => {
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <input
               type="email"
+              aria-label="Email address for newsletter"
               placeholder={t('about.newsletter.placeholder')}
               className="flex-1 px-4 py-3 rounded-lg text-foreground border-0 focus:ring-2 focus:ring-white/50 outline-none"
             />
             <Button
               variant="outline"
               className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary"
-              onClick={() => alert('Thank you for subscribing! We\'ll keep you updated with our latest products and recipes.')}
+              onClick={() => toast('Thank you for subscribing! We\'ll keep you updated with our latest products and recipes.')}
             >
               {t('about.newsletter.subscribe')}
             </Button>
