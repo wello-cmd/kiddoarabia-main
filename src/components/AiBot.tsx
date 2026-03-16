@@ -198,6 +198,8 @@ const AiBot = () => {
         onClick={handleOpen}
         className="fixed bottom-6 right-6 rounded-full w-14 h-14 shadow-lg z-50"
         size="lg"
+        aria-label="Open AI Assistant"
+        aria-expanded={isOpen}
       >
         <MessageCircle className="h-6 w-6" />
       </Button>
@@ -209,7 +211,7 @@ const AiBot = () => {
             <CardTitle className="text-lg">
               {language === 'ar' ? 'مساعد كيدو الذكي' : 'Kiddo AI Assistant'}
             </CardTitle>
-            <Button variant="ghost" size="sm" onClick={() => setIsOpen(false)}>
+            <Button variant="ghost" size="sm" aria-label="Close chat" onClick={() => setIsOpen(false)}>
               <X className="h-4 w-4" />
             </Button>
           </CardHeader>
@@ -278,10 +280,11 @@ const AiBot = () => {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && !isLoading && handleSend()}
                 placeholder={language === 'ar' ? 'اسأل عن منتجات كيدو...' : 'Ask about Kiddo products...'}
+                aria-label="Chat input"
                 className="flex-1 px-3 py-2 border rounded-lg text-sm"
                 disabled={isLoading}
               />
-              <Button size="sm" onClick={handleSend} disabled={isLoading || !input.trim()}>
+              <Button size="sm" aria-label="Send message" onClick={handleSend} disabled={isLoading || !input.trim()}>
                 {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
               </Button>
             </div>
