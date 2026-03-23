@@ -53,38 +53,38 @@ const ContactSection = () => {
             <form className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor="contact-name" className="block text-sm font-medium text-foreground mb-2">
                     {t('contact.form.name')} *
                   </label>
-                  <Input placeholder={t('contact.form.name')} className="bg-background/50 border-border/50 focus:border-primary transition-colors" />
+                  <Input id="contact-name" placeholder={t('contact.form.name')} className="bg-background/50 border-border/50 focus:border-primary transition-colors" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor="contact-email" className="block text-sm font-medium text-foreground mb-2">
                     {t('contact.form.email')} *
                   </label>
-                  <Input type="email" placeholder={t('contact.form.email')} className="bg-background/50 border-border/50 focus:border-primary transition-colors" />
+                  <Input id="contact-email" type="email" placeholder={t('contact.form.email')} className="bg-background/50 border-border/50 focus:border-primary transition-colors" />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="contact-phone" className="block text-sm font-medium text-foreground mb-2">
                   {t('contact.form.phone')}
                 </label>
-                <Input placeholder={t('contact.form.phone')} className="bg-background/50 border-border/50 focus:border-primary transition-colors" />
+                <Input id="contact-phone" placeholder={t('contact.form.phone')} className="bg-background/50 border-border/50 focus:border-primary transition-colors" />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="contact-subject" className="block text-sm font-medium text-foreground mb-2">
                   {t('contact.form.subject')}
                 </label>
-                <Input placeholder={t('contact.form.subject')} className="bg-background/50 border-border/50 focus:border-primary transition-colors" />
+                <Input id="contact-subject" placeholder={t('contact.form.subject')} className="bg-background/50 border-border/50 focus:border-primary transition-colors" />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label htmlFor="contact-message" className="block text-sm font-medium text-foreground mb-2">
                   {t('contact.form.message')} *
                 </label>
-                <Textarea placeholder={t('contact.form.message')} rows={5} className="bg-background/50 border-border/50 focus:border-primary transition-colors resize-none" />
+                <Textarea id="contact-message" placeholder={t('contact.form.message')} rows={5} className="bg-background/50 border-border/50 focus:border-primary transition-colors resize-none" />
               </div>
 
               <Button
