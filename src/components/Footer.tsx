@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Heart, Facebook, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react";
 import { FaTiktok } from "react-icons/fa";
 import { safeExternalLink } from "@/utils/security";
+import { toast } from "sonner";
 
 const Footer = () => {
   const footerLinks = {
@@ -57,12 +58,13 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Enter your email address"
+                aria-label="Email address for newsletter"
                 className="flex-1 px-4 py-3 rounded-lg text-foreground bg-background border-0 focus:ring-2 focus:ring-primary outline-none"
               />
               <Button
                 variant="kiddo"
                 className="px-8"
-                onClick={() => alert('Thank you for subscribing! We\'ll keep you updated with our latest news and offers.')}
+                onClick={() => toast.success('Thank you for subscribing! We\'ll keep you updated with our latest news and offers.')}
               >
                 <Mail className="h-4 w-4 mr-2" />
                 Subscribe
@@ -124,6 +126,7 @@ const Footer = () => {
                   key={index}
                   variant="ghost"
                   size="icon"
+                  aria-label={social.label}
                   className={`bg-background/10 hover:bg-background/20 text-background ${social.color} transition-all duration-300 hover:scale-110`}
                   onClick={() => safeExternalLink(social.href)}
                 >
