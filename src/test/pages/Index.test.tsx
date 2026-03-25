@@ -3,8 +3,11 @@ import { screen } from '@testing-library/dom';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { TranslationProvider } from '@/contexts/TranslationContext';
+import { HelmetProvider } from 'react-helmet-async';
 import Index from '@/pages/Index';
 import { describe, it, expect } from 'vitest';
+import { SoundProvider } from '@/contexts/SoundContext';
+import { InteractionProvider } from '@/contexts/InteractionContext';
 
 const TestWrapper = ({ children }: { children: React.ReactNode }) => {
   const queryClient = new QueryClient({
@@ -18,9 +21,15 @@ const TestWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <TranslationProvider>
-          {children}
-        </TranslationProvider>
+        <HelmetProvider>
+          <TranslationProvider>
+            <InteractionProvider>
+              <SoundProvider>
+                {children}
+              </SoundProvider>
+            </InteractionProvider>
+          </TranslationProvider>
+        </HelmetProvider>
       </BrowserRouter>
     </QueryClientProvider>
   );
@@ -45,10 +54,10 @@ describe('Index Page', () => {
     );
 
     // Check for main content sections
-    expect(screen.getByText(/product/i)).toBeInTheDocument();
-    expect(screen.getByText(/about/i)).toBeInTheDocument();
-    expect(screen.getByText(/recipe/i)).toBeInTheDocument();
-    expect(screen.getByText(/contact/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/product/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/about/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/recipe/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/contact/i)[0]).toBeInTheDocument();
   });
 
   it('has proper semantic structure', () => {
@@ -59,8 +68,8 @@ describe('Index Page', () => {
     );
 
     // Check for proper semantic elements
-    expect(screen.getByRole('main')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
+    expect(screen.getAllByRole('main')[0]).toBeInTheDocument();
+    expect(screen.getAllByRole('heading', { level: 1 })[0]).toBeInTheDocument();
   });
 
   it('renders call-to-action buttons', () => {
