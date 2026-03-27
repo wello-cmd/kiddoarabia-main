@@ -8,7 +8,9 @@ export const usePerformance = () => {
         // Track Largest Contentful Paint
         new PerformanceObserver((list) => {
           for (const entry of list.getEntries()) {
-            console.log('LCP:', (entry as any).renderTime || (entry as any).loadTime);
+            if (process.env.NODE_ENV !== 'production') {
+              console.log('LCP:', (entry as any).renderTime || (entry as any).loadTime);
+            }
             
             // Send to analytics if needed
             if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -24,7 +26,9 @@ export const usePerformance = () => {
         // Track First Input Delay
         new PerformanceObserver((list) => {
           for (const entry of list.getEntries()) {
-            console.log('FID:', (entry as any).processingStart - (entry as any).startTime);
+            if (process.env.NODE_ENV !== 'production') {
+              console.log('FID:', (entry as any).processingStart - (entry as any).startTime);
+            }
           }
         }).observe({entryTypes: ['first-input']});
       } catch (e) {
@@ -37,7 +41,9 @@ export const usePerformance = () => {
       setTimeout(() => {
         const perfData = window.performance.timing;
         const loadTime = perfData.loadEventEnd - perfData.navigationStart;
-        console.log(`Page load time: ${loadTime}ms`);
+        if (process.env.NODE_ENV !== 'production') {
+          console.log(`Page load time: ${loadTime}ms`);
+        }
       }, 0);
     });
 
