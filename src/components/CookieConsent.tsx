@@ -99,6 +99,7 @@ const CookieConsent = () => {
                   variant="ghost" 
                   size="sm"
                   onClick={() => setShowSettings(false)}
+                  aria-label={language === 'ar' ? 'إغلاق الإعدادات' : 'Close settings'}
                 >
                   <X className="h-4 w-4" />
                 </Button>
