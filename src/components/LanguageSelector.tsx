@@ -11,6 +11,7 @@ const LanguageSelector = () => {
       size="sm"
       onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
       className="flex items-center gap-2 text-sm"
+      aria-label={`Switch language to ${language === 'en' ? 'Arabic' : 'English'}`}
     >
       <Globe className="h-4 w-4" />
       <span className="font-medium">

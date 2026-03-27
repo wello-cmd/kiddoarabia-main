@@ -54,14 +54,18 @@ const Header = () => {
       {/* Main Navigation */}
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center cursor-pointer" onClick={() => navigate('/')}>
+          <button
+            className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+            onClick={() => navigate('/')}
+            aria-label="Go to homepage"
+          >
             <img
               src="/logo.png"
               alt="Kiddo logo"
               className="h-16 md:h-20 w-auto"
               decoding="async"
             />
-          </div>
+          </button>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
@@ -97,6 +101,7 @@ const Header = () => {
                 }
               }}
               title="Contact Us"
+              aria-label="Contact Us"
             >
               <Search className="h-5 w-5" />
             </Button>
@@ -107,6 +112,8 @@ const Header = () => {
               size="icon"
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-expanded={isMenuOpen}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
