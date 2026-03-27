@@ -26,6 +26,10 @@ global.ResizeObserver = class ResizeObserver {
   unobserve() {}
 };
 
+// Mock window.HTMLAudioElement.prototype.play
+window.HTMLMediaElement.prototype.play = vi.fn().mockImplementation(() => Promise.resolve());
+window.HTMLMediaElement.prototype.pause = vi.fn();
+
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
