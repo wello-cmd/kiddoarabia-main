@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { useTranslation } from "@/contexts/TranslationContext";
 import { safeExternalLink } from "@/utils/security";
+import { toast } from "sonner";
 const ContactSection = () => {
   const { t } = useTranslation();
 
@@ -91,7 +92,7 @@ const ContactSection = () => {
                 variant="kiddo"
                 size="lg"
                 className="w-full group"
-                onClick={() => alert(t('contact.form.send') + '! We\'ll get back to you within 24 hours.')}
+                onClick={() => toast.success(t('contact.form.send') + '! We\'ll get back to you within 24 hours.')}
               >
                 {t('contact.form.send')}
                 <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
