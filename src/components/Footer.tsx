@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Heart, Facebook, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react";
 import { FaTiktok } from "react-icons/fa";
+import { toast } from "sonner";
 import { safeExternalLink } from "@/utils/security";
 
 const Footer = () => {
@@ -62,7 +63,7 @@ const Footer = () => {
               <Button
                 variant="kiddo"
                 className="px-8"
-                onClick={() => alert('Thank you for subscribing! We\'ll keep you updated with our latest news and offers.')}
+                onClick={() => toast.success('Thank you for subscribing! We\'ll keep you updated with our latest news and offers.')}
               >
                 <Mail className="h-4 w-4 mr-2" />
                 Subscribe
@@ -126,6 +127,7 @@ const Footer = () => {
                   size="icon"
                   className={`bg-background/10 hover:bg-background/20 text-background ${social.color} transition-all duration-300 hover:scale-110`}
                   onClick={() => safeExternalLink(social.href)}
+                  aria-label={social.label}
                 >
                   <social.icon className="h-5 w-5" />
                 </Button>
