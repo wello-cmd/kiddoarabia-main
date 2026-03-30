@@ -4,6 +4,14 @@ import userEvent from '@testing-library/user-event';
 import { Button } from '@/components/ui/button';
 import { describe, it, expect, vi } from 'vitest';
 
+// Mock SoundContext to avoid audio issues and dependencies
+vi.mock('@/contexts/SoundContext', () => ({
+  useSound: () => ({
+    playSound: vi.fn(),
+  }),
+  SoundProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+}));
+
 describe('Button Component', () => {
   it('renders correctly with default props', () => {
     render(<Button>Click me</Button>);
