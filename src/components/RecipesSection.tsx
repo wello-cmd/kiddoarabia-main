@@ -1,3 +1,4 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Clock, Users, ChefHat, Heart, Star } from "lucide-react";
@@ -139,6 +140,13 @@ const RecipesSection = () => {
     { name: "Drinks", count: drinkRecipes.length, color: "bg-blue-400" }
   ];
 
+  const handleKeyDown = (e: React.KeyboardEvent, action: () => void) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      action();
+    }
+  };
+
   return (
     <section id="recipes" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -220,6 +228,10 @@ const RecipesSection = () => {
                 key={index}
                 className="cursor-pointer group hover:shadow-glow transition-all duration-300 hover:-translate-y-1"
                 onClick={() => navigate(`/recipes#${category.name.toLowerCase()}`)}
+                role="button"
+                tabIndex={0}
+                aria-label={`View ${category.name} recipes`}
+                onKeyDown={(e) => handleKeyDown(e, () => navigate(`/recipes#${category.name.toLowerCase()}`))}
               >
                 <CardContent className="p-6 text-center">
                   <div className={`${category.color} w-12 h-12 rounded-xl mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform`}>
@@ -245,6 +257,9 @@ const RecipesSection = () => {
               className="group hover:shadow-glow transition-all duration-500 hover:-translate-y-2 cursor-pointer"
               style={{ animationDelay: `${index * 150}ms` }}
               onClick={() => navigate(`/recipe/${recipe.id}`)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => handleKeyDown(e, () => navigate(`/recipe/${recipe.id}`))}
             >
               <div className="h-48 relative overflow-hidden rounded-t-lg">
                 <img
@@ -253,8 +268,13 @@ const RecipesSection = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                <div className="absolute top-4 right-4">
-                  <Button variant="ghost" size="icon" className="bg-white/20 hover:bg-white/40 text-white">
+                <div className="absolute top-4 right-4" aria-hidden="true">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="bg-white/20 hover:bg-white/40 text-white"
+                    tabIndex={-1}
+                  >
                     <Heart className="h-4 w-4" />
                   </Button>
                 </div>
