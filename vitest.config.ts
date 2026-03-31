@@ -5,13 +5,14 @@ import path from 'path';
 export default defineConfig({
   plugins: [react()],
   test: {
+    exclude: ['**/e2e/**', '**/*.spec.ts', 'e2e/**', 'node_modules/'],
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      exclude: [
+      exclude: ['**/e2e/**', '**/*.spec.ts', 'e2e/**',
         'node_modules/',
         'src/test/',
         '**/*.d.ts',
