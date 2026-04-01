@@ -43,3 +43,23 @@ Object.defineProperty(window, 'matchMedia', {
 
 // Mock scrollTo
 window.scrollTo = vi.fn();
+
+// Mock useSound
+vi.mock('@/contexts/SoundContext', () => ({
+  useSound: () => ({
+    playSound: vi.fn(),
+    toggleSound: vi.fn(),
+    isSoundEnabled: true,
+  }),
+  SoundProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+// Mock useInteraction
+vi.mock('@/contexts/InteractionContext', () => ({
+  useInteraction: () => ({
+    handleInteraction: vi.fn(),
+    isInteracting: false,
+    interactionType: null,
+  }),
+  InteractionProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
