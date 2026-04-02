@@ -97,6 +97,7 @@ const Header = () => {
                 }
               }}
               title="Contact Us"
+              aria-label="Contact Us"
             >
               <Search className="h-5 w-5" />
             </Button>
@@ -107,6 +108,7 @@ const Header = () => {
               size="icon"
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle mobile menu"
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
