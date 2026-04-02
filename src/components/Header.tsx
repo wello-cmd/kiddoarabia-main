@@ -105,6 +105,7 @@ const Header = () => {
             <Button
               variant="ghost"
               size="icon"
+              aria-label="Toggle menu"
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
