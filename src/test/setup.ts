@@ -43,3 +43,12 @@ Object.defineProperty(window, 'matchMedia', {
 
 // Mock scrollTo
 window.scrollTo = vi.fn();
+
+// Mock useSound to avoid must be used within SoundProvider error
+vi.mock('@/contexts/SoundContext', () => ({
+  useSound: () => ({
+    playSound: vi.fn(),
+    isSoundEnabled: true,
+    toggleSound: vi.fn(),
+  }),
+}));
