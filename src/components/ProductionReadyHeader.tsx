@@ -252,6 +252,7 @@ const ProductionReadyHeader: React.FC = () => {
                         <input
                           ref={searchRef}
                           type="text"
+                          aria-label="Search site"
                           value={searchQuery}
                           onChange={(e) => setSearchQuery(e.target.value)}
                           placeholder={t('actions.searchPlaceholder')}
@@ -321,6 +322,7 @@ const ProductionReadyHeader: React.FC = () => {
                 <form onSubmit={handleSearch} className="relative md:hidden">
                   <input
                     type="text"
+                    aria-label="Search site"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder={t('actions.searchPlaceholder')}
