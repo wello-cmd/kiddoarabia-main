@@ -86,6 +86,7 @@ const Header = () => {
               variant="ghost"
               size="icon"
               className="hidden sm:flex"
+              aria-label="Search"
               onClick={() => {
                 if (location.pathname !== '/') {
                   navigate('/');
@@ -107,6 +108,8 @@ const Header = () => {
               size="icon"
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
