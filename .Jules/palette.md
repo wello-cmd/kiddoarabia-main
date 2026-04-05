@@ -1,0 +1,3 @@
+## 2024-04-05 - Missing ARIA Labels on Icon-only Buttons
+**Learning:** Found multiple instances of icon-only Buttons missing `aria-label` attributes, particularly in `RecipesSection`, `Header`, and `Footer`. These buttons are inaccessible to screen reader users because they lack descriptive text. Additionally, icon buttons in `Footer` that iterate over an array mapping `social.label` correctly provide a label, but it isn't passed down. Memory notes emphasize 'Icon-only buttons must always include a descriptive aria-label attribute'.
+**Action:** Always add `aria-label` explicitly on icon buttons (e.g. `<Button size="icon" aria-label="...">`). This fixes screen reader accessibility.
