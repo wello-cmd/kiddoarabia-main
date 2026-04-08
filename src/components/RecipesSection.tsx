@@ -254,7 +254,7 @@ const RecipesSection = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 <div className="absolute top-4 right-4">
-                  <Button variant="ghost" size="icon" className="bg-white/20 hover:bg-white/40 text-white">
+                  <Button variant="ghost" size="icon" className="bg-white/20 hover:bg-white/40 text-white" aria-label="Favorite recipe">
                     <Heart className="h-4 w-4" />
                   </Button>
                 </div>
