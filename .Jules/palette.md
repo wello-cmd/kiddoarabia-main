@@ -1,0 +1,4 @@
+## 2025-04-08 - Added ARIA labels to icon buttons
+
+**Learning:** When adding ARIA labels to icon buttons, it is critical to match the actual action or destination of the button rather than just describing the icon visually. For example, a "Search" icon used for a "Contact Us" scrolling action should be labelled "Contact Us" to avoid confusing screen reader users. Additionally, using `aria-expanded` on toggle buttons (like mobile menus) provides essential state information.
+**Action:** Always verify the `onClick` handler and any existing `title` attributes before blindly naming an `aria-label` after the icon used. Add `aria-expanded` attributes to all toggle buttons.
