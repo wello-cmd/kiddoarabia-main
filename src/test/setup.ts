@@ -43,3 +43,13 @@ Object.defineProperty(window, 'matchMedia', {
 
 // Mock scrollTo
 window.scrollTo = vi.fn();
+
+// Mock useSound globally to prevent test failures
+vi.mock('@/contexts/SoundContext', () => ({
+  useSound: () => ({ playSound: vi.fn(), isSoundEnabled: true, toggleSound: vi.fn() })
+}));
+
+// Mock useInteraction globally
+vi.mock('@/contexts/InteractionContext', () => ({
+  useInteraction: () => ({ isInteracting: false, setIsInteracting: vi.fn(), cursorStyle: 'default', setCursorStyle: vi.fn() })
+}));
