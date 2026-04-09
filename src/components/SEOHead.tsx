@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { SEO_CONFIG } from '@/utils/constants';
 
 interface SEOHeadProps {
   title?: string;
@@ -7,7 +8,7 @@ interface SEOHeadProps {
   image?: string;
   url?: string;
   type?: 'website' | 'article' | 'product';
-  structuredData?: Record<string, any>;
+  structuredData?: Record<string, unknown>;
   article?: {
     publishedTime?: string;
     modifiedTime?: string;
@@ -26,17 +27,17 @@ interface SEOHeadProps {
 }
 
 const SEOHead: React.FC<SEOHeadProps> = ({
-  title = "Kiddo Arabia - Premium Kids' Nutrition | Made with Love & Care",
-  description = "🌟 Nourishing your little ones with the finest, healthiest ingredients. Premium cereals, oat jars & biscuits crafted with love for growing minds and bodies. Trusted by families across the Middle East.",
-  keywords = "kids nutrition, healthy cereals, children's food, family breakfast, organic snacks, vitamins for kids, Arabic brands, healthy eating, growing children",
-  image = "https://kiddoarabia.com/og-image.jpg",
-  url = "https://kiddoarabia.com",
-  type = "website",
+  title = SEO_CONFIG.DEFAULT_TITLE,
+  description = SEO_CONFIG.DEFAULT_DESCRIPTION,
+  keywords = SEO_CONFIG.DEFAULT_KEYWORDS,
+  image = SEO_CONFIG.SOCIAL_IMAGE,
+  url = SEO_CONFIG.SITE_URL,
+  type = SEO_CONFIG.DEFAULT_TYPE,
   structuredData: customStructuredData,
   article,
   product,
   noIndex = false,
-  lang = 'en'
+  lang = SEO_CONFIG.DEFAULT_LANG
 }) => {
   const structuredData = {
     "@context": "https://schema.org",
