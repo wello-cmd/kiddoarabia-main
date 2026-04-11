@@ -26,6 +26,18 @@ global.ResizeObserver = class ResizeObserver {
   unobserve() {}
 };
 
+// Mock useSound to prevent "must be used within a SoundProvider"
+vi.mock('@/contexts/SoundContext', () => ({
+  useSound: () => ({ playSound: vi.fn(), stopSound: vi.fn(), toggleSound: vi.fn(), soundEnabled: true }),
+  SoundProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+// Mock useInteraction to prevent "must be used within an InteractionProvider"
+vi.mock('@/contexts/InteractionContext', () => ({
+  useInteraction: () => ({ isInteracting: false, setInteracting: vi.fn() }),
+  InteractionProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
