@@ -1,0 +1,3 @@
+## 2024-05-24 - Accessibility for Form Inputs & Icon-Only Buttons
+**Learning:** Standalone form inputs (like newsletter emails) and icon-only buttons (like social media links) often lack context for screen readers when they don't have explicit text labels. Mapped arrays of links/icons specifically need `aria-label` pulled from their object data.
+**Action:** Ensure that input fields without a visual `<label>` use an `aria-label` attribute describing their purpose. When mapping over data arrays to render icon-only buttons, ensure the data source includes a descriptive `label` property to map to the `aria-label` attribute.
