@@ -1,0 +1,3 @@
+## 2024-04-15 - Enhancing Accessibility and Form Behavior
+**Learning:** Found multiple instances where standalone inputs and icon-only buttons rendered from arrays lacked `aria-label` attributes, which hinders screen reader users. Additionally, an embedded form's submit button lacked `e.preventDefault()`, which could trigger unintended page reloads or broken navigations when an `onClick` logic is used within a `<form>` block.
+**Action:** When mapping over data arrays to render icon buttons, enforce a `label` property in the data object to map to `aria-label`. Always add an `aria-label` attribute on inputs missing explicit associated `<label>` tags. Ensure non-navigational buttons in forms use `e.preventDefault()` to stop unwanted standard form submissions.

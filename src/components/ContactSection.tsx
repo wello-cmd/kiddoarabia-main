@@ -91,7 +91,10 @@ const ContactSection = () => {
                 variant="kiddo"
                 size="lg"
                 className="w-full group"
-                onClick={() => alert(t('contact.form.send') + '! We\'ll get back to you within 24 hours.')}
+                onClick={(e) => {
+                  e.preventDefault();
+                  alert(t('contact.form.send') + '! We\'ll get back to you within 24 hours.');
+                }}
               >
                 {t('contact.form.send')}
                 <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
