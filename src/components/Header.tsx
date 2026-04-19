@@ -97,6 +97,7 @@ const Header = () => {
                 }
               }}
               title="Contact Us"
+              aria-label="Contact Us"
             >
               <Search className="h-5 w-5" />
             </Button>
@@ -105,6 +106,7 @@ const Header = () => {
             <Button
               variant="ghost"
               size="icon"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
