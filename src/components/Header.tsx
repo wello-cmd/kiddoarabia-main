@@ -85,6 +85,7 @@ const Header = () => {
             <Button
               variant="ghost"
               size="icon"
+              aria-label="Contact Us"
               className="hidden sm:flex"
               onClick={() => {
                 if (location.pathname !== '/') {
@@ -105,6 +106,7 @@ const Header = () => {
             <Button
               variant="ghost"
               size="icon"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
