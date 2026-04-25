@@ -89,6 +89,7 @@ const ScrollProgress: React.FC = () => {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
+          aria-label="Scroll to top"
         />
       </motion.div>
     </>
