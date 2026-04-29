@@ -517,6 +517,7 @@ const Blog = () => {
                 <input
                   type="email"
                   placeholder="Enter your email"
+                  aria-label="Email address for newsletter"
                   className="flex-1 px-4 py-3 rounded-lg text-foreground"
                 />
                 <Button variant="secondary">

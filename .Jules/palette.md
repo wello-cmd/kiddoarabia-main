@@ -1,0 +1,1 @@
+## 2024-05-24 - Missing ARIA Labels on Form Inputs\n**Learning:** Standalone form inputs without explicit associated <label> tags (e.g., newsletter email inputs) must include an aria-label attribute to ensure accessibility for screen readers.\n**Action:** Add aria-label to newsletter inputs and other standalone form inputs across the application.
