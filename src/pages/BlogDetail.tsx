@@ -632,6 +632,7 @@ const BlogDetail = () => {
               <input
                 type="email"
                 placeholder={language === 'ar' ? 'أدخل بريدك الإلكتروني' : 'Enter your email'}
+                aria-label={language === 'ar' ? 'أدخل بريدك الإلكتروني' : 'Email address for newsletter'}
                 className="flex-1 px-4 py-3 rounded-lg border"
               />
               <Button>
