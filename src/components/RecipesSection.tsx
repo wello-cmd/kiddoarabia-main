@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Clock, Users, ChefHat, Heart, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 import breakfastImage from "@/assets/kiddo-breakfast.png";
 import classicBowlImage from "@/assets/classic-cornflakes-bowl.jpg";
 import energyBarsImage from "@/assets/cornflakes-energy-bars.jpg";
@@ -12,6 +13,7 @@ import chickenImage from "@/assets/cornflakes-crusted-chicken.jpg";
 
 const RecipesSection = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   // Breakfast recipes
   const breakfastRecipes = [
@@ -253,8 +255,20 @@ const RecipesSection = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                <div className="absolute top-4 right-4">
-                  <Button variant="ghost" size="icon" className="bg-white/20 hover:bg-white/40 text-white">
+                <div className="absolute top-4 right-4 z-10">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="bg-white/20 hover:bg-white/40 text-white"
+                    aria-label={`Save ${recipe.title} to favorites`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toast({
+                        title: "Saved to favorites",
+                        description: `${recipe.title} has been saved to your favorites.`,
+                      });
+                    }}
+                  >
                     <Heart className="h-4 w-4" />
                   </Button>
                 </div>
