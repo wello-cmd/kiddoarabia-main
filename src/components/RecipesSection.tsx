@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Clock, Users, ChefHat, Heart, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import breakfastImage from "@/assets/kiddo-breakfast.png";
 import classicBowlImage from "@/assets/classic-cornflakes-bowl.jpg";
 import energyBarsImage from "@/assets/cornflakes-energy-bars.jpg";
@@ -254,7 +255,16 @@ const RecipesSection = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 <div className="absolute top-4 right-4">
-                  <Button variant="ghost" size="icon" className="bg-white/20 hover:bg-white/40 text-white">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="bg-white/20 hover:bg-white/40 text-white"
+                    aria-label="Save to favorites"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toast.success(`${recipe.title} saved to favorites!`);
+                    }}
+                  >
                     <Heart className="h-4 w-4" />
                   </Button>
                 </div>

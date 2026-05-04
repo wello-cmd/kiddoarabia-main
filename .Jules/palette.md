@@ -1,0 +1,3 @@
+## 2024-05-15 - [Favorite Button in Clickable Card Context]
+**Learning:** In list views where entire cards are clickable (navigating to details), nesting interactive elements like "favorite" buttons causes poor UX. Users clicking to favorite an item are unintentionally navigated away from their context (the list). Furthermore, missing `aria-label`s on these buttons degrade accessibility, and lack of visual/toast feedback leaves the user unsure if their action succeeded.
+**Action:** When adding interactive actions inside clickable parent containers, always include `e.stopPropagation()` on the child's `onClick` handler, provide an `aria-label`, and add immediate feedback (e.g., a toast notification).
