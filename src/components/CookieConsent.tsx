@@ -138,6 +138,7 @@ const CookieConsent = () => {
                     type="checkbox"
                     checked={preferences.analytics}
                     onChange={(e) => setPreferences(prev => ({ ...prev, analytics: e.target.checked }))}
+                    aria-label={language === 'ar' ? 'تفعيل ملفات تعريف الارتباط التحليلية' : 'Enable Analytics Cookies'}
                     className="rounded"
                   />
                 </div>
@@ -158,6 +159,7 @@ const CookieConsent = () => {
                     type="checkbox"
                     checked={preferences.marketing}
                     onChange={(e) => setPreferences(prev => ({ ...prev, marketing: e.target.checked }))}
+                    aria-label={language === 'ar' ? 'تفعيل ملفات تعريف الارتباط التسويقية' : 'Enable Marketing Cookies'}
                     className="rounded"
                   />
                 </div>

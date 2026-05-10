@@ -138,6 +138,7 @@ const AboutSection = () => {
             <input
               type="email"
               placeholder={t('about.newsletter.placeholder')}
+              aria-label={t('about.newsletter.placeholder')}
               className="flex-1 px-4 py-3 rounded-lg text-foreground border-0 focus:ring-2 focus:ring-white/50 outline-none"
             />
             <Button

@@ -26,6 +26,10 @@ global.ResizeObserver = class ResizeObserver {
   unobserve() {}
 };
 
+// Mock HTMLMediaElement play/pause for SoundContext
+window.HTMLMediaElement.prototype.play = vi.fn().mockImplementation(() => Promise.resolve());
+window.HTMLMediaElement.prototype.pause = vi.fn();
+
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,

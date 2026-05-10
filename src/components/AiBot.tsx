@@ -232,6 +232,7 @@ const AiBot = () => {
                     value={apiKey}
                     onChange={(e) => setApiKey(e.target.value)}
                     placeholder="sk-or-..."
+                    aria-label={language === 'ar' ? 'أدخل مفتاح OpenRouter API' : 'Enter your OpenRouter API key'}
                     className="flex-1 px-2 py-1 text-xs border rounded"
                   />
                   <Button 

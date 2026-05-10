@@ -255,6 +255,7 @@ const ProductionReadyHeader: React.FC = () => {
                           value={searchQuery}
                           onChange={(e) => setSearchQuery(e.target.value)}
                           placeholder={t('actions.searchPlaceholder')}
+                          aria-label={t('actions.searchPlaceholder')}
                           className="w-full px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-sm"
                         />
                         <kbd className="absolute right-3 top-1/2 -translate-y-1/2 px-2 py-0.5 bg-muted text-muted-foreground text-xs rounded">
@@ -324,6 +325,7 @@ const ProductionReadyHeader: React.FC = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder={t('actions.searchPlaceholder')}
+                    aria-label={t('actions.searchPlaceholder')}
                     className="w-full px-4 py-2 bg-muted border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-sm"
                   />
                   <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
