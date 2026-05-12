@@ -282,6 +282,7 @@ const AiBot = () => {
               )}
               <input
                 value={input}
+                aria-label={language === 'ar' ? 'اكتب رسالتك هنا' : 'Type your message here'}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && !isLoading && handleSend()}
                 placeholder={language === 'ar' ? 'اسأل عن منتجات كيدو...' : 'Ask about Kiddo products...'}

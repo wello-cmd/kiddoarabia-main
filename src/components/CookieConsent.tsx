@@ -136,6 +136,7 @@ const CookieConsent = () => {
                   </div>
                   <input
                     type="checkbox"
+                    aria-label="Enable analytics cookies"
                     checked={preferences.analytics}
                     onChange={(e) => setPreferences(prev => ({ ...prev, analytics: e.target.checked }))}
                     className="rounded"
@@ -156,6 +157,7 @@ const CookieConsent = () => {
                   </div>
                   <input
                     type="checkbox"
+                    aria-label="Enable marketing cookies"
                     checked={preferences.marketing}
                     onChange={(e) => setPreferences(prev => ({ ...prev, marketing: e.target.checked }))}
                     className="rounded"
