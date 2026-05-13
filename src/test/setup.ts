@@ -43,3 +43,19 @@ Object.defineProperty(window, 'matchMedia', {
 
 // Mock scrollTo
 window.scrollTo = vi.fn();
+// Mock hooks to avoid Provider wrap errors in tests
+vi.mock('@/contexts/SoundContext', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    useSound: vi.fn().mockReturnValue({ playSound: vi.fn(), soundEnabled: false }),
+  };
+});
+
+vi.mock('@/contexts/InteractionContext', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    useInteraction: vi.fn().mockReturnValue({ onInteract: vi.fn(), registerInteraction: vi.fn() }),
+  };
+});
