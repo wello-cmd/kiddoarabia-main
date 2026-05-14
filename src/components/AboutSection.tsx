@@ -137,12 +137,15 @@ const AboutSection = () => {
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <input
               type="email"
+              autoComplete="email"
+              aria-label={t('about.newsletter.placeholder')}
               placeholder={t('about.newsletter.placeholder')}
               className="flex-1 px-4 py-3 rounded-lg text-foreground border-0 focus:ring-2 focus:ring-white/50 outline-none"
             />
             <Button
               variant="outline"
               className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary"
+              aria-label={t('about.newsletter.subscribe')}
               onClick={() => alert('Thank you for subscribing! We\'ll keep you updated with our latest products and recipes.')}
             >
               {t('about.newsletter.subscribe')}
