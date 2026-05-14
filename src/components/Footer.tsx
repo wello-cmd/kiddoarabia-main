@@ -56,12 +56,15 @@ const Footer = () => {
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
                 type="email"
+                autoComplete="email"
+                aria-label="Enter your email address"
                 placeholder="Enter your email address"
                 className="flex-1 px-4 py-3 rounded-lg text-foreground bg-background border-0 focus:ring-2 focus:ring-primary outline-none"
               />
               <Button
                 variant="kiddo"
                 className="px-8"
+                aria-label="Subscribe to newsletter"
                 onClick={() => alert('Thank you for subscribing! We\'ll keep you updated with our latest news and offers.')}
               >
                 <Mail className="h-4 w-4 mr-2" />
