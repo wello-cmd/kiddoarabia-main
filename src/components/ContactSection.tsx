@@ -137,6 +137,8 @@ const ContactSection = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="block"
+            aria-label="View Kiddo HQ on Google Maps"
+            title="View Kiddo HQ on Google Maps"
           >
             <Card className="overflow-hidden shadow-card border-none hover:shadow-glow transition-all duration-300">
               <div className="relative h-56 bg-[#e5e7eb] overflow-hidden group">

@@ -56,6 +56,7 @@ const Footer = () => {
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
                 type="email"
+                aria-label="Enter your email address for newsletter"
                 placeholder="Enter your email address"
                 className="flex-1 px-4 py-3 rounded-lg text-foreground bg-background border-0 focus:ring-2 focus:ring-primary outline-none"
               />
@@ -126,6 +127,8 @@ const Footer = () => {
                   size="icon"
                   className={`bg-background/10 hover:bg-background/20 text-background ${social.color} transition-all duration-300 hover:scale-110`}
                   onClick={() => safeExternalLink(social.href)}
+                  aria-label={social.label}
+                  title={social.label}
                 >
                   <social.icon className="h-5 w-5" />
                 </Button>
