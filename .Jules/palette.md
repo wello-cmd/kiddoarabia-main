@@ -1,0 +1,3 @@
+## 2024-05-14 - Add ARIA label and toast feedback to favorite button
+**Learning:** Icon-only buttons (like the Heart/Favorite button in recipe cards) lack accessible names for screen readers and don't provide immediate feedback on interaction, which can lead to users clicking multiple times or wondering if the action worked. In components mapped from an array, clicking the child button can inadvertently trigger the parent container's navigation if event propagation isn't stopped.
+**Action:** Always add descriptive `aria-label`s to icon-only buttons. Combine state changes (or simulated state changes) with visual/toast feedback, and use `e.stopPropagation()` in list-item button handlers to prevent parent card navigation.
