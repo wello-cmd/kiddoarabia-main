@@ -53,21 +53,29 @@ const Footer = () => {
               delivered straight to your inbox
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <form
+              className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert('Thank you for subscribing! We\'ll keep you updated with our latest news and offers.');
+              }}
+            >
               <input
                 type="email"
                 placeholder="Enter your email address"
+                aria-label="Email address for newsletter"
+                required
                 className="flex-1 px-4 py-3 rounded-lg text-foreground bg-background border-0 focus:ring-2 focus:ring-primary outline-none"
               />
               <Button
+                type="submit"
                 variant="kiddo"
                 className="px-8"
-                onClick={() => alert('Thank you for subscribing! We\'ll keep you updated with our latest news and offers.')}
               >
                 <Mail className="h-4 w-4 mr-2" />
                 Subscribe
               </Button>
-            </div>
+            </form>
 
             <p className="text-xs text-background/60 mt-4">
               We respect your privacy. Unsubscribe at any time.
@@ -124,6 +132,7 @@ const Footer = () => {
                   key={index}
                   variant="ghost"
                   size="icon"
+                  aria-label={`Visit our ${social.label} page`}
                   className={`bg-background/10 hover:bg-background/20 text-background ${social.color} transition-all duration-300 hover:scale-110`}
                   onClick={() => safeExternalLink(social.href)}
                 >
