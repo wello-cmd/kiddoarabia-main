@@ -203,6 +203,7 @@ const PerformanceMonitor: React.FC<{ showDetails?: boolean }> = ({ showDetails =
             <button
               onClick={() => setIsVisible(false)}
               className="ml-auto text-gray-400 hover:text-gray-600 text-xs"
+              aria-label="Close performance monitor"
             >
               ×
             </button>
