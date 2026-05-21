@@ -1,0 +1,3 @@
+## 2026-05-21 - Interactive Elements Inside Clickable Cards
+**Learning:** Placing interactive elements (like "Save to favorites" icon buttons) inside clickable cards or link containers can cause unintended navigation when clicked if the event bubbles up. Furthermore, if these buttons lack visible text, visual feedback is crucial to confirm the action.
+**Action:** When nesting buttons within clickable areas, always use `e.stopPropagation()` in the click handler to prevent event bubbling, and provide an appropriate `aria-label`. For actions that don't cause an immediate visual state change, trigger a toast notification (e.g. using `sonner`) to give the user immediate feedback.
