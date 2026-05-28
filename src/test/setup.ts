@@ -26,6 +26,24 @@ global.ResizeObserver = class ResizeObserver {
   unobserve() {}
 };
 
+// Mock useSound globally to prevent "useSound must be used within a SoundProvider" errors in tests
+vi.mock('@/contexts/SoundContext', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    useSound: vi.fn().mockReturnValue({ playHover: vi.fn(), playClick: vi.fn(), playSound: vi.fn() }),
+  };
+});
+
+// Mock useInteraction globally
+vi.mock('@/contexts/InteractionContext', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    useInteraction: vi.fn().mockReturnValue({ registerInteraction: vi.fn() }),
+  };
+});
+
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
