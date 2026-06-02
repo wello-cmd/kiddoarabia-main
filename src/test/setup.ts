@@ -26,6 +26,36 @@ global.ResizeObserver = class ResizeObserver {
   unobserve() {}
 };
 
+// Mock useSound and useInteraction from contexts
+vi.mock('@/contexts/SoundContext', () => ({
+  useSound: () => ({
+    playSound: vi.fn(),
+    playHover: vi.fn(),
+    playClick: vi.fn(),
+  }),
+  SoundProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+vi.mock('@/contexts/InteractionContext', () => ({
+  useInteraction: () => ({
+    interactions: [],
+    trackInteraction: vi.fn(),
+  }),
+  InteractionProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+// Mock react-helmet-async to avoid "Cannot read properties of undefined (reading 'add')"
+vi.mock('react-helmet-async', () => ({
+  HelmetProvider: ({ children }: { children: React.ReactNode }) => children,
+  Helmet: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+// Mock HTMLMediaElement play/pause
+if (typeof window !== 'undefined') {
+  window.HTMLMediaElement.prototype.play = vi.fn().mockImplementation(() => Promise.resolve());
+  window.HTMLMediaElement.prototype.pause = vi.fn();
+}
+
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
