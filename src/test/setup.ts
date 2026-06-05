@@ -5,6 +5,31 @@ import { vi } from 'vitest';
 // Configure Testing Library  
 configure({ asyncUtilTimeout: 1000 } as any);
 
+// Mock react-helmet-async to prevent "Cannot read properties of undefined (reading 'add')"
+vi.mock('react-helmet-async', () => ({
+  HelmetProvider: ({ children }: { children: React.ReactNode }) => children,
+  Helmet: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+// Mock sound context to prevent "useSound must be used within a SoundProvider"
+vi.mock('@/contexts/SoundContext', () => ({
+  useSound: () => ({
+    playSound: vi.fn(),
+    playHover: vi.fn(),
+    playClick: vi.fn(),
+  }),
+  SoundProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+// Mock interaction context to prevent "useInteraction must be used within an InteractionProvider"
+vi.mock('@/contexts/InteractionContext', () => ({
+  useInteraction: () => ({
+    isInteracting: false,
+    registerInteraction: vi.fn(),
+  }),
+  InteractionProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
   root = null;
