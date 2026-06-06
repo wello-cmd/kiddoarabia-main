@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Shield, Leaf, Award, Users, Globe } from "lucide-react";
@@ -143,7 +144,7 @@ const AboutSection = () => {
             <Button
               variant="outline"
               className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary"
-              onClick={() => alert('Thank you for subscribing! We\'ll keep you updated with our latest products and recipes.')}
+              onClick={() => toast.success('Thank you for subscribing!', { description: 'We\'ll keep you updated with our latest products and recipes.' })}
             >
               {t('about.newsletter.subscribe')}
             </Button>

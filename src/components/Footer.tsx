@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 import { Heart, Facebook, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react";
 import { FaTiktok } from "react-icons/fa";
 import { safeExternalLink } from "@/utils/security";
@@ -62,7 +63,7 @@ const Footer = () => {
               <Button
                 variant="kiddo"
                 className="px-8"
-                onClick={() => alert('Thank you for subscribing! We\'ll keep you updated with our latest news and offers.')}
+                onClick={() => toast.success('Thank you for subscribing!', { description: 'We\'ll keep you updated with our latest news and offers.' })}
               >
                 <Mail className="h-4 w-4 mr-2" />
                 Subscribe
