@@ -1,0 +1,3 @@
+## 2026-06-11 - Added proper ARIA labels and replaced generic alert() with toast notifications
+**Learning:** In interactive or data-collecting forms (like the standalone newsletter input), providing an `aria-label` ensures screen readers can identify the field's purpose when a visible `<label>` isn't present. Replaced basic `alert()` notifications with the project's existing `toast.success()` pattern to improve non-blocking visual feedback.
+**Action:** Always check standalone inputs for accessibility metadata (`aria-label` or `aria-labelledby`) and prefer non-intrusive toast notification utilities (e.g., `sonner`) over blocking `window.alert()` calls.
