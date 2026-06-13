@@ -26,6 +26,31 @@ global.ResizeObserver = class ResizeObserver {
   unobserve() {}
 };
 
+// Mock useSound and useInteraction hooks to avoid missing context errors in tests
+vi.mock('@/contexts/SoundContext', () => ({
+  useSound: () => ({
+    playSound: vi.fn(),
+    playHover: vi.fn(),
+    playClick: vi.fn(),
+  }),
+  SoundProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+vi.mock('@/contexts/InteractionContext', () => ({
+  useInteraction: () => ({
+    registerInteraction: vi.fn(),
+  }),
+  InteractionProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+// Mock react-helmet-async to avoid undefined helmetInstances errors
+vi.mock('react-helmet-async', () => {
+  return {
+    Helmet: ({ children }: { children: React.ReactNode }) => children,
+    HelmetProvider: ({ children }: { children: React.ReactNode }) => children,
+  };
+});
+
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
