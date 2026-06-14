@@ -1,0 +1,3 @@
+## 2024-06-14 - StopPropagation and Accessible Labels on Card Interactions
+**Learning:** Interactive elements (like a "Save to favorites" button) nested inside clickable parent containers (like recipe cards that navigate to a details page) require `e.stopPropagation()` and `e.preventDefault()` to prevent unintended navigation. Additionally, icon-only buttons need an `aria-label` to be accessible to screen readers, ensuring users know what action the nested button performs.
+**Action:** When adding interactive elements (buttons, links) inside clickable cards, always include `stopPropagation()` in the `onClick` handler, provide an appropriate `aria-label` for icon-only elements, and use a toast notification for immediate user feedback to improve micro-UX.
