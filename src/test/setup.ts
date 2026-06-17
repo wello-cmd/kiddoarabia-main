@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { configure } from '@testing-library/react';
 import { vi } from 'vitest';
+import React from 'react';
 
 // Configure Testing Library  
 configure({ asyncUtilTimeout: 1000 } as any);
@@ -43,3 +44,28 @@ Object.defineProperty(window, 'matchMedia', {
 
 // Mock scrollTo
 window.scrollTo = vi.fn();
+
+// Mock useSound to avoid must be used within Provider errors
+vi.mock('@/contexts/SoundContext', () => ({
+  useSound: () => ({
+    playSound: vi.fn(),
+    playHover: vi.fn(),
+    playClick: vi.fn()
+  }),
+  SoundProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+// Mock useInteraction context
+vi.mock('@/contexts/InteractionContext', () => ({
+  useInteraction: () => ({
+    isInteracting: false,
+    setInteracting: vi.fn()
+  }),
+  InteractionProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+// Mock react-helmet-async to prevent errors
+vi.mock('react-helmet-async', () => ({
+  HelmetProvider: ({ children }: { children: React.ReactNode }) => children,
+  Helmet: ({ children }: { children: React.ReactNode }) => children,
+}));
