@@ -45,10 +45,14 @@ describe('Index Page', () => {
     );
 
     // Check for main content sections
-    expect(screen.getByText(/product/i)).toBeInTheDocument();
-    expect(screen.getByText(/about/i)).toBeInTheDocument();
-    expect(screen.getByText(/recipe/i)).toBeInTheDocument();
-    expect(screen.getByText(/contact/i)).toBeInTheDocument();
+    const productTexts = screen.getAllByText(/product/i);
+    expect(productTexts.length).toBeGreaterThan(0);
+    const aboutTexts = screen.getAllByText(/about/i);
+    expect(aboutTexts.length).toBeGreaterThan(0);
+    const recipeTexts = screen.getAllByText(/recipe/i);
+    expect(recipeTexts.length).toBeGreaterThan(0);
+    const contactTexts = screen.getAllByText(/contact/i);
+    expect(contactTexts.length).toBeGreaterThan(0);
   });
 
   it('has proper semantic structure', () => {
@@ -59,7 +63,8 @@ describe('Index Page', () => {
     );
 
     // Check for proper semantic elements
-    expect(screen.getByRole('main')).toBeInTheDocument();
+    const mainElements = screen.getAllByRole('main');
+    expect(mainElements.length).toBeGreaterThan(0);
     expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
   });
 

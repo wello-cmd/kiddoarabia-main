@@ -1,0 +1,3 @@
+## 2024-05-18 - Standalone Inputs, Icon-Only Links, and Blocking Alerts
+**Learning:** Standalone form inputs (like newsletter subscriptions) lack implicit context for screen readers without a `<label>`, icon-only links are inaccessible without `aria-label`, and blocking browser `alert()` notifications degrade the micro-interaction experience.
+**Action:** When implementing standalone inputs or icon-only buttons/links, ensure an explicit `aria-label` is applied to give context. When adding notifications in response to user actions, utilize a non-blocking toast notification library (e.g., `sonner`) instead of the blocking `alert()` method.
