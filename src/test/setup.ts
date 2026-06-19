@@ -43,3 +43,34 @@ Object.defineProperty(window, 'matchMedia', {
 
 // Mock scrollTo
 window.scrollTo = vi.fn();
+
+// Mock react-helmet-async
+vi.mock('react-helmet-async', () => ({
+  HelmetProvider: ({ children }: { children: React.ReactNode }) => children,
+  Helmet: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+// Mock useSound and SoundContext
+vi.mock('@/contexts/SoundContext', () => ({
+  useSound: () => ({
+    playSound: vi.fn(),
+    playHover: vi.fn(),
+    playClick: vi.fn(),
+    playSuccess: vi.fn(),
+    playError: vi.fn(),
+  }),
+  SoundProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+// Mock useInteraction and InteractionContext
+vi.mock('@/contexts/InteractionContext', () => ({
+  useInteraction: () => ({
+    interactions: {
+      reducedMotion: false,
+      hoverEffects: true,
+    },
+    setReducedMotion: vi.fn(),
+    setHoverEffects: vi.fn(),
+  }),
+  InteractionProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
