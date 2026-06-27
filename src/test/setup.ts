@@ -26,6 +26,12 @@ global.ResizeObserver = class ResizeObserver {
   unobserve() {}
 };
 
+// Mock react-helmet-async to prevent context errors during testing
+vi.mock('react-helmet-async', () => ({
+  HelmetProvider: ({ children }: { children: React.ReactNode }) => children,
+  Helmet: ({ children }: { children: React.ReactNode }) => children,
+}));
+
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -43,3 +49,26 @@ Object.defineProperty(window, 'matchMedia', {
 
 // Mock scrollTo
 window.scrollTo = vi.fn();
+
+// Mock useSound hook
+vi.mock('@/contexts/SoundContext', () => ({
+  useSound: () => ({
+    playSound: vi.fn(),
+    playHover: vi.fn(),
+    playClick: vi.fn(),
+  }),
+  SoundProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+// Mock InteractionContext hook
+vi.mock('@/contexts/InteractionContext', () => ({
+  useInteraction: () => ({
+    handleInteraction: vi.fn(),
+    isInteracting: false,
+  }),
+  InteractionProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+// Global mock for HTMLMediaElement
+window.HTMLMediaElement.prototype.play = vi.fn().mockImplementation(() => Promise.resolve());
+window.HTMLMediaElement.prototype.pause = vi.fn();
