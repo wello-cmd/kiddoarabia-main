@@ -17,7 +17,12 @@ export default defineConfig({
         '**/*.d.ts',
         '**/*.config.*'
       ]
-    }
+    },
+    exclude: [
+      '**/e2e/**',
+      '**/src/test/e2e/**',
+      'node_modules/**'
+    ]
   },
   resolve: {
     alias: {

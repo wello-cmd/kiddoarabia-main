@@ -1,0 +1,1 @@
+## 2024-05-15 - Replace alert with toast in Footer\n**Learning:** The `alert()` function is blocking and poor UX. Replacing it with a modern `toast` from the existing `sonner` library improves the micro-UX and non-blocking interactions.\n**Action:** Replaced `alert()` in `src/components/Footer.tsx` with `toast.success()` from `sonner`.
