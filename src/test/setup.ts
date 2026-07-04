@@ -26,6 +26,30 @@ global.ResizeObserver = class ResizeObserver {
   unobserve() {}
 };
 
+// Mock SoundContext explicitly
+vi.mock('@/contexts/SoundContext', () => ({
+  useSound: () => ({
+    playSound: vi.fn(),
+    playHover: vi.fn(),
+    playClick: vi.fn(),
+  }),
+  SoundProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+// Mock InteractionContext explicitly
+vi.mock('@/contexts/InteractionContext', () => ({
+  useInteraction: () => ({
+    hasInteracted: true,
+  }),
+  InteractionProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+// Mock react-helmet-async explicitly
+vi.mock('react-helmet-async', () => ({
+  HelmetProvider: ({ children }: { children: React.ReactNode }) => children,
+  Helmet: ({ children }: { children: React.ReactNode }) => children,
+}));
+
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
