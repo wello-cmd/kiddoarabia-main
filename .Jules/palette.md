@@ -1,0 +1,3 @@
+## 2024-07-04 - Refactoring Alerts and Improving ARIA labels
+**Learning:** `alert()` in forms is blocking and causes poor user experience, moreover `alert()` triggers within forms need `e.preventDefault()` to avoid unintentional page reloads. Standalone `<input>`s (like newsletter signups without `<label>` elements) and icon-only buttons require explicit `aria-label`s for screen readers.
+**Action:** Replace `alert()` with modern toast notifications (`toast.success` via `sonner`), explicitly add `e.preventDefault()` on form buttons to prevent unexpected navigations, and always add `aria-label` to visually implied inputs or icon-only buttons to ensure keyboard and screen reader accessibility.
