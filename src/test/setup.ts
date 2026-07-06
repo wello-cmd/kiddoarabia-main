@@ -26,6 +26,31 @@ global.ResizeObserver = class ResizeObserver {
   unobserve() {}
 };
 
+// Mock react-helmet-async to prevent HelmetDispatcher add errors
+vi.mock('react-helmet-async', () => ({
+  HelmetProvider: ({ children }: { children: React.ReactNode }) => children,
+  Helmet: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+// Mock sound context globally to avoid Provider errors
+vi.mock('@/contexts/SoundContext', () => ({
+  useSound: () => ({
+    playSound: vi.fn(),
+    playHover: vi.fn(),
+    playClick: vi.fn(),
+  }),
+  SoundProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+// Mock interaction context globally to avoid Provider errors
+vi.mock('@/contexts/InteractionContext', () => ({
+  useInteraction: () => ({
+    interacted: false,
+    setInteracted: vi.fn(),
+  }),
+  InteractionProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
