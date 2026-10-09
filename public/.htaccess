@@ -1,4 +1,5 @@
 # Serve prerendered files and static assets directly, then use React Router.
+DirectoryIndex index.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteCond %{REQUEST_FILENAME} !-f
