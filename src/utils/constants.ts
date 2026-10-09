@@ -46,8 +46,8 @@ export const SEO_CONFIG = {
   DEFAULT_TITLE: "Kiddo Arabia - Premium Kids' Nutrition | Made with Love & Care",
   DEFAULT_DESCRIPTION: "🌟 Nourishing your little ones with the finest, healthiest ingredients. Premium cereals, oat jars & biscuits crafted with love for growing minds and bodies.",
   DEFAULT_KEYWORDS: "kids nutrition, healthy cereals, children's food, family breakfast, organic snacks, vitamins for kids, Arabic brands, healthy eating, growing children",
-  SITE_URL: 'https://kiddoarabia.com',
-  SOCIAL_IMAGE: 'https://kiddoarabia.com/og-image.jpg',
+  SITE_URL: 'https://kiddo-kid.com',
+  SOCIAL_IMAGE: 'https://kiddo-kid.com/og-image.png',
 } as const;
 
 // Security Configuration

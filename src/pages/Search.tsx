@@ -1,5 +1,4 @@
 import EnhancedLayout from "@/components/EnhancedLayout";
-import SEOHead from "@/components/SEOHead";
 import { useSearchParams } from "react-router-dom";
 
 const Search = () => {
@@ -8,11 +7,6 @@ const Search = () => {
 
   return (
     <>
-      <SEOHead
-        title={`Search Results${q ? ` for "${q}"` : ""} | Kiddo Arabia`}
-        description={`Search results${q ? ` for "${q}"` : ""} at Kiddo Arabia.`}
-        keywords="search, kiddo arabia, products, recipes"
-      />
       <EnhancedLayout>
         <main id="main-content" className="container mx-auto px-4 py-8">
           <header className="mb-6">

@@ -5,20 +5,19 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { TranslationProvider } from "@/contexts/TranslationContext";
 import { InteractionProvider } from "@/contexts/InteractionContext";
-import { SoundProvider } from "@/contexts/SoundContext";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
 import Analytics from "@/components/Analytics";
+import SEOHead from "@/components/SEOHead";
 import SkipToContent from "@/components/SkipToContent";
 import { usePerformance } from "@/hooks/usePerformance";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import SmoothScroll from "@/components/SmoothScroll";
-import CustomCursor from "@/components/CustomCursor";
-import ScrollToTop from "@/components/ScrollToTop";
 import { AnimatePresence } from "framer-motion";
 
 // Lazy load pages for better performance
+const Play = lazy(() => import("./pages/Play"));
+const Partners = lazy(() => import("./pages/Partners"));
 const Index = lazy(() => import("./pages/Index"));
 const Recipes = lazy(() => import("./pages/Recipes"));
 const RecipeDetail = lazy(() => import("./pages/RecipeDetail"));
@@ -32,15 +31,6 @@ const Biscuits = lazy(() => import("./pages/Biscuits"));
 const Cereals = lazy(() => import("./pages/Cereals"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const SearchPage = lazy(() => import("./pages/Search"));
-const Careers = lazy(() => import("./pages/Careers"));
-const Press = lazy(() => import("./pages/Press"));
-const FAQ = lazy(() => import("./pages/FAQ"));
-const Nutrition = lazy(() => import("./pages/Nutrition"));
-const Allergens = lazy(() => import("./pages/Allergens"));
-const Privacy = lazy(() => import("./pages/Privacy"));
-const Terms = lazy(() => import("./pages/Terms"));
-const Cookies = lazy(() => import("./pages/Cookies"));
-const Refunds = lazy(() => import("./pages/Refunds"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -67,19 +57,13 @@ const AppContent = () => {
       <TooltipProvider>
         <InteractionProvider>
           <TranslationProvider>
-            <SmoothScroll>
               <SkipToContent />
               <Toaster />
               <Sonner />
-              <CustomCursor />
-              <SoundProvider>
-                <BrowserRouter>
-                  <ScrollToTop />
-                  <Analytics />
-                  <AnimatedRoutes />
-                </BrowserRouter>
-              </SoundProvider>
-            </SmoothScroll>
+              <BrowserRouter>
+                <Analytics />
+                <AnimatedRoutes />
+              </BrowserRouter>
           </TranslationProvider>
         </InteractionProvider>
       </TooltipProvider>
@@ -90,8 +74,16 @@ const AppContent = () => {
 const AnimatedRoutes = () => {
   const location = useLocation();
 
+  useEffect(() => {
+    if (!location.hash) { window.scrollTo(0, 0); return; }
+    const target = location.hash.slice(1);
+    const timer = window.setTimeout(() => document.getElementById(target)?.scrollIntoView({ behavior: "smooth" }), 400);
+    return () => window.clearTimeout(timer);
+  }, [location.pathname, location.hash]);
+
   return (
     <AnimatePresence mode="wait">
+      <SEOHead />
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageSuspense><Index /></PageSuspense>} />
         <Route path="/recipes" element={<PageSuspense><Recipes /></PageSuspense>} />
@@ -100,20 +92,13 @@ const AnimatedRoutes = () => {
         <Route path="/blog/:id" element={<PageSuspense><BlogDetail /></PageSuspense>} />
         <Route path="/about" element={<PageSuspense><About /></PageSuspense>} />
         <Route path="/products" element={<PageSuspense><Products /></PageSuspense>} />
+        <Route path="/play" element={<PageSuspense><Play /></PageSuspense>} />
+        <Route path="/partners" element={<PageSuspense><Partners /></PageSuspense>} />
         <Route path="/characters" element={<PageSuspense><Characters /></PageSuspense>} />
         <Route path="/oat-jars" element={<PageSuspense><OatJars /></PageSuspense>} />
         <Route path="/biscuits" element={<PageSuspense><Biscuits /></PageSuspense>} />
         <Route path="/cereals" element={<PageSuspense><Cereals /></PageSuspense>} />
         <Route path="/search" element={<PageSuspense><SearchPage /></PageSuspense>} />
-        <Route path="/careers" element={<PageSuspense><Careers /></PageSuspense>} />
-        <Route path="/press" element={<PageSuspense><Press /></PageSuspense>} />
-        <Route path="/faq" element={<PageSuspense><FAQ /></PageSuspense>} />
-        <Route path="/nutrition" element={<PageSuspense><Nutrition /></PageSuspense>} />
-        <Route path="/allergens" element={<PageSuspense><Allergens /></PageSuspense>} />
-        <Route path="/privacy" element={<PageSuspense><Privacy /></PageSuspense>} />
-        <Route path="/terms" element={<PageSuspense><Terms /></PageSuspense>} />
-        <Route path="/cookies" element={<PageSuspense><Cookies /></PageSuspense>} />
-        <Route path="/refunds" element={<PageSuspense><Refunds /></PageSuspense>} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<PageSuspense><NotFound /></PageSuspense>} />
       </Routes>

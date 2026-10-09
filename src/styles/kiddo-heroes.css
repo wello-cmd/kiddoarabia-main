@@ -1,0 +1,20 @@
+/* Keep live copy separate from contained artwork in both languages. */
+.kiddo-page-hero{background:#e51b24;color:white}
+.kiddo-page-hero-inner{display:grid;grid-template-columns:40% 60%;align-items:center;direction:ltr}
+.kiddo-page-hero-copy{padding:48px 28px 48px 0;min-width:0}
+.kiddo-page-hero-copy h1{font-family:Fredoka,Inter,sans-serif;font-weight:650;font-size:clamp(46px,5vw,72px);line-height:1.04;letter-spacing:-.025em;max-width:12ch;text-wrap:balance;color:white}
+.kiddo-page-hero-copy p{font-size:clamp(17px,1.5vw,21px);line-height:1.5;max-width:30ch;margin:24px 0 30px}
+.kiddo-page-hero-art{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain}
+.kiddo-crew-hero .kiddo-page-hero-inner{min-height:540px;padding-block:24px}
+.kiddo-recipe-hero .kiddo-page-hero-copy{padding-inline:clamp(24px,5vw,80px)}
+[dir=rtl] .kiddo-page-hero-copy{direction:rtl;text-align:right}
+[dir=rtl] .kiddo-page-hero-copy h1{font-family:inherit;letter-spacing:normal;line-height:1.22}
+@media(max-width:760px){
+  .kiddo-page-hero-inner{grid-template-columns:1fr}
+  .kiddo-crew-hero .kiddo-page-hero-inner{min-height:0;padding-block:0}
+  .kiddo-page-hero-copy,.kiddo-recipe-hero .kiddo-page-hero-copy{padding:32px 20px 24px}
+  .kiddo-crew-hero .kiddo-page-hero-copy{padding-inline:0}
+  .kiddo-page-hero-copy h1{font-size:44px;max-width:16ch}
+  .kiddo-page-hero-copy p{margin:18px 0 24px;font-size:17px;max-width:35ch}
+  .kiddo-crew-hero .kiddo-page-hero-art{margin-bottom:20px}
+}

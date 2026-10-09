@@ -4,10 +4,6 @@ import CursorTrail from '@/components/CursorTrail';
 import ScrollProgress from '@/components/ScrollProgress';
 import ProductionReadyHeader from '@/components/ProductionReadyHeader';
 import Footer from '@/components/Footer';
-import AiBot from '@/components/AiBot';
-import CookieConsent from '@/components/CookieConsent';
-import SkipToContent from '@/components/SkipToContent';
-import { motion } from 'framer-motion';
 
 interface EnhancedLayoutProps {
   children: React.ReactNode;
@@ -16,35 +12,27 @@ interface EnhancedLayoutProps {
   showScrollProgress?: boolean;
 }
 
-const EnhancedLayout: React.FC<EnhancedLayoutProps> = ({
-  children,
+const EnhancedLayout: React.FC<EnhancedLayoutProps> = ({ 
+  children, 
   showParticles = false, // Disabled for performance
   showCursorTrail = false, // Disabled for performance
-  showScrollProgress = true
+  showScrollProgress = false
 }) => {
   return (
     <div className="min-h-screen bg-background">
-      <SkipToContent />
       {/* Performance-optimized effects - only in development */}
-      {process.env.NODE_ENV === 'development' && showParticles && <ParticleSystem />}
-      {process.env.NODE_ENV === 'development' && showCursorTrail && <CursorTrail />}
+      {import.meta.env.DEV && showParticles && <ParticleSystem />}
+      {import.meta.env.DEV && showCursorTrail && <CursorTrail />}
       {showScrollProgress && <ScrollProgress />}
-
+      
       {/* Elite-tier navigation */}
       <ProductionReadyHeader />
-
-      <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3, ease: "easeOut" }}
-        className="relative z-10 pt-16"
-      >
+      
+      <main id="main-content" tabIndex={-1} className="relative z-10">
         {children}
-      </motion.main>
-
+      </main>
+      
       <Footer />
-      <AiBot />
-      <CookieConsent />
     </div>
   );
 };

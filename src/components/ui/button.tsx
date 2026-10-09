@@ -3,8 +3,6 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
-import { useSound } from "@/contexts/SoundContext"
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
@@ -40,53 +38,17 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-  VariantProps<typeof buttonVariants> {
+    VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : motion.button
-    const { playSound } = useSound();
-
-    // Magnetic Logic
-    const refLocal = React.useRef<HTMLButtonElement>(null);
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-
-    const mouseXSpring = useSpring(x);
-    const mouseYSpring = useSpring(y);
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      const rect = refLocal.current?.getBoundingClientRect();
-      if (rect) {
-        const width = rect.width;
-        const height = rect.height;
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-        const xPct = mouseX / width - 0.5;
-        const yPct = mouseY / height - 0.5;
-        x.set(xPct * 10); // Strength of magnet
-        y.set(yPct * 10);
-      }
-    };
-
-    const handleMouseLeave = () => {
-      x.set(0);
-      y.set(0);
-    };
-
+    const Comp = asChild ? Slot : "button"
     return (
-      // @ts-ignore
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref || refLocal}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        onMouseEnter={() => playSound('hover')}
-        onClick={() => playSound('click')}
-        style={{ x: mouseXSpring, y: mouseYSpring }}
-        whileTap={{ scale: 0.95 }}
+        ref={ref}
         {...props}
       />
     )

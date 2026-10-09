@@ -1,0 +1,16 @@
+.play-gaming-hero .kiddo-page-hero-copy{padding:40px clamp(24px,4vw,64px)}
+.play-gaming-hero .kiddo-page-hero-copy h1{max-width:12ch}
+.play-hero-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.play-color-link{display:inline-flex;align-items:center;gap:8px;color:white;font-size:15px;text-decoration:underline;text-underline-offset:4px}
+.play-room>.catalog-filters{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.play-room .game-surface{scroll-margin-top:110px}
+@media(max-width:760px){.play-gaming-hero .kiddo-page-hero-copy{padding:32px 20px}.play-gaming-hero .kiddo-page-hero-copy h1{font-size:44px;max-width:16ch}.play-room>.catalog-filters{justify-content:flex-start;gap:8px}.play-room>.catalog-filters .catalog-filter{font-size:13px;padding:10px 13px}.play-color-link{font-size:14px}}
+
+/* Each game gets its own authored scene; complete artwork stays visible. */
+.play-room .game-picker{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:28px}
+.play-room .game-picker .catalog-filter{display:flex;flex-direction:column;align-items:stretch;border-radius:16px;background:white;border:2px solid #e6c8cb;padding:12px;text-align:center;white-space:normal;color:#20202c;gap:12px}
+.play-room .game-picker .catalog-filter img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;border-radius:10px}
+.play-room .game-picker .catalog-filter span{padding:4px 4px 8px;font-weight:800;line-height:1.4}
+.play-room .game-picker .catalog-filter[aria-pressed="true"]{border-color:#bf1019;background:#fff5f5;color:#bf1019}
+.play-room .game-picker .catalog-filter:focus-visible{outline:3px solid #20202c;outline-offset:4px}
+@media(max-width:760px){.play-room .game-picker{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.play-room .game-picker .catalog-filter{padding:8px;gap:6px}.play-room .game-picker .catalog-filter span{font-size:14px}}

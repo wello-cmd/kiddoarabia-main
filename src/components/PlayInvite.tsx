@@ -1,0 +1,5 @@
+import { Link } from 'react-router-dom';
+import { ArrowUpRight, Download } from 'lucide-react';
+import { useTranslation } from '@/contexts/TranslationContext';
+import '@/styles/kiddo-play.css';
+export default function PlayInvite(){const {language}=useTranslation();const ar=language==='ar';return <section className="play-invite"><div className="kiddo-wrap play-invite-inner"><img src="/generated/mascots/loopy.webp" alt="Loopy" width="1254" height="1254" loading="lazy"/><div><h2>{ar?'تعال نلعب.':'Come out and play.'}</h2><p>{ar?'ألعاب صغيرة ومغامرات ملونة. طابق فريق كيدو، خمن الشخصيات وحمل كتاب تلوينك.':'Mini games and colorful adventures. Match the Kiddo crew, guess the characters and make your own coloring book.'}</p><div className="play-invite-actions"><Link to="/play" className="kiddo-action kiddo-action-red">{ar?'العب الألعاب':'Play the mini games'}<ArrowUpRight size={18}/></Link><Link to="/play#coloring" className="kiddo-action kiddo-action-white">{ar?'حمل صفحات التلوين':'Coloring books'}<Download size={18}/></Link></div></div></div></section>}

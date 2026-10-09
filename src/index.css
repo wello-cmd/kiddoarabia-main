@@ -389,3 +389,9 @@ All colors MUST be HSL. Performance-optimized with prefers-reduced-motion suppor
     transform: scale(0.98);
   }
 }
+/* Homepage visual refresh */
+.kiddo-hero { background: radial-gradient(circle at 80% 30%, #ffe3b0 0, transparent 42%), linear-gradient(135deg, #fff8e9 0%, #ffefdb 100%); }
+.kiddo-primary-link { background: #db2028; transition: background-color .2s, transform .2s; }
+.kiddo-primary-link:hover { background: #ad151d; transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) { .kiddo-primary-link, .kiddo-primary-link:hover { transition: none; transform: none; } }
+h1, h2, h3, h4 { font-family: Inter, system-ui, sans-serif; }

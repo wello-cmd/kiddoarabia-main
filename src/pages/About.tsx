@@ -1,158 +1,92 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Heart, Shield, Leaf, Users, Award, Globe, ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "@/contexts/TranslationContext";
-import EnhancedLayout from "@/components/EnhancedLayout";
-import { motion } from "framer-motion";
-import heroImage from "@/assets/kiddo-hero-illustration.png";
-import SEOHead from "@/components/SEOHead";
+import ProductRangeDisplay from '@/components/ProductRangeDisplay';
+import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
+import EnhancedLayout from '@/components/EnhancedLayout';
+import ContactSection from '@/components/ContactSection';
+import { useTranslation } from '@/contexts/TranslationContext';
+import '@/styles/kiddo-about-professional.css';
 
-const About = () => {
-  const navigate = useNavigate();
-  const { t, language } = useTranslation();
-
-  const values = [
-    {
-      icon: Heart,
-      title: "Made with Love",
-      description: "Every product is crafted with care and love for children's health and happiness."
-    },
-    {
-      icon: Shield,
-      title: "Safety First",
-      description: "We maintain the highest safety standards in all our manufacturing processes."
-    },
-    {
-      icon: Leaf,
-      title: "Natural Ingredients",
-      description: "Only the finest natural ingredients make it into our products."
-    },
-    {
-      icon: Users,
-      title: "Family Focused",
-      description: "We understand families and create products that bring them together."
-    }
-  ];
-
-  const achievements = [
-    { number: "50+", label: "Countries Served" },
-    { number: "1M+", label: "Happy Families" },
-    { number: "4+", label: "Years of Excellence" },
-    { number: "100%", label: "Natural Ingredients" }
+export default function About() {
+  const { language } = useTranslation();
+  const ar = language === 'ar';
+  const ranges = [
+    { href: '/cereals', name: ar ? 'حبوب الإفطار' : 'Cereals', detail: ar ? '١١ صنفًا من حبوب الإفطار، تشمل الشوكولاتة والحلقات وبيلو والكورن فليكس.' : 'Eleven cereals spanning chocolate varieties, rings, pillows and corn flakes.', count: ar ? '١١ منتجًا' : '11 products' },
+    { href: '/oat-jars', name: ar ? 'عبوات الشوفان' : 'Oat jars', detail: ar ? 'شوفان الحبة الكاملة وشوفان سريع التحضير، للإفطار والوصفات المنزلية.' : 'Whole-grain oats and quick-cooking oats for breakfast and home recipes.', count: ar ? 'منتجان' : '2 products' },
+    { href: '/biscuits', name: ar ? 'بسكويت الشوفان' : 'Oat biscuits', detail: ar ? 'الشوكولاتة، والتفاح والقرفة، والشوفان السادة، وجوز الهند.' : 'Chocolate, Apple Cinnamon, Plain Oats and Coconut.', count: ar ? '٤ منتجات' : '4 products' },
   ];
 
   return (
     <EnhancedLayout>
-      <SEOHead
-        title={language === 'ar'
-          ? "كيدو أرابيا - الأفضل فقط لأطفالك | قصتنا"
-          : "About Kiddo Arabia - Our Story & Values | Kids' Nutrition Experts"}
-        description={language === 'ar'
-          ? "تعرف على مهمة كيدو أرابيا لتوفير طعام صحي ومغذي وممتع للأطفال. اكتشف قصتنا وقيمنا."
-          : "Learn about Kiddo Arabia's mission to provide premium, healthy nutrition for children. Discover our story, our commitment to safety, and our passion for natural ingredients."}
-        keywords={language === 'ar'
-          ? "عن كيدو أرابيا, قصتنا, مهمة تغذية الأطفال, شركة طعام صحي, قيمنا"
-          : "about kiddo arabia, kids nutrition company, healthy cereal brand, natural ingredients, children food safety, our story"}
-        lang={language}
-      />
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="bg-background"
-      >
-        {/* Header */}
-        <div className="bg-gradient-hero text-white py-16">
-          <div className="container mx-auto px-4">
-            <Button
-              variant="ghost"
-              onClick={() => navigate('/')}
-              className="mb-8 text-white hover:bg-white/20"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              {t('nav.about')}
-            </Button>
+      <div className="kiddo-company" dir={ar ? 'rtl' : 'ltr'}>
+        <section className="company-intro kiddo-wrap" aria-labelledby="company-title">
+          <h1 id="company-title">{ar ? 'عن كيدو أرابيا.' : 'About Kiddo Arabia.'}</h1>
+          <div className="company-intro-copy">
+            <p className="company-lead">{ar ? 'كيدو أرابيا علامة للمنتجات الغذائية تجمع حبوب الإفطار وعبوات الشوفان وبسكويت الشوفان في هوية مميزة بشخصياتها وألوان عبواتها.' : 'Kiddo Arabia is a food brand bringing cereals, oat jars and oat biscuits together through distinctive characters and colorful packaging.'}</p>
+            <p>{ar ? 'نقدم مجموعة يمكن للعائلات استكشافها حسب تفضيلاتها، ونرحب بتجار التجزئة والموزعين حول العالم الراغبين في التعرف على المنتجات ومناقشة فرص التعاون.' : 'Our range gives families different products to explore according to their preferences. We also welcome retailers and distributors worldwide who want to learn about the products and discuss cooperation.'}</p>
+          </div>
+          <div className="company-intro-actions">
+            <Link to="/products" className="kiddo-action kiddo-action-red">{ar ? 'استكشف المنتجات' : 'Explore our products'}<ArrowUpRight size={19} aria-hidden="true" /></Link>
+            <Link to="/partners" className="company-link">{ar ? 'تواصل بشأن الشراكات' : 'Discuss a partnership'}<ArrowUpRight size={19} aria-hidden="true" /></Link>
+          </div>
+        </section>
 
-            <div className="text-center">
-              <h1 className="text-4xl lg:text-6xl font-bold mb-4">
-                {t('about.story.title')}
-              </h1>
-              <p className="text-xl opacity-90 max-w-2xl mx-auto">
-                {t('about.story.description')}
-              </p>
+        <section className="company-range kiddo-wrap" aria-labelledby="company-range-title">
+          <div className="company-section-intro">
+            <h2 id="company-range-title">{ar ? 'مجموعة كيدو.' : 'The Kiddo range.'}</h2>
+            <p>{ar ? '١٧ منتجًا في ثلاث فئات. تصفح كل فئة للتعرف على الأصناف واختيار ما يهمك، سواء لبيتك أو لعملك.' : 'Seventeen products across three categories. Browse each range to find the varieties that interest you, whether for your home or your business.'}</p>
+          </div>
+          <div className="company-range-list">
+            {ranges.map((range) => (
+              <Link key={range.href} to={range.href} className="company-range-row">
+                <h3>{range.name}</h3>
+                <p>{range.detail}</p>
+                <span>{range.count}</span>
+                <ArrowUpRight size={24} aria-hidden="true" />
+              </Link>
+            ))}
+          </div>
+          <p className="company-pack-note">{ar ? 'للمكونات ومعلومات الحساسية وتعليمات التحضير، يرجى الرجوع إلى العبوة الحالية للمنتج الذي تختاره.' : 'For ingredients, allergen information and preparation instructions, refer to the current packaging of the product you choose.'}</p>
+        </section>
+
+        <section className="company-identity" aria-labelledby="company-identity-title">
+          <div className="kiddo-wrap company-identity-inner">
+            <ProductRangeDisplay ar={ar} studio/>
+            <div>
+              <h2 id="company-identity-title">{ar ? 'هوية تتعرف عليها.' : 'A recognizable identity.'}</h2>
+              <p>{ar ? 'شخصيات كيدو وألوان العبوات جزء أساسي من العلامة. تمنح كل منتج وجهًا مميزًا، وتربط المجموعة بعالم مشترك من الشخصيات التي يمكن للعائلات التعرف عليها.' : 'Kiddo’s characters and package colors are central to the brand. They give individual products a distinctive face and connect the range through a shared character world for families to discover.'}</p>
+              <Link to="/characters" className="company-link">{ar ? 'تعرّف على شخصيات كيدو' : 'Meet the Kiddo characters'}<ArrowUpRight size={19} aria-hidden="true" /></Link>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div className="container mx-auto px-4 py-16">
-          {/* Story Section */}
-          <div className="max-w-4xl mx-auto mb-16">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-foreground mb-6">The Kiddo Story</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Founded with a simple mission: to provide children with nutritious, delicious, and safe breakfast options
-                that parents can trust. Our journey began when our founders, as parents themselves, realized the need for
-                healthier breakfast alternatives in the region.
-              </p>
-            </div>
+        <section className="company-leadership kiddo-wrap" aria-labelledby="company-leadership-title">
+          <h2 id="company-leadership-title">{ar ? 'قيادة كيدو أرابيا.' : 'Our leadership.'}</h2>
+          <figure className="company-leader">
+            <img src="/team/waleed-fathy-afify.jpg" alt={ar ? 'وليد فتحي عفيفي' : 'Waleed Fathy Afify'} width="303" height="303" loading="lazy" />
+            <figcaption>
+              <h3>{ar ? 'وليد فتحي عفيفي' : 'Waleed Fathy Afify'}</h3>
+              <p>{ar ? 'الرئيس التنفيذي، كيدو أرابيا' : 'CEO, Kiddo Arabia'}</p>
+            </figcaption>
+          </figure>
+        </section>
 
-            <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-              <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-foreground">Our Mission</h3>
-                <p className="text-muted-foreground">
-                  To nourish young minds and bodies with love, care, and the finest natural ingredients.
-                  We believe that a great day starts with a great breakfast, and every child deserves
-                  the very best nutrition to fuel their dreams and adventures.
-                </p>
-                <p className="text-muted-foreground">
-                  From our state-of-the-art facilities in Egypt, we ensure that every grain of our
-                  cornflakes meets the highest quality standards, bringing joy and nutrition to breakfast
-                  tables across the Middle East and beyond.
-                </p>
-              </div>
-              <div className="rounded-3xl h-64 flex items-center justify-center overflow-hidden">
-                <img src={heroImage} alt="Our Mission" className="w-full h-full object-cover rounded-3xl" />
-              </div>
+        <section className="company-audiences kiddo-wrap" aria-label={ar ? 'للعائلات والشركاء التجاريين' : 'For families and business partners'}>
+          <div>
+            <h2>{ar ? 'للعائلات.' : 'For families.'}</h2>
+            <p>{ar ? 'إلى جانب المجموعة، تجدون وصفات تستخدم منتجات كيدو، وأفكار أنشطة في المدونة، وألعابًا وصفحات تلوين مع الشخصيات. استكشفوا المنتجات والأفكار التي تناسب أوقاتكم معًا.' : 'Alongside the range, discover recipes using Kiddo products, activity ideas in our journal, and games and coloring pages featuring the characters. Explore products and ideas for the time you share.'}</p>
+            <div className="company-audience-links">
+              <Link to="/recipes" className="company-link">{ar ? 'اكتشف الوصفات' : 'Discover recipes'}<ArrowUpRight size={18} aria-hidden="true" /></Link>
+              <Link to="/play" className="company-link">{ar ? 'العب مع كيدو' : 'Play with Kiddo'}<ArrowUpRight size={18} aria-hidden="true" /></Link>
             </div>
           </div>
-
-          {/* Values Section */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-foreground text-center mb-12">Our Values</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {values.map((value, index) => (
-                <Card key={index} className="text-center hover:shadow-glow transition-all duration-500">
-                  <CardContent className="p-6">
-                    <div className="bg-gradient-hero rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                      <value.icon className="h-8 w-8 text-white" />
-                    </div>
-                    <h3 className="font-bold text-lg text-foreground mb-2">{value.title}</h3>
-                    <p className="text-sm text-muted-foreground">{value.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+          <div>
+            <h2>{ar ? 'لتجار التجزئة والموزعين.' : 'For retailers and distributors.'}</h2>
+            <p>{ar ? 'نرحب باستفسارات الشراكة من حول العالم. تصفح المجموعة، واختر المنتجات التي تهمك، وعرّفنا بعملك وسوقك عبر صفحة الشراكات لبدء الحديث مع الفريق.' : 'We welcome partnership enquiries from around the world. Browse the range, select the products that interest you, and introduce your business and market through our partner page to start a conversation with the team.'}</p>
+            <Link to="/partners" className="kiddo-action kiddo-action-red">{ar ? 'ناقش فرص الشراكة' : 'Discuss partnership opportunities'}<ArrowUpRight size={19} aria-hidden="true" /></Link>
           </div>
-
-          {/* Achievements */}
-          <div className="bg-red-600 rounded-3xl p-12 text-white text-center mb-16">
-            <h2 className="text-3xl font-bold mb-8">Our Achievements</h2>
-            <div className="grid md:grid-cols-4 gap-8">
-              {achievements.map((achievement, index) => (
-                <div key={index} className="space-y-2">
-                  <div className="text-4xl font-bold">{achievement.number}</div>
-                  <div className="text-lg opacity-90">{achievement.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-
-        </div>
-      </motion.div>
+        </section>
+        <ContactSection />
+      </div>
     </EnhancedLayout>
   );
-};
-
-export default About;
+}

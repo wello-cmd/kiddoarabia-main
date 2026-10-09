@@ -4,16 +4,19 @@ import { createRoot } from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
 import App from './App.tsx';
 import './index.css';
+import './styles/kiddo-redesign.css';
+import './styles/kiddo-brand.css';
+import './styles/kiddo-heroes.css';
 
 // Performance monitoring
-if (process.env.NODE_ENV === 'production') {
+if (import.meta.env.PROD) {
   import('./utils/performance').then(({ measureWebVitals }) => {
     measureWebVitals();
   });
 }
 
 // Accessibility monitoring in development
-if (process.env.NODE_ENV === 'development') {
+if (import.meta.env.DEV) {
   import('@axe-core/react').then(axe => {
     axe.default(React, ReactDOM, 1000);
   });
