@@ -1,0 +1,1 @@
+import{j as t}from"./index-BAlKQaRF.js";import{O as r}from"./OatCollection-BaF6bsCM.js";import"./EnhancedLayout-Cwhj-XEA.js";import"./oats-tk1dXQRD.js";import"./arrow-left-BzQwreSr.js";function p(){return t.jsx(r,{kind:"jars"})}export{p as default};

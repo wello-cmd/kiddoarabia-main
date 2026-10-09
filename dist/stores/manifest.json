@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Othaim Egypt",
+    "path": "/stores/othaim.svg",
+    "sourceURL": "https://www.othaimmarkets.com/api/svgurl/l7jj78cw6vpe/5rvw3PGe0yeQuH85lj0yN9/2fe5bacdedc98cdade9acbea0b3b144c/othaim-logo.svg"
+  },
+  {
+    "name": "El Mahalawy",
+    "path": "/stores/el-mahalawy.jpg",
+    "sourceURL": "https://www.menuegypt.com/restaurants_logos/el-mahallawy-market_logo.jpg",
+    "note": "Third-party directory asset visually matches user-confirmed screenshot; similarly named Elmahalawy Stores uses a different mark."
+  },
+  {
+    "name": "Mahmoud Elfar",
+    "path": "/stores/mahmoud-elfar.svg",
+    "sourceURL": "https://mahmoudelfar.com/_next/static/media/alfarLogo.bd09c206.svg"
+  },
+  {
+    "name": "Talabat",
+    "path": "/stores/talabat.svg",
+    "sourceURL": "https://www.talabat.com/assets/images/remix-logo.svg"
+  },
+  {
+    "name": "Breadfast",
+    "path": "/stores/breadfast.svg",
+    "sourceURL": "https://www.breadfast.com/wp-content/themes/breadfast/website/images/breadfast-brand.svg"
+  },
+  {
+    "name": "Spinneys Egypt",
+    "path": "/stores/spinneys.webp",
+    "sourceURL": "https://spinneys-egypt.com/_nuxt/img/logo.b30a9ea.webp"
+  },
+  {
+    "name": "Fathalla",
+    "path": "/stores/fathalla.png",
+    "sourceURL": "https://fathallamarket.com.eg/assets/image-CsfY1WIA.png"
+  },
+  {
+    "name": "Hyper One",
+    "path": "/stores/hyper-one.jpg",
+    "sourceURL": "https://fartradingco.com/cdn/shop/files/retailer-hyper-one.jpg?v=1790860845&width=400",
+    "sourcePage": "https://fartradingco.com/en-eg",
+    "note": "Authentic logo supplied on official distributor retailer-partner list."
+  },
+  {
+    "name": "Zahran Market",
+    "path": "/stores/zahran.jpg",
+    "sourceURL": "https://ugc.production.linktr.ee/afafcb5c-eaec-402a-a241-39d9f2b4af29_79cfd81e20281d58ed0638ad40147360-tplv-tiktokx-cropcenter-1080-1080.jpeg?io=true&size=avatar-v3_0",
+    "sourcePage": "https://linktr.ee/Zahranmarket87",
+    "note": "Official Zahran Market social profile avatar."
+  },
+  {
+    "name": "InstaShop",
+    "path": "/stores/instashop.svg",
+    "sourceURL": "https://upload.wikimedia.org/wikipedia/commons/6/60/Instashop_logo.svg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Instashop_logo.svg",
+    "officialSourceAttribution": "http://instashop.com",
+    "note": "Official logo attributed to InstaShop; official HTTPS site blocks direct requests."
+  },
+  {
+    "name": "Carrefour Egypt",
+    "path": "/stores/carrefour.svg",
+    "sourceURL": "https://www.carrefour.com/themes/custom/c4com/img/logo-svg.svg",
+    "note": "Official Carrefour global brand mark; Egypt website blocks asset discovery."
+  },
+  {
+    "name": "El-Hawary",
+    "path": "/stores/el-hawary.jpg",
+    "sourceURL": "https://www.menuegypt.com/restaurants_logos/elhawary_logo.jpg",
+    "note": "Third-party directory logo visually matches user-confirmed screenshot; official former website is parked."
+  }
+]

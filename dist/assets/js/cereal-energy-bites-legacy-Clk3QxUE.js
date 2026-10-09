@@ -1,1 +1,0 @@
-System.register([],function(s,e){"use strict";return{execute:function(){s("c","/assets/images/cornflakes-crusted-chicken-rXknVgDE.jpg"),s("a","/assets/images/cocoa-crunch-milkshake--Bb91nDh.png"),s("h","/assets/images/honey-rings-morning-blast-CdqeT1W9.png"),s("f","/assets/images/fruit-rings-splash-C1m0gPRn.png"),s("b","/assets/images/cereal-energy-bites-BGPROybV.png")}}});
