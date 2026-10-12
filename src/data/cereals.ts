@@ -1,6 +1,6 @@
 export type PackViewport = { x: number; y: number; width: number; height: number };
 export type PackAsset = { image: string; packViewport?: PackViewport };
-export const cerealPackagingSheet = '/brand/cereal-packaging-supplied.png';
+export const cerealPackagingSheet = '/brand/cereal-packaging-supplied.webp';
 // Pixel viewports in the unmodified 1448 × 1086 user-supplied packaging sheet.
 const pack = (x: number, y: number): PackAsset => ({ image: cerealPackagingSheet, packViewport: { x, y, width: 230, height: 300 } });
 export const cereals=[

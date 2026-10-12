@@ -3,7 +3,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { chromium } from '@playwright/test';
 
-const routes = ['/', '/products', '/cereals', '/oat-jars', '/biscuits', '/recipes', '/blog', '/about', '/characters', '/play', '/partners', ...Array.from({ length: 12 }, (_, i) => `/recipe/${i + 1}`), ...Array.from({ length: 16 }, (_, i) => `/blog/${i + 1}`)];
+const routes = ['/', '/products', '/cereals', '/oat-jars', '/biscuits', '/recipes', '/blog', '/about', '/characters', '/play', '/partners', '/search', '/404', ...Array.from({ length: 12 }, (_, i) => `/recipe/${i + 1}`), ...Array.from({ length: 16 }, (_, i) => `/blog/${i + 1}`)];
 const port = 4179;
 const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', String(port), '--strictPort'], { stdio: 'ignore' });
 let browser;
@@ -39,6 +39,7 @@ try {
       }
     });
     const html = await page.content();
+    if (route === '/404') { await writeFile('dist/404.html', html); continue; }
     const folder = route === '/' ? 'dist' : join('dist', route.slice(1));
     await mkdir(folder, { recursive: true });
     await writeFile(join(folder, 'index.html'), html);

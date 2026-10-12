@@ -1,0 +1,1 @@
+import{j as t}from"./index-Bp987j4i.js";import{O as i}from"./OatCollection-DGbK3GKm.js";import"./EnhancedLayout-7MsXrjnC.js";import"./oats-tk1dXQRD.js";import"./arrow-left-BvuOjNwV.js";function n(){return t.jsx(i,{kind:"biscuits"})}export{n as default};

@@ -13,7 +13,6 @@ import SkipToContent from "@/components/SkipToContent";
 import { usePerformance } from "@/hooks/usePerformance";
 import { lazy, Suspense, useEffect } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { AnimatePresence } from "framer-motion";
 
 // Lazy load pages for better performance
 const Play = lazy(() => import("./pages/Play"));
@@ -82,7 +81,7 @@ const AnimatedRoutes = () => {
   }, [location.pathname, location.hash]);
 
   return (
-    <AnimatePresence mode="wait">
+    <>
       <SEOHead />
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageSuspense><Index /></PageSuspense>} />
@@ -102,7 +101,7 @@ const AnimatedRoutes = () => {
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<PageSuspense><NotFound /></PageSuspense>} />
       </Routes>
-    </AnimatePresence>
+    </>
   );
 };
 

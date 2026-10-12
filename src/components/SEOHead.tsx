@@ -1,3 +1,4 @@
+import { pageDescriptions, recipeDescriptions, articleDescriptions } from '@/data/seo-descriptions';
 import { recipes } from "@/data/recipes";
 import { blogPosts } from "@/data/blog";
 import { Helmet } from "react-helmet-async";
@@ -35,6 +36,7 @@ const SEOHead = ({ title, description, image, noIndex, structuredData }: SEOHead
   const recipeTitle = recipe ? (recipeIsArabic ? recipe.titleAr! : recipe.title) : undefined;
   const articleTitle = article ? (ar ? article.titleAr : article.title) : undefined;
   const page = pages[path] || (recipe ? { title: `${recipeTitle} Recipe | Kiddo Arabia`, description: recipe.description } : article ? { title: `${articleTitle} | Kiddo Arabia`, description: ar ? article.excerptAr : article.excerpt } : { title: "Page not found | Kiddo Arabia", description: "Explore Kiddo Arabia products and recipes." });
+  const metaDescription = description || (ar && article ? article.excerptAr : pageDescriptions[path] || (recipe ? recipeDescriptions[recipe.id - 1] : article ? articleDescriptions[article.id - 1] : page.description));
   const robots = noIndex || path === "/search" || (!pages[path] && !recipe && !article) ? "noindex, follow" : "index, follow";
   const canonical = `${origin}${path}`;
   const absoluteImage = (value: string) => new URL(value, origin).href;
@@ -45,7 +47,14 @@ const SEOHead = ({ title, description, image, noIndex, structuredData }: SEOHead
     description: "Kiddo Arabia offers cereals, oat jars and oat biscuits, with recipes and ideas for family moments.",
     sameAs: ["https://www.instagram.com/kiddoarabia/", "https://www.facebook.com/people/Kiddo-Arabia/100090897127132/", "https://www.youtube.com/@KiddoArabia", "https://www.tiktok.com/@kiddoarabia_"]
   };
-  const graph: Record<string, unknown>[] = [organization];
+  const graph: Record<string, unknown>[] = [organization, {
+    "@type": "WebSite", "@id": `${origin}/#website`, url: `${origin}/`, name: "Kiddo Arabia", alternateName: "Kiddo",
+    publisher: { "@id": organization["@id"] }, inLanguage: ["en", "ar"]
+  }, {
+    "@type": path === "/about" ? "AboutPage" : "WebPage", "@id": `${canonical}#webpage`, url: canonical,
+    name: title || page.title, description: metaDescription, inLanguage: language,
+    isPartOf: { "@id": `${origin}/#website` }, publisher: { "@id": organization["@id"] }
+  }];
   if (path === "/about") graph.push({
     "@type": "Person", "@id": `${origin}/about#ceo`, name: "Waleed Fathy Afify",
     jobTitle: "CEO", worksFor: { "@id": organization["@id"] },
@@ -65,7 +74,7 @@ const SEOHead = ({ title, description, image, noIndex, structuredData }: SEOHead
     description: ar ? article.excerptAr : article.excerpt, image: absoluteImage(article.image),
     url: canonical, mainEntityOfPage: canonical, inLanguage: language,
     articleSection: ar ? article.categoryAr : article.category,
-    publisher: { "@id": organization["@id"] }
+    author: { "@id": organization["@id"] }, publisher: { "@id": organization["@id"] }
   });
   if (path === "/recipes" || path === "/blog") {
     const collection = path === "/recipes"
@@ -84,7 +93,7 @@ const SEOHead = ({ title, description, image, noIndex, structuredData }: SEOHead
   const data = structuredData || { "@context": "https://schema.org", "@graph": graph };
   return <Helmet>
     <title>{title || page.title}</title>
-    <meta name="description" content={description || page.description} />
+    <meta name="description" content={metaDescription} />
     <meta name="robots" content={robots} />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content={path.startsWith("/blog/") ? "article" : "website"} />
@@ -92,11 +101,11 @@ const SEOHead = ({ title, description, image, noIndex, structuredData }: SEOHead
     <meta property="og:locale" content={language === "ar" ? "ar_EG" : "en_US"} />
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title || page.title} />
-    <meta property="og:description" content={description || page.description} />
+    <meta property="og:description" content={metaDescription} />
     <meta property="og:image" content={socialImage} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title || page.title} />
-    <meta name="twitter:description" content={description || page.description} />
+    <meta name="twitter:description" content={metaDescription} />
     <meta name="twitter:image" content={socialImage} />
     {data && <script type="application/ld+json">{JSON.stringify(data).replace(/</g, "\\u003c")}</script>}
   </Helmet>;

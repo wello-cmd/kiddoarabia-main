@@ -5,6 +5,6 @@
   "start_url": "/",
   "display": "browser",
   "background_color": "#fffaf1",
-  "theme_color": "#db2028",
-  "icons": [{ "src": "/favicon.ico", "sizes": "any", "type": "image/x-icon" }]
+  "theme_color": "#ee2b2b",
+  "icons": [{ "src": "/kiddo-icon.png", "sizes": "96x96", "type": "image/png" }]
 }

@@ -1,8 +1,35 @@
-# Serve prerendered files and static assets directly, then use React Router.
+# One HTTPS host and slash-free page URLs. Prerendered pages remain crawlable.
+Options -Indexes
+DirectorySlash Off
 DirectoryIndex index.html
+ErrorDocument 404 /404.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} ^www\.kiddo-kid\.com$ [NC]
+  RewriteRule ^ https://kiddo-kid.com%{REQUEST_URI} [R=301,L,NE]
+  RewriteCond %{THE_REQUEST} \s/+[^?\s]+/+[?\s]
+  RewriteRule ^(.+)/$ https://kiddo-kid.com/$1 [R=301,L,NE]
+  RewriteCond %{THE_REQUEST} \s/+index\.html[?\s] [NC]
+  RewriteRule ^index\.html$ https://kiddo-kid.com/ [R=301,L]
+  RewriteCond %{THE_REQUEST} \s/+[^?\s]+/index\.html[?\s] [NC]
+  RewriteRule ^(products|cereals|oat-jars|biscuits|recipes|blog|about|characters|play|partners|search|recipe/[0-9]+|blog/[0-9]+)/index\.html$ https://kiddo-kid.com/$1 [R=301,L]
+  RewriteRule ^(products|cereals|oat-jars|biscuits|recipes|blog|about|characters|play|partners|search|recipe/[0-9]+|blog/[0-9]+)$ $1/index.html [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^ index.html [L]
+  RewriteRule ^ - [R=404,L]
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.(webp|png|jpe?g|ico|woff2?|ttf|pdf)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "^(sw\.js|.*\.html|manifest\.json)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain application/javascript application/json application/ld+json image/svg+xml
 </IfModule>
