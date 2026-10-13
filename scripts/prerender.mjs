@@ -1,8 +1,17 @@
 import { spawn } from 'node:child_process';
-import { mkdir, writeFile, readFile } from 'node:fs/promises';
+import { mkdir, writeFile, readFile, readdir, unlink } from 'node:fs/promises';
 import { join } from 'node:path';
 import { chromium } from '@playwright/test';
 
+// Build-time generation records are reference material, not public website assets.
+async function removeGenerationRecords(folder) {
+  for (const entry of await readdir(folder, { withFileTypes: true })) {
+    const file = join(folder, entry.name);
+    if (entry.isDirectory()) await removeGenerationRecords(file);
+    else if (entry.name.endsWith('.prompt.txt') || /\.(webp|png|jpe?g)\.json$/.test(entry.name)) await unlink(file);
+  }
+}
+await removeGenerationRecords('dist');
 const productRoutes = JSON.parse(await readFile(new URL('./product-routes.json', import.meta.url), 'utf8'));
 const englishRoutes = ['/', '/products', '/cereals', '/oat-jars', '/biscuits', '/recipes', '/blog', '/about', '/characters', '/play', '/partners', '/search', ...productRoutes, ...Array.from({ length: 12 }, (_, i) => `/recipe/${i + 1}`), ...Array.from({ length: 16 }, (_, i) => `/blog/${i + 1}`)];
 const routes = [...englishRoutes, ...englishRoutes.map(p => `/ar${p === '/' ? '' : p}`), '/404'];
