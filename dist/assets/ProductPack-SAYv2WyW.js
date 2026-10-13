@@ -1,0 +1,1 @@
+import{j as a}from"./index-BrSLErwS.js";function i({product:r,alt:s,className:c="",eager:t=!1}){return a.jsx("span",{className:`product-pack ${c}`,dir:"ltr",children:a.jsx("img",{className:"product-pack-art",src:r.image,alt:s,width:"230",height:"300",loading:t?"eager":"lazy",decoding:"async"})})}export{i as P};

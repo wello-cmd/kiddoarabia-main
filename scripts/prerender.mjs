@@ -1,9 +1,11 @@
 import { spawn } from 'node:child_process';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, writeFile, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { chromium } from '@playwright/test';
 
-const routes = ['/', '/products', '/cereals', '/oat-jars', '/biscuits', '/recipes', '/blog', '/about', '/characters', '/play', '/partners', '/search', '/404', ...Array.from({ length: 12 }, (_, i) => `/recipe/${i + 1}`), ...Array.from({ length: 16 }, (_, i) => `/blog/${i + 1}`)];
+const productRoutes = JSON.parse(await readFile(new URL('./product-routes.json', import.meta.url), 'utf8'));
+const englishRoutes = ['/', '/products', '/cereals', '/oat-jars', '/biscuits', '/recipes', '/blog', '/about', '/characters', '/play', '/partners', '/search', ...productRoutes, ...Array.from({ length: 12 }, (_, i) => `/recipe/${i + 1}`), ...Array.from({ length: 16 }, (_, i) => `/blog/${i + 1}`)];
+const routes = [...englishRoutes, ...englishRoutes.map(p => `/ar${p === '/' ? '' : p}`), '/404'];
 const port = 4179;
 const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', String(port), '--strictPort'], { stdio: 'ignore' });
 let browser;

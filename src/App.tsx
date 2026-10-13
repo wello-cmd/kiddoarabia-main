@@ -15,6 +15,7 @@ import { lazy, Suspense, useEffect } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
 // Lazy load pages for better performance
+const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const Play = lazy(() => import("./pages/Play"));
 const Partners = lazy(() => import("./pages/Partners"));
 const Index = lazy(() => import("./pages/Index"));
@@ -59,7 +60,7 @@ const AppContent = () => {
               <SkipToContent />
               <Toaster />
               <Sonner />
-              <BrowserRouter>
+              <BrowserRouter basename={/^\/ar(?:\/|$)/.test(window.location.pathname) ? "/ar" : "/"}>
                 <Analytics />
                 <AnimatedRoutes />
               </BrowserRouter>
@@ -98,6 +99,9 @@ const AnimatedRoutes = () => {
         <Route path="/biscuits" element={<PageSuspense><Biscuits /></PageSuspense>} />
         <Route path="/cereals" element={<PageSuspense><Cereals /></PageSuspense>} />
         <Route path="/search" element={<PageSuspense><SearchPage /></PageSuspense>} />
+        <Route path="/cereals/:slug" element={<PageSuspense><ProductDetail /></PageSuspense>} />
+        <Route path="/oat-jars/:slug" element={<PageSuspense><ProductDetail /></PageSuspense>} />
+        <Route path="/biscuits/:slug" element={<PageSuspense><ProductDetail /></PageSuspense>} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<PageSuspense><NotFound /></PageSuspense>} />
       </Routes>

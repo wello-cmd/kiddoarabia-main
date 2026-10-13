@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import EnhancedLayout from '@/components/EnhancedLayout';
 import { useTranslation } from '@/contexts/TranslationContext';
+import { productDetails } from '@/data/product-details';
 import { oatJars, oatBiscuits } from '@/data/oats';
 
 export default function OatCollection({ kind }: { kind: 'jars' | 'biscuits' }) {
@@ -16,7 +17,7 @@ export default function OatCollection({ kind }: { kind: 'jars' | 'biscuits' }) {
       </div>
       <img src={jars ? "/generated/products/jars-scene-v2.webp" : "/generated/products/biscuits-scene-v3.webp"} alt={ar ? title : `Kiddo ${jars ? 'oat jars' : 'oat biscuits'} in a red and white studio scene`} width="1536" height="1024" {...{fetchpriority:"high"}} />
     </section>
-    <section className="oat-collection kiddo-wrap" id="collection"><h2>{ar ? 'اختار المفضل.' : 'Choose your favourite.'}</h2><div className={`oat-pack-grid ${jars ? 'oat-pack-grid-jars' : ''}`}>{items.map(item => <article key={item.name}><img src={item.image.replace('.webp','-640.webp')} srcSet={`${item.image.replace('.webp','-320.webp')} 320w, ${item.image.replace('.webp','-640.webp')} 640w`} sizes="(max-width:760px) 45vw, 300px" alt={`Kiddo ${jars ? 'Oat Jars' : 'Oat Biscuits'} ${item.name} pack illustration`} width="550" height="400" loading="lazy" /><h3>{ar ? item.ar : item.name}</h3><p>{title.replace('.', '')}</p><Link className="text-link product-enquire" to={`/partners?product=${encodeURIComponent(`Kiddo ${item.name}`)}#partner-enquiry`}>{ar ? "استفسر عن المنتج" : "Enquire"}<ArrowUpRight size={16}/></Link></article>)}</div>
+    <section className="oat-collection kiddo-wrap" id="collection"><h2>{ar ? 'اختار المفضل.' : 'Choose your favourite.'}</h2><div className={`oat-pack-grid ${jars ? 'oat-pack-grid-jars' : ''}`}>{items.map(item => <article key={item.name}><img src={item.image.replace('.webp','-640.webp')} srcSet={`${item.image.replace('.webp','-320.webp')} 320w, ${item.image.replace('.webp','-640.webp')} 640w`} sizes="(max-width:760px) 45vw, 300px" alt={`Kiddo ${jars ? 'Oat Jars' : 'Oat Biscuits'} ${item.name} pack illustration`} width="550" height="400" loading="lazy" /><h3><Link to={productDetails.find(p => p.name === item.name && p.kind === kind)!.path}>{ar ? item.ar : item.name}</Link></h3><Link className="text-link" to={productDetails.find(p => p.name === item.name && p.kind === kind)!.path}>{ar ? "تفاصيل المنتج" : "Product details"}<ArrowUpRight size={16}/></Link><p>{title.replace('.', '')}</p><Link className="text-link product-enquire" to={`/partners?product=${encodeURIComponent(`Kiddo ${item.name}`)}#partner-enquiry`}>{ar ? "استفسر عن المنتج" : "Enquire"}<ArrowUpRight size={16}/></Link></article>)}</div>
       <div className="catalog-enquiry"><div><h2>{ar ? 'كيدو على رفوف متجرك.' : 'Bring Kiddo to your market.'}</h2><p>{ar ? 'تواصل مع الفريق للاستفسار عن المجموعة.' : 'Contact the team to enquire about the range.'}</p></div><a href="mailto:hello@kiddoarabia.com?subject=Retail%20or%20distribution%20enquiry" className="kiddo-action kiddo-action-red">{ar ? 'التجارة والتوزيع' : 'Retail & distribution'}<ArrowUpRight size={18} /></a></div>
     </section>
   </EnhancedLayout>;

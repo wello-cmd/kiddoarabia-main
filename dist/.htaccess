@@ -13,8 +13,8 @@ ErrorDocument 404 /404.html
   RewriteCond %{THE_REQUEST} \s/+index\.html[?\s] [NC]
   RewriteRule ^index\.html$ https://kiddo-kid.com/ [R=301,L]
   RewriteCond %{THE_REQUEST} \s/+[^?\s]+/index\.html[?\s] [NC]
-  RewriteRule ^(products|cereals|oat-jars|biscuits|recipes|blog|about|characters|play|partners|search|recipe/[0-9]+|blog/[0-9]+)/index\.html$ https://kiddo-kid.com/$1 [R=301,L]
-  RewriteRule ^(products|cereals|oat-jars|biscuits|recipes|blog|about|characters|play|partners|search|recipe/[0-9]+|blog/[0-9]+)$ $1/index.html [L]
+  RewriteRule ^((?:ar/)?(?:products|cereals|oat-jars|biscuits|recipes|blog|about|characters|play|partners|search|recipe/[0-9]+|blog/[0-9]+|(?:cereals|oat-jars|biscuits)/[a-z0-9-]+)|ar)/index\.html$ https://kiddo-kid.com/$1 [R=301,L]
+  RewriteRule ^((?:ar/)?(?:products|cereals|oat-jars|biscuits|recipes|blog|about|characters|play|partners|search|recipe/[0-9]+|blog/[0-9]+|(?:cereals|oat-jars|biscuits)/[a-z0-9-]+)|ar)$ $1/index.html [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^ - [R=404,L]

@@ -1,0 +1,11 @@
+import{c as i,d as s}from"./index-BrSLErwS.js";/**
+ * @license lucide-react v0.462.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const g=i("Clock",[["circle",{cx:"12",cy:"12",r:"10",key:"1mglay"}],["polyline",{points:"12 6 12 12 16 14",key:"68esgv"}]]);/**
+ * @license lucide-react v0.462.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const y=i("Heart",[["path",{d:"M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z",key:"c3ymky"}]]),d="kiddo-saved-recipes-v1",a="kiddo-saved-recipes-changed";function o(){try{const t=JSON.parse(window.localStorage.getItem(d)??"[]");return Array.isArray(t)?[...new Set(t.filter(n=>Number.isInteger(n)&&n>0))]:[]}catch{return[]}}function p(){const[t,n]=s.useState(o),[l,r]=s.useState(!1);s.useEffect(()=>{const e=()=>n(o());return window.addEventListener("storage",e),window.addEventListener(a,e),()=>{window.removeEventListener("storage",e),window.removeEventListener(a,e)}},[]);function v(e){const c=t.includes(e)?t.filter(u=>u!==e):[...t,e];n(c);try{window.localStorage.setItem(d,JSON.stringify(c)),r(!1),window.dispatchEvent(new Event(a))}catch{r(!0)}}return{saved:t,toggle:v,storageUnavailable:l}}export{g as C,y as H,p as u};

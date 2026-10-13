@@ -5,7 +5,7 @@ import { useTranslation } from "@/contexts/TranslationContext";
 
 const ProductionReadyHeader = () => {
   const [open, setOpen] = useState(false);
-  const { language, setLanguage } = useTranslation();
+  const { language } = useTranslation();
   const ar = language === "ar";
   const { pathname } = useLocation();
   const links = [
@@ -27,7 +27,7 @@ const ProductionReadyHeader = () => {
           {links.map(link => <NavLink key={link.to} to={link.to} className={({ isActive }) => `site-nav-link ${isActive ? "is-active" : ""}`}>{link.label}</NavLink>)}
         </div>
         <div className="site-nav-actions">
-          <button type="button" className="site-language" onClick={() => setLanguage(ar ? "en" : "ar")} aria-label={ar ? "Switch to English" : "التبديل إلى العربية"}>{ar ? "EN" : "عربي"}</button>
+          <a className="site-language" href={(ar ? pathname : `/ar${pathname === "/" ? "" : pathname}`) + window.location.search + window.location.hash} hrefLang={ar ? "en" : "ar"} aria-label={ar ? "Switch to English" : "التبديل إلى العربية"}>{ar ? "EN" : "عربي"}</a>
           <Link className="site-retail" to="/partners">{retailLabel}<ArrowUpRight size={18} aria-hidden="true" /></Link>
           <button type="button" className="site-menu-toggle" aria-label={open ? (ar ? "إغلاق القائمة" : "Close menu") : (ar ? "فتح القائمة" : "Open menu")} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen(!open)}>{open ? <X size={25} /> : <Menu size={25} />}</button>
         </div>

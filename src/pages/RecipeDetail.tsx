@@ -1,3 +1,4 @@
+import RelatedProducts from '@/components/RelatedProducts';
 import { useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Clock, Heart, Minus, Plus, Printer, Check, X } from 'lucide-react';
@@ -58,5 +59,5 @@ export default function RecipeDetail() {
   const { id } = useParams(); const { language } = useTranslation(); const ar = language === 'ar';
   const recipe = recipes.find(r => r.id === Number(id));
   if (!recipe) return <EnhancedLayout><section className="page-intro"><div className="kiddo-wrap"><h1>{ar ? 'الوصفة غير موجودة' : 'Recipe not found'}</h1><Link className="text-link" to="/recipes">{ar ? 'كل الوصفات' : 'Browse all recipes'}</Link></div></section></EnhancedLayout>;
-  return <EnhancedLayout><RecipeKitchen key={recipe.id} recipe={recipe} ar={ar}/></EnhancedLayout>;
+  return <EnhancedLayout><RecipeKitchen key={recipe.id} recipe={recipe} ar={ar}/><RelatedProducts recipeId={recipe.id}/></EnhancedLayout>;
 }

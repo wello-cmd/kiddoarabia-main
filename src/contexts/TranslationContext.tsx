@@ -374,13 +374,14 @@ const translations = {
 };
 
 export const TranslationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<'en' | 'ar'>(() => {
-    try {
-      return window.localStorage.getItem('kiddo.language') === 'ar' ? 'ar' : 'en';
-    } catch {
-      return 'en';
-    }
-  });
+  // Each language has a stable crawlable URL; URL wins over saved preferences.
+  const [language] = useState<'en' | 'ar'>(() => /^\/ar(?:\/|$)/.test(window.location.pathname) ? 'ar' : 'en');
+  const setLanguage = (lang: 'en' | 'ar') => {
+    if (lang === language) return;
+    const path = window.location.pathname.replace(/^\/ar(?=\/|$)/, '') || '/';
+    const target = lang === 'ar' ? `/ar${path === '/' ? '' : path}` : path;
+    window.location.assign(target + window.location.search + window.location.hash);
+  };
 
   const t = (key: string): string => {
     return translations[language][key as keyof typeof translations[typeof language]] || key;

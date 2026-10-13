@@ -1,3 +1,4 @@
+import { getProduct, productDetails, productName } from '@/data/product-details';
 import { pageDescriptions, recipeDescriptions, articleDescriptions } from '@/data/seo-descriptions';
 import { recipes } from "@/data/recipes";
 import { blogPosts } from "@/data/blog";
@@ -21,11 +22,64 @@ const pages: Record<string, { title: string; description: string }> = {
 };
 
 
+const arabicPages: Record<string, {title: string; description: string}> = {
+  "/": {
+    "title": "كيدو أرابيا | كورن فليكس، شوفان وبسكويت شوفان",
+    "description": "اكتشف حبوب الإفطار والكورن فليكس وعبوات الشوفان وبسكويت الشوفان من كيدو. تصفح المنتجات والوصفات وقصص الشخصيات والمتاجر وفرص التوزيع."
+  },
+  "/products": {
+    "title": "منتجات كيدو | حبوب الإفطار والشوفان وبسكويت الشوفان",
+    "description": "تصفح تشكيلة كيدو: ١١ صنفًا من حبوب الإفطار وعبوتان من الشوفان وأربع نكهات من بسكويت الشوفان. اكتشف تفاصيل كل منتج وأفكار التقديم."
+  },
+  "/cereals": {
+    "title": "حبوب إفطار كيدو | كورن فليكس وحلقات وبيلو",
+    "description": "اكتشف تشكيلة حبوب الإفطار من كيدو، من الكورن فليكس ورقائق الشوكولاتة إلى حلقات الفواكه والعسل والبيلو. تصفح العبوات والشخصيات والوصفات."
+  },
+  "/oat-jars": {
+    "title": "شوفان كيدو | الحبة الكاملة وسريع التحضير",
+    "description": "اكتشف عبوات شوفان الحبة الكاملة والشوفان سريع التحضير من كيدو. تصفح تفاصيل المنتجات وأفكار وصفات الشوفان وطرق التواصل مع الفريق."
+  },
+  "/biscuits": {
+    "title": "بسكويت شوفان كيدو | سادة وشوكولاتة وتفاح وقرفة وجوز هند",
+    "description": "تصفح بسكويت الشوفان من كيدو بأربع نكهات: الشوفان السادة والشوكولاتة والتفاح والقرفة وجوز الهند. اكتشف تفاصيل المنتجات وأفكار التقديم."
+  },
+  "/recipes": {
+    "title": "وصفات كيدو | إفطار وحلويات وأفكار للمطبخ",
+    "description": "اكتشف وصفات كيدو للكورن فليكس والشوفان وبسكويت الشوفان. تصفح المكونات والحصص وخطوات التحضير، واحفظ وصفاتك المفضلة على جهازك."
+  },
+  "/blog": {
+    "title": "مدونة كيدو | وصفات وقصص وأفكار للعائلة",
+    "description": "اقرأ قصص كيدو وأفكار المطبخ والأنشطة العائلية. اكتشف المنتجات والوصفات والشخصيات، وتصفح قصص العلامة الأصلية مع الصور المناسبة."
+  },
+  "/about": {
+    "title": "عن كيدو أرابيا | القصة والمنتجات والإدارة",
+    "description": "تعرّف على كيدو أرابيا وتشكيلة حبوب الإفطار والشوفان وبسكويت الشوفان، ورئيسها التنفيذي وليد فتحي عفيفي، وفرص التعاون والتوزيع."
+  },
+  "/characters": {
+    "title": "شخصيات كيدو | تعرّف على فريق حبوب الإفطار",
+    "description": "تعرّف على بوبس وكينغ ولوبي وبيلو وباز وبقية فريق كيدو. اكتشف الشخصية المرتبطة بكل عبوة من حبوب الإفطار، ثم جرّب الألعاب والأنشطة."
+  },
+  "/play": {
+    "title": "نادي كيدو | ألعاب وكتب تلوين مجانية",
+    "description": "العب ألعاب كيدو المصغرة مع الشخصيات، وجرّب التلوين التفاعلي وكتب التلوين المجانية. اكتشف ألعاب الذاكرة والألغاز واحصل على شارات على جهازك."
+  },
+  "/partners": {
+    "title": "شراكة مع كيدو | المتاجر والموزعون حول العالم",
+    "description": "تواصل مع كيدو للاستفسار عن حبوب الإفطار والشوفان وبسكويت الشوفان. اكتشف فرص التعاون للمتاجر والموزعين حول العالم وأماكن بيع المنتجات."
+  }
+};
+const recipeTotalTime = (time: string) => {
+  const hours = Number(time.match(/(\d+)\s*(?:hrs?|hours?)/i)?.[1] || 0);
+  const minutes = Number(time.match(/(\d+)\s*mins?/i)?.[1] || 0);
+  return hours || minutes ? `PT${hours ? `${hours}H` : ''}${minutes ? `${minutes}M` : ''}` : undefined;
+};
+
 interface SEOHeadProps { title?: string; description?: string; image?: string; noIndex?: boolean; structuredData?: Record<string, unknown>; }
 const SEOHead = ({ title, description, image, noIndex, structuredData }: SEOHeadProps) => {
   const { pathname } = useLocation();
   const { language } = useTranslation();
   const path = pathname === "/" ? "/" : pathname.replace(/\/$/, "");
+  const product = getProduct(path);
   const recipeMatch = path.match(/^\/recipe\/(\d+)$/);
   const articleMatch = path.match(/^\/blog\/(\d+)$/);
   const recipe = recipeMatch ? recipes.find(r => r.id === Number(recipeMatch[1])) : undefined;
@@ -35,12 +89,13 @@ const SEOHead = ({ title, description, image, noIndex, structuredData }: SEOHead
   const recipeIsArabic = ar && !!recipe?.titleAr && !!recipe?.ingredientsAr && !!recipe?.instructionsAr;
   const recipeTitle = recipe ? (recipeIsArabic ? recipe.titleAr! : recipe.title) : undefined;
   const articleTitle = article ? (ar ? article.titleAr : article.title) : undefined;
-  const page = pages[path] || (recipe ? { title: `${recipeTitle} Recipe | Kiddo Arabia`, description: recipe.description } : article ? { title: `${articleTitle} | Kiddo Arabia`, description: ar ? article.excerptAr : article.excerpt } : { title: "Page not found | Kiddo Arabia", description: "Explore Kiddo Arabia products and recipes." });
-  const metaDescription = description || (ar && article ? article.excerptAr : pageDescriptions[path] || (recipe ? recipeDescriptions[recipe.id - 1] : article ? articleDescriptions[article.id - 1] : page.description));
-  const robots = noIndex || path === "/search" || (!pages[path] && !recipe && !article) ? "noindex, follow" : "index, follow";
-  const canonical = `${origin}${path}`;
+  const page = (product ? {title: `${productName(product, ar)} | ${ar ? "تفاصيل المنتج" : "Product details"}`, description: ar ? product.descriptionAr : product.description} : undefined) || (ar ? arabicPages[path] : pages[path]) || (recipe ? { title: `${recipeTitle} Recipe | Kiddo Arabia`, description: recipe.description } : article ? { title: `${articleTitle} | Kiddo Arabia`, description: ar ? article.excerptAr : article.excerpt } : { title: "Page not found | Kiddo Arabia", description: "Explore Kiddo Arabia products and recipes." });
+  const metaDescription = description || (product ? page.description : ar ? (article ? article.excerptAr : recipe ? `${recipeTitle}. ${recipe.timeAr}، ${recipe.serves} حصص. اكتشف المكونات وطريقة التحضير خطوة بخطوة في مطبخ كيدو.` : page.description) : pageDescriptions[path] || (recipe ? recipeDescriptions[recipe.id - 1] : article ? articleDescriptions[article.id - 1] : page.description));
+  const robots = noIndex || path === "/search" || (!pages[path] && !recipe && !article && !product) ? "noindex, follow" : "index, follow";
+  const localizedPath = (value: string, arabic = ar) => arabic ? `/ar${value === "/" ? "" : value}` : value;
+  const canonical = `${origin}${localizedPath(path)}`;
   const absoluteImage = (value: string) => new URL(value, origin).href;
-  const socialImage = absoluteImage(image || recipe?.image || article?.image || "/og-image.png");
+  const socialImage = absoluteImage(image || product?.image || recipe?.image || article?.image || "/og-image.png");
   const organization = {
     "@type": "Organization", "@id": `${origin}/#organization`, name: "Kiddo Arabia",
     url: origin, logo: `${origin}/kiddo-logo.png`,
@@ -63,7 +118,7 @@ const SEOHead = ({ title, description, image, noIndex, structuredData }: SEOHead
   if (recipe) graph.push({
     "@type": "Recipe", "@id": `${canonical}#recipe`, url: canonical, name: recipeTitle,
     image: absoluteImage(recipe.image), inLanguage: recipeIsArabic ? "ar" : "en",
-    recipeYield: `${recipe.serves} servings`,
+    recipeYield: `${recipe.serves} servings`, totalTime: recipeTotalTime(recipe.time), author: {"@id": organization["@id"]},
     recipeIngredient: recipeIsArabic ? recipe.ingredientsAr : recipe.ingredients,
     recipeInstructions: (recipeIsArabic ? recipe.instructionsAr! : recipe.instructions).map((text, i) => ({
       "@type": "HowToStep", position: i + 1, text
@@ -78,27 +133,45 @@ const SEOHead = ({ title, description, image, noIndex, structuredData }: SEOHead
   });
   if (path === "/recipes" || path === "/blog") {
     const collection = path === "/recipes"
-      ? recipes.map(r => ({ name: ar ? (r.titleAr ?? r.title) : r.title, url: `${origin}/recipe/${r.id}` }))
-      : blogPosts.map(p => ({ name: ar ? p.titleAr : p.title, url: `${origin}/blog/${p.id}` }));
+      ? recipes.map(r => ({ name: ar ? (r.titleAr ?? r.title) : r.title, url: `${origin}${localizedPath(`/recipe/${r.id}`)}` }))
+      : blogPosts.map(p => ({ name: ar ? p.titleAr : p.title, url: `${origin}${localizedPath(`/blog/${p.id}`)}` }));
     graph.push({ "@type": "ItemList", "@id": `${canonical}#list`, numberOfItems: collection.length,
       itemListElement: collection.map((item, i) => ({ "@type": "ListItem", position: i + 1, ...item })) });
   }
   if (recipe || article) graph.push({
     "@type": "BreadcrumbList", itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Kiddo Arabia", item: `${origin}/` },
-      { "@type": "ListItem", position: 2, name: recipe ? (ar ? "الوصفات" : "Recipes") : (ar ? "القصص" : "Journal"), item: `${origin}${recipe ? "/recipes" : "/blog"}` },
+      { "@type": "ListItem", position: 1, name: "Kiddo Arabia", item: `${origin}${localizedPath("/")}` },
+      { "@type": "ListItem", position: 2, name: recipe ? (ar ? "الوصفات" : "Recipes") : (ar ? "القصص" : "Journal"), item: `${origin}${localizedPath(recipe ? "/recipes" : "/blog")}` },
       { "@type": "ListItem", position: 3, name: recipeTitle || articleTitle, item: canonical }
     ]
   });
+  if (product) {
+    graph.push({ "@type": "Product", "@id": `${canonical}#product`, url: canonical,
+      name: productName(product, ar), image: absoluteImage(product.image), description: metaDescription,
+      brand: { "@type": "Brand", name: "Kiddo" }, mainEntityOfPage: { "@id": `${canonical}#webpage` }
+    });
+    const collectionPath = product.kind === 'cereals' ? '/cereals' : product.kind === 'jars' ? '/oat-jars' : '/biscuits';
+    graph.push({ "@type": "BreadcrumbList", itemListElement: [
+      { "@type": "ListItem", position: 1, name: ar ? 'المنتجات' : 'Products', item: `${origin}${localizedPath('/products')}` },
+      { "@type": "ListItem", position: 2, name: ar ? 'المجموعة' : 'Collection', item: `${origin}${localizedPath(collectionPath)}` },
+      { "@type": "ListItem", position: 3, name: productName(product, ar), item: canonical }
+    ] });
+  }
+  const categoryProducts = productDetails.filter(p => p.path.startsWith(path + '/'));
+  if (categoryProducts.length) graph.push({ "@type": "ItemList", name: page.title, numberOfItems: categoryProducts.length,
+    itemListElement: categoryProducts.map((p, i) => ({ "@type": "ListItem", position: i + 1, name: productName(p, ar), url: `${origin}${localizedPath(p.path)}` })) });
   const data = structuredData || { "@context": "https://schema.org", "@graph": graph };
   return <Helmet>
     <title>{title || page.title}</title>
     <meta name="description" content={metaDescription} />
     <meta name="robots" content={robots} />
     <link rel="canonical" href={canonical} />
+    {robots === "index, follow" && <link rel="alternate" hrefLang="en" href={`${origin}${localizedPath(path, false)}`} />}
+    {robots === "index, follow" && <link rel="alternate" hrefLang="ar" href={`${origin}${localizedPath(path, true)}`} />}
+    {robots === "index, follow" && <link rel="alternate" hrefLang="x-default" href={`${origin}${localizedPath(path, false)}`} />}
     <meta property="og:type" content={path.startsWith("/blog/") ? "article" : "website"} />
     <meta property="og:site_name" content="Kiddo Arabia" />
-    <meta property="og:locale" content={language === "ar" ? "ar_EG" : "en_US"} />
+    <meta property="og:locale" content={language === "ar" ? "ar_EG" : "en_EG"} />
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title || page.title} />
     <meta property="og:description" content={metaDescription} />

@@ -1,3 +1,4 @@
+import RelatedProducts from '@/components/RelatedProducts';
 import {Link, useParams} from 'react-router-dom';
 import {ArrowLeft, ArrowUpRight} from 'lucide-react';
 import EnhancedLayout from '@/components/EnhancedLayout';
@@ -24,5 +25,5 @@ export default function BlogDetail() {
       <Link className="kiddo-action kiddo-action-red" to={post.relatedLink.to}>{ar?post.relatedLink.labelAr:post.relatedLink.label}<ArrowUpRight size={19}/></Link>
     </div>
     <section className="editorial-related kiddo-wrap"><h2>{ar?'فكرة أخرى ليوم آخر':'Another idea for another day'}</h2><div>{related.map(p=><Link key={p.id} to={`/blog/${p.id}`}><span>{ar?p.titleAr:p.title}</span><ArrowUpRight size={22}/></Link>)}</div></section>
-  </article></EnhancedLayout>;
+  </article>{(post.category === 'Oats' || post.category === 'Kitchen') && <RelatedProducts range={post.category === 'Oats' ? 'jars' : 'cereals'}/>}</EnhancedLayout>;
 }
